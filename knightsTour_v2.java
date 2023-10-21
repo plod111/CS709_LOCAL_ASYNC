@@ -1,22 +1,43 @@
-
-// If the final position of such a path is a knight's move away from the initial position of the knight, 
-// the path is called re-entrant or closed and corresponds to a Hamiltonian cycle on the underlying knight graph. 
-// Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff n>=6 and n is even. 
+/**
+ * CS709 - Week 6 ASYNC Exercise Knight's Tour v2 - closed
+ * 
+ * If the final position of such a path is a knight's move away from the initial
+ * position of the knight,
+ * the path is called re-entrant or closed and corresponds to a Hamiltonian
+ * cycle on the underlying knight graph.
+ * Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff
+ * n>=6 and n is even.
+ * 
+ * @author B.Cornish
+ * @collaborator P.Chu
+ * @date Oct 21, 2023
+ */
 
 public class knightsTour_v2 {
 
-	static final int SIZE = 6; // makes recursion much faster
-	static final int MAX_MOVES = SIZE * SIZE;
-	static int[][] board = new int[SIZE][SIZE];
-	static boolean finished = false;
+	static final int SIZE = 6; // board size
+	static final int MAX_MOVES = SIZE * SIZE; // max number of moves
+	static int[][] board = new int[SIZE][SIZE]; // the board
+	static boolean finished = false; // flag to stop the recursion
+
+	// possible moves
 	static int[] rowMoves = { +2, +2, -2, -2, +1, +1, -1, -1 };
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
+	// starting position
 	static int startRow = 1;
 	static int startCol = 0;
 
+	// keep track of how many moves we've tried
 	static int attemptedMoves = 0;
 
+	/**
+	 * Recursive method to find a knight's tour.
+	 * 
+	 * @param move
+	 * @param row
+	 * @param col
+	 */
 	public static void knightsTour(int move, int row, int col) {
 
 		attemptedMoves++;
@@ -24,7 +45,6 @@ public class knightsTour_v2 {
 		// System.out.println("Attempted Moves: " + attemptedMoves);
 		// }
 
-		// System.out.println("move: " + move + " row: " + row + " col: " + col);
 		// fell off board.
 		if (row < 0 || row >= board.length || col < 0 || col >= board[row].length)
 			return;
@@ -71,9 +91,11 @@ public class knightsTour_v2 {
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////////////////
+	////////// RUN PROGRAM ////////////////////////////////////////////////////////
 	public static void main(String args[]) {
 		for (int i = 0; i < board.length; i++)
-			for (int j = 0; j < board[i].length; j++) // why not board.length?
+			for (int j = 0; j < board[i].length; j++)
 				board[i][j] = 0;
 
 		// kick off the recursion.
@@ -88,7 +110,7 @@ public class knightsTour_v2 {
 	 */
 	public static void printBoard() {
 		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) // why not board.length?
+			for (int j = 0; j < board[i].length; j++)
 				System.out.print(board[i][j] + "\t");
 			System.out.println();
 		}
