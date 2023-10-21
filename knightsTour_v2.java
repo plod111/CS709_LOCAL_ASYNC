@@ -1,5 +1,4 @@
 
-
 // If the final position of such a path is a knight's move away from the initial position of the knight, 
 // the path is called re-entrant or closed and corresponds to a Hamiltonian cycle on the underlying knight graph. 
 // Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff n>=6 and n is even. 
@@ -13,7 +12,7 @@ public class knightsTour_v2 {
 	static int[] rowMoves = { +2, +2, -2, -2, +1, +1, -1, -1 };
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
-	static int startRow = 0;
+	static int startRow = 1;
 	static int startCol = 0;
 
 	static int attemptedMoves = 0;
@@ -36,8 +35,15 @@ public class knightsTour_v2 {
 		}
 
 		// if the last move, and it's NOT landing on one move away from start, go back
-		if ((move == MAX_MOVES) && (!(row == 2 && col == 1) || !(row == 1 && col == 2))) {
-			// System.out.println("Not landing on 2,1 or 1,2. row: " + row + " col: " + col);
+		if ((move == MAX_MOVES) &&
+				!((row == startRow + rowMoves[0] && col == startCol + colMoves[0]) ||
+						(row == startRow + rowMoves[1] && col == startCol + colMoves[1]) ||
+						(row == startRow + rowMoves[2] && col == startCol + colMoves[2]) ||
+						(row == startRow + rowMoves[3] && col == startCol + colMoves[3]) ||
+						(row == startRow + rowMoves[4] && col == startCol + colMoves[4]) ||
+						(row == startRow + rowMoves[5] && col == startCol + colMoves[5]) ||
+						(row == startRow + rowMoves[6] && col == startCol + colMoves[6]) ||
+						(row == startRow + rowMoves[7] && col == startCol + colMoves[7]))) {
 			return;
 		}
 
