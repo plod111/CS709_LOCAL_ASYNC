@@ -1,3 +1,5 @@
+
+
 // If the final position of such a path is a knight's move away from the initial position of the knight, 
 // the path is called re-entrant or closed and corresponds to a Hamiltonian cycle on the underlying knight graph. 
 // Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff n>=6 and n is even. 
@@ -34,7 +36,7 @@ public class knightsTour_v2 {
 		}
 
 		// if the last move, and it's NOT landing on one move away from start, go back
-		if ((move == MAX_MOVES) && ((row != 2 && col != 1) || (row != 1 && col != 2))) {
+		if ((move == MAX_MOVES) && (!(row == 2 && col == 1) || !(row == 1 && col == 2))) {
 			// System.out.println("Not landing on 2,1 or 1,2. row: " + row + " col: " + col);
 			return;
 		}
