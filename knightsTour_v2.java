@@ -20,10 +20,10 @@ public class knightsTour_v2 {
 
 		attemptedMoves++;
 		// if (attemptedMoves % 1000000 == 0) {
-		// 	System.out.println("Attempted Moves: " + attemptedMoves);
+		// System.out.println("Attempted Moves: " + attemptedMoves);
 		// }
 
-		//System.out.println("move: " + move + " row: " + row + " col: " + col);
+		// System.out.println("move: " + move + " row: " + row + " col: " + col);
 		// fell off board.
 		if (row < 0 || row >= board.length || col < 0 || col >= board[row].length)
 			return;
@@ -33,15 +33,14 @@ public class knightsTour_v2 {
 			return;
 		}
 
+		// if the last move, and it's NOT landing on one move away from start, go back
 		if ((move == MAX_MOVES) && ((row != 2 && col != 1) || (row != 1 && col != 2))) {
-			//System.out.println("Not landing on 2,1 or 1,2. Move: " + move + " row: " + row + " col: " + col);
-			//move--;
+			// System.out.println("Not landing on 2,1 or 1,2. row: " + row + " col: " + col);
 			return;
 		}
 
 		// mark my spot
 		board[row][col] = move;
-
 
 		// stop the recursion -- we're done.
 		if ((move == MAX_MOVES)) {
