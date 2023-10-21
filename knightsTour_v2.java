@@ -1,3 +1,7 @@
+// If the final position of such a path is a knight's move away from the initial position of the knight, 
+// the path is called re-entrant or closed and corresponds to a Hamiltonian cycle on the underlying knight graph. 
+// Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff n>=6 and n is even. 
+
 public class knightsTour_v2 {
 
 	static final int SIZE = 6; // makes recursion much faster
@@ -15,26 +19,29 @@ public class knightsTour_v2 {
 	public static void knightsTour(int move, int row, int col) {
 
 		attemptedMoves++;
-		// if(attemptedMoves%1000000==0){
+		// if (attemptedMoves % 1000000 == 0) {
 		// 	System.out.println("Attempted Moves: " + attemptedMoves);
 		// }
 
+		//System.out.println("move: " + move + " row: " + row + " col: " + col);
 		// fell off board.
 		if (row < 0 || row >= board.length || col < 0 || col >= board[row].length)
 			return;
 
 		// already here. ie. been here before, don't proceed
-		if ((board[row][col] != 0) ) {
+		if ((board[row][col] != 0)) {
 			return;
 		}
 
-		if ((move == MAX_MOVES-1) && ((row != 2 && col != 1) || (row != 1 && col != 2))) {
-			// System.out.println("Not landing");
+		if ((move == MAX_MOVES) && ((row != 2 && col != 1) || (row != 1 && col != 2))) {
+			//System.out.println("Not landing on 2,1 or 1,2. Move: " + move + " row: " + row + " col: " + col);
+			//move--;
 			return;
 		}
-		
+
 		// mark my spot
 		board[row][col] = move;
+
 
 		// stop the recursion -- we're done.
 		if ((move == MAX_MOVES)) {
@@ -52,8 +59,9 @@ public class knightsTour_v2 {
 		}
 
 		// back track - we're stuck in a corner
-		if (!finished)
+		if (!finished) {
 			board[row][col] = 0;
+		}
 	}
 
 	public static void main(String args[]) {
@@ -81,60 +89,3 @@ public class knightsTour_v2 {
 	}
 
 }
-
-// public class knightsTour_v1 {
-// public static void main(String[] args) {
-// int[][] board = new int[8][8];
-// int[] xMoves = {2, 1, -1, -2, -2, -1, 1, 2};
-// int[] yMoves = {1, 2, 2, 1, -1, -2, -2, -1};
-// int x = 0;
-// int y = 0;
-// int move = 0;
-// int nextX = 0;
-// int nextY = 0;
-// int minMoves = 8;
-// int minIndex = 0;
-// int tempX = 0;
-// int tempY = 0;
-// int tempMoves = 0;
-// boolean stuck = false;
-// boolean done = false;
-// board[x][y] = 1;
-// while (!done) {
-// stuck = true;
-// minMoves = 8;
-// minIndex = 0;
-// for (int i = 0; i < 8; i++) {
-// nextX = x + xMoves[i];
-// nextY = y + yMoves[i];
-// if (nextX >= 0 && nextX < 8 && nextY >= 0 && nextY < 8 && board[nextX][nextY]
-// == 0) {
-// stuck = false;
-// tempMoves = 0;
-// for (int j = 0; j < 8; j++) {
-// tempX = nextX + xMoves[j];
-// tempY = nextY + yMoves[j];
-// if (tempX >= 0 && tempX < 8 && tempY >= 0 && tempY < 8 && board[tempX][tempY]
-// == 0) {
-// tempMoves++;
-// }
-// }
-// if (tempMoves < minMoves) {
-// minMoves = tempMoves;
-// minIndex = i;
-// }
-// }
-// }
-// if (stuck) {
-// done = true;
-// } else {
-// move++;
-// x += xMoves[minIndex];
-// y += yMoves[minIndex];
-// board[x][y] = move + 1;
-// }
-// }
-// for (int i = 0; i < 8; i++) {
-// System.out.println();
-// for (int j = 0; j < 8; j++) {
-// }
