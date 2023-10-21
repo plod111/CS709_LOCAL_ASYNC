@@ -1,5 +1,6 @@
 /**
- * CS709 - Week 6 ASYNC Exercise Knight's Tour v2 - closed
+ * CS709 - Week 6 ASYNC 
+ * Exercise: MODIFIED Knight's Tour v2 - CLOSED
  * 
  * If the final position of such a path is a knight's move away from the initial
  * position of the knight,
@@ -8,7 +9,7 @@
  * Conrad et al. (1994) shows that a knight's tour exists on an n×n board iff
  * n>=6 and n is even.
  * 
- * @author B.Cornish
+ * @editor B.Cornish
  * @collaborator P.Chu
  * @date Oct 21, 2023
  */
@@ -25,8 +26,8 @@ public class knightsTour_v2 {
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
 	// starting position
-	static int startRow = 1;
-	static int startCol = 0;
+	static int startRow = 3;
+	static int startCol = 3;
 
 	// keep track of how many moves we've tried
 	static int attemptedMoves = 0;
@@ -40,10 +41,12 @@ public class knightsTour_v2 {
 	 */
 	public static void knightsTour(int move, int row, int col) {
 
+		// keep track of how many moves we've tried
 		attemptedMoves++;
-		// if (attemptedMoves % 1000000 == 0) {
-		// System.out.println("Attempted Moves: " + attemptedMoves);
-		// }
+		// Print out every 10,000,000 moves
+		if (attemptedMoves % 10000000 == 0) {
+		System.out.println("Attempted Moves: " + attemptedMoves);
+		}
 
 		// fell off board.
 		if (row < 0 || row >= board.length || col < 0 || col >= board[row].length)
@@ -94,6 +97,8 @@ public class knightsTour_v2 {
 	///////////////////////////////////////////////////////////////////////////////
 	////////// RUN PROGRAM ////////////////////////////////////////////////////////
 	public static void main(String args[]) {
+
+		// initialize the board
 		for (int i = 0; i < board.length; i++)
 			for (int j = 0; j < board[i].length; j++)
 				board[i][j] = 0;
@@ -101,6 +106,7 @@ public class knightsTour_v2 {
 		// kick off the recursion.
 		knightsTour(1, startRow, startCol);
 
+		// print the board
 		printBoard();
 
 	}
