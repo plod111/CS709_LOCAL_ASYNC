@@ -39,8 +39,8 @@ public class knightsTour_v3 {
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
 	// starting position
-	static int startRow = 1;
-	static int startCol = 1;
+	static int startRow = 0;
+	static int startCol = 0;
 
 	// keep track of how many moves we've tried
 	static int attemptedMoves = 0;
@@ -105,7 +105,7 @@ public class knightsTour_v3 {
 			return;
 		}
 
-		// recurse Using Warnsdoff's rule
+		// recurse using Warnsdoff's rule
 		if (!finished) {
 			int[] nextMove = findNextMove(row, col);
 			if (nextMove[0] == 0 && nextMove[1] == 0) {
@@ -115,7 +115,7 @@ public class knightsTour_v3 {
 			knightsTour(move + 1, row + nextMove[0], col + nextMove[1]);
 		}
 
-		// back track - we're stuck in a corner
+		// back track
 		if (!finished) {
 			board[row][col] = 0;
 		}
@@ -130,7 +130,7 @@ public class knightsTour_v3 {
 	 */
 	public static int[] findNextMove(int row, int col) {
 
-		System.out.println("Current Position: " + row + ", " + col);
+		// System.out.println("Current Position: " + row + ", " + col);
 
 		// initialize the least number of moves to the max possible
 		int leastMoves = MAX_POSSIBLE_MOVES;
@@ -152,7 +152,8 @@ public class knightsTour_v3 {
 				}
 			}
 		}
-		System.out.println("Next Move: " + nextMove[0] + ", " + nextMove[1] + "  Least Moves: " + leastMoves);
+		// System.out.println("Next Move: " + nextMove[0] + ", " + nextMove[1] + " Least
+		// Moves: " + leastMoves);
 		return nextMove;
 	} // end findNextMove
 
@@ -195,16 +196,16 @@ public class knightsTour_v3 {
 			}
 
 		// kick off the recursion.
-		knightsTour(1, startRow, startCol);
+		// knightsTour(1, startRow, startCol);
 
 		// print the board
 		System.out.println("\nStarting Position: " + startRow + ", " + startCol);
-		System.out.println("\nSolution:");
-		printBoard();
+		// System.out.println("\nSolution:");
+		// printBoard();
 
 		// print the valid moves board
-		// System.out.println("\nValid Moves Board:");
-		// printValidMovesBoard();
+		System.out.println("\nValid Moves Board:");
+		printValidMovesBoard();
 
 	} // end main
 
