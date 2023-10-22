@@ -26,8 +26,8 @@ public class knightsTour_v2 {
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
 	// starting position
-	static int startRow = 3;
-	static int startCol = 3;
+	static int startRow = 1;
+	static int startCol = 1;
 
 	// keep track of how many moves we've tried
 	static int attemptedMoves = 0;
@@ -84,7 +84,7 @@ public class knightsTour_v2 {
 		// recurse in every direction
 		for (int i = 0; i < 8; i++) {
 			if (!finished) {
-				knightsTour(move + 1, row - rowMoves[i], col - colMoves[i]);
+				knightsTour(move + 1, row + rowMoves[i], col + colMoves[i]);
 			}
 		}
 

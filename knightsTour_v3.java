@@ -31,7 +31,7 @@ public class knightsTour_v3 {
 	static int[][] board = new int[SIZE][SIZE]; // the board
 	static boolean finished = false; // flag to stop the recursion
 
-	static int[][] validMoves = new int[SIZE][SIZE]; // the board of valid moves
+	static int[][] movesArray = new int[SIZE][SIZE]; // the board of valid moves
 	static int MAX_POSSIBLE_MOVES = 8; // max number of moves
 
 	// possible moves
@@ -39,8 +39,8 @@ public class knightsTour_v3 {
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
 	// starting position
-	static int startRow = 3;
-	static int startCol = 3;
+	static int startRow = 1;
+	static int startCol = 1;
 
 	// keep track of how many moves we've tried
 	static int attemptedMoves = 0;
@@ -59,22 +59,26 @@ public class knightsTour_v3 {
 
 		// keep track of how many moves we've tried
 		attemptedMoves++;
-		// Print out every 10,000,000 moves
-		if (attemptedMoves % 10000000 == 0) {
-			System.out.println("Attempted Moves: " + attemptedMoves);
-		}
+		// Print out every 1,000,000 moves
+		// if (attemptedMoves % 1000000 == 0) {
+		System.out.println("Attempted Moves: " + attemptedMoves);
+		// }
 
 		// fell off board.
-		if (isValidMove(row, col))
+		if (!isValidMove(row, col)) {
+			System.out.println("fell off board.");
 			return;
+		}
 
 		// already here. ie. been here before, don't proceed
 		if ((board[row][col] != 0)) {
+			System.out.println("been here before.");
 			return;
 		}
 
 		// if we want a closed tour, check if we're on the last move
 		if (closed) {
+			System.out.println("Closed Tour");
 			// if the last move, and it's NOT landing on one move away from start, go back
 			if ((move == MAX_MOVES) &&
 					!((row == startRow + rowMoves[0] && col == startCol + colMoves[0]) ||
@@ -91,6 +95,7 @@ public class knightsTour_v3 {
 
 		// mark my spot
 		board[row][col] = move;
+		printBoard();
 
 		// stop the recursion -- we're done.
 		if ((move == MAX_MOVES)) {
@@ -103,7 +108,11 @@ public class knightsTour_v3 {
 		// recurse Using Warnsdoff's rule
 		if (!finished) {
 			int[] nextMove = findNextMove(row, col);
-			knightsTour(move + 1, row - nextMove[0], col - nextMove[1]);
+			if (nextMove[0] == 0 && nextMove[1] == 0) {
+				System.out.println("No more moves.");
+				return;
+			}
+			knightsTour(move + 1, row + nextMove[0], col + nextMove[1]);
 		}
 
 		// back track - we're stuck in a corner
@@ -121,6 +130,8 @@ public class knightsTour_v3 {
 	 */
 	public static int[] findNextMove(int row, int col) {
 
+		System.out.println("Current Position: " + row + ", " + col);
+
 		// initialize the least number of moves to the max possible
 		int leastMoves = MAX_POSSIBLE_MOVES;
 
@@ -131,13 +142,17 @@ public class knightsTour_v3 {
 			// if the move is valid, return it
 			if (isValidMove(row + rowMoves[i], col + colMoves[i])) {
 
-				if (validMoves[row + rowMoves[i]][col + colMoves[i]] < leastMoves) {
-					leastMoves = validMoves[row + rowMoves[i]][col + colMoves[i]];
+				// if the move has less valid moves than the current least AND
+				// it's not been visited, set it as the next move
+				if ((movesArray[row + rowMoves[i]][col + colMoves[i]] <= leastMoves)
+						&& (board[row + rowMoves[i]][col + colMoves[i]] == 0)) {
+					leastMoves = movesArray[row + rowMoves[i]][col + colMoves[i]];
 					nextMove[0] = rowMoves[i];
 					nextMove[1] = colMoves[i];
 				}
 			}
 		}
+		System.out.println("Next Move: " + nextMove[0] + ", " + nextMove[1] + "  Least Moves: " + leastMoves);
 		return nextMove;
 	} // end findNextMove
 
@@ -176,18 +191,20 @@ public class knightsTour_v3 {
 						numValidMoves++;
 					}
 				}
-				validMoves[i][j] = numValidMoves;
+				movesArray[i][j] = numValidMoves;
 			}
 
 		// kick off the recursion.
-		// knightsTour(1, startRow, startCol);
+		knightsTour(1, startRow, startCol);
 
 		// print the board
+		System.out.println("\nStarting Position: " + startRow + ", " + startCol);
+		System.out.println("\nSolution:");
 		printBoard();
 
 		// print the valid moves board
-		System.out.println("\nValid Moves Board:");
-		printValidMovesBoard();
+		// System.out.println("\nValid Moves Board:");
+		// printValidMovesBoard();
 
 	} // end main
 
@@ -207,9 +224,9 @@ public class knightsTour_v3 {
 	 * Prints the valid moves board.
 	 */
 	public static void printValidMovesBoard() {
-		for (int i = 0; i < validMoves.length; i++) {
-			for (int j = 0; j < validMoves[i].length; j++)
-				System.out.print(validMoves[i][j] + "\t");
+		for (int i = 0; i < movesArray.length; i++) {
+			for (int j = 0; j < movesArray[i].length; j++)
+				System.out.print(movesArray[i][j] + "\t");
 			System.out.println();
 		}
 	} // end printValidMovesBoard
