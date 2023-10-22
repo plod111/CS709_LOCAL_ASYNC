@@ -26,11 +26,11 @@ public class knightsTour_v2 {
 	static int[] colMoves = { +1, -1, +1, -1, +2, -2, +2, -2 };
 
 	// starting position
-	static int startRow = 1;
-	static int startCol = 1;
+	static int startRow = 3;
+	static int startCol = 3;
 
 	// keep track of how many moves we've tried
-	static int attemptedMoves = 0;
+	static long attemptedMoves = 0;
 
 	/**
 	 * Recursive method to find a knight's tour.
