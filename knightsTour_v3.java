@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  * CS709 - Week 6 ASYNC
  * Exercise: MODIFIED Knight's Tour v2 - CLOSED
@@ -137,6 +138,17 @@ public class knightsTour_v3 {
 
 		int[] nextMove = { 0, 0 };
 
+		// ArrayList to store duplicate moves
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		
+		// 
+		int[] arr = new int[8];
+		// cycle through all possible moves
+		for (int i = 0; i < MAX_POSSIBLE_MOVES; i++) {
+			arr[i] = movesArray[row + rowMoves[i]][col + colMoves[i]];
+		}
+		System.out.println("arr: " + arr);
+
 		// cycle through all possible moves
 		for (int i = 0; i < MAX_POSSIBLE_MOVES; i++) {
 			// if the move is valid, return it
@@ -156,6 +168,33 @@ public class knightsTour_v3 {
 		// Moves: " + leastMoves);
 		return nextMove;
 	} // end findNextMove
+
+
+	/*
+	 * 
+ 
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (arr[i] == arr[j]) {
+                    // checking if element is
+                    // present in the ArrayList
+                    // or not if present then break
+                    if (al.contains(arr[i])) {
+                        break;
+                    }
+ 
+                    // if element is not present in the
+                    // ArrayList then add it to ArrayList
+                    // and make ifPresent at true
+                    else {
+                        al.add(arr[i]);
+                        ifPresent = true;
+                    }
+                }
+            }
+        }
+ 
+	 */
 
 	/**
 	 * Checks if a move is valid.
@@ -203,6 +242,7 @@ public class knightsTour_v3 {
 		// System.out.println("\nSolution:");
 		// printBoard();
 
+		System.out.println("Finding Next Move: " + findNextMove(startRow, startCol));
 		// print the valid moves board
 		System.out.println("\nValid Moves Board:");
 		printValidMovesBoard();
