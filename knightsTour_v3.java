@@ -53,7 +53,7 @@ public class knightsTour_v3 {
 	 * @param row
 	 * @param col
 	 */
-	public static void knightsTour(int move, int row, int col) {
+	public static void knightsTour(int move, int row, int col, int[] nextMove) {
 
 		// keep track of how many moves we've tried
 		attemptedMoves++;
@@ -64,9 +64,15 @@ public class knightsTour_v3 {
 
 		// fell off board.
 		// if (!isValidMove(row, col)) {
-		// 	System.out.println("fell off board.");
-		// 	return;
+		// System.out.println("fell off board.");
+		// return;
 		// }
+
+		// validate or break the recursion  ---?????????????????????????????????????
+		if (nextMove[0] == 0 && nextMove[1] == 0) {
+			System.out.println("No more moves.");
+			return;
+		}
 
 		// already here. ie. been here before, don't proceed
 		if ((board[row][col] != 0)) {
@@ -105,17 +111,15 @@ public class knightsTour_v3 {
 
 		// recurse using Warnsdoff's rule
 		if (!finished) {
-			int[] nextMove = findNextMove(row, col);
-			if (nextMove[0] == 0 && nextMove[1] == 0) {
-				System.out.println("No more moves.");
-				return;
-			}
-			knightsTour(move + 1, row + nextMove[0], col + nextMove[1]);
+			int[] nextMove2 = findNextMove(row, col);
+			knightsTour(move + 1, row + nextMove2[0], col + nextMove2[1], nextMove2);
 		}
 
 		// back track
 		if (!finished) {
 			board[row][col] = 0;
+			System.out.println("Backtracking...");
+			//printBoard();
 		}
 	} // end knightsTour
 
@@ -200,7 +204,7 @@ public class knightsTour_v3 {
 			}
 
 		// kick off the recursion.
-		knightsTour(1, startRow, startCol);
+		knightsTour(1, startRow, startCol, findNextMove(startRow, startCol));
 
 		// print the board
 		System.out.println("\nStarting Position: " + startRow + ", " + startCol);
