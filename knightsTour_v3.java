@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class knightsTour_v3 {
 
-	static final int SIZE = 8; // board size
+	static final int SIZE = 6; // board size
 	static final int MAX_MOVES = SIZE * SIZE; // max number of moves
 	static int[][] board = new int[SIZE][SIZE]; // the board
 	static boolean finished = false; // flag to stop the recursion
@@ -63,10 +63,10 @@ public class knightsTour_v3 {
 		// }
 
 		// fell off board.
-		if (!isValidMove(row, col)) {
-			System.out.println("fell off board.");
-			return;
-		}
+		// if (!isValidMove(row, col)) {
+		// 	System.out.println("fell off board.");
+		// 	return;
+		// }
 
 		// already here. ie. been here before, don't proceed
 		if ((board[row][col] != 0)) {
@@ -157,8 +157,7 @@ public class knightsTour_v3 {
 				}
 			}
 		}
-		// System.out.println("Next Move: " + nextMove[0] + ", " + nextMove[1] + " Least
-		// Moves: " + leastMoves);
+		System.out.println("Next Move: " + nextMove[0] + ", " + nextMove[1] + " Least Moves: " + leastMoves);
 		return nextMove;
 	} // end findNextMove
 
