@@ -11,13 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * The knight is moved so that it always proceeds to the square from which the
  * knight will have the fewest onward moves. When calculating the number of
  * onward moves for each candidate square, we do not count moves that revisit
- * any
- * square already visited.
+ * any square already visited.
  * It is possible to have two or more choices for which the number of onward
  * moves is equal; there are various methods for breaking such ties.
  * 
  * 
- * @editor /
  * @author B.Cornish
  * @collaborator P.Chu
  * @date Oct 21, 2023
@@ -152,7 +150,7 @@ public class knightsTour_v3 {
 			if (isValidMove(row + rowMoves[i], col + colMoves[i])) {
 
 				// if the move has less valid moves than the current least AND
-				// it's not been visited, set it as the next move
+				// it's NOT been visited, set it as the next move
 				if ((movesArray[row + rowMoves[i]][col + colMoves[i]] <= leastMoves)
 						&& (board[row + rowMoves[i]][col + colMoves[i]] == 0)) {
 					leastMoves = movesArray[row + rowMoves[i]][col + colMoves[i]];
