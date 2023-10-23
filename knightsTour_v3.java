@@ -20,13 +20,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * @collaborator P.Chu
  * @date Oct 21, 2023
  * 
- * 
- * 
  */
 
 public class knightsTour_v3 {
 
-	static final int SIZE = 6; // board size
+	static final int SIZE = 8; // board size
 	static final int MAX_MOVES = SIZE * SIZE; // max number of moves
 	static int[][] board = new int[SIZE][SIZE]; // the board
 	static boolean finished = false; // flag to stop the recursion
