@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * CS709 - Week 6 ASYNC
  * Exercise: MODIFIED Knight's Tour v2 - CLOSED
@@ -137,8 +139,15 @@ public class knightsTour_v3 {
 
 		int[] nextMove = { 0, 0 };
 
+		// pick a random starting point for the cycle through all possible moves
+		int start = ThreadLocalRandom.current().nextInt(1000) % MAX_POSSIBLE_MOVES;
+
 		// cycle through all possible moves
-		for (int i = 0; i < MAX_POSSIBLE_MOVES; i++) {
+		for (int count = 0; count < MAX_POSSIBLE_MOVES; ++count) {
+
+			int i = (start + count) % MAX_POSSIBLE_MOVES;
+			// System.out.println("i: " + i);
+
 			// if the move is valid, return it
 			if (isValidMove(row + rowMoves[i], col + colMoves[i])) {
 
@@ -196,7 +205,7 @@ public class knightsTour_v3 {
 			}
 
 		// kick off the recursion.
-		// knightsTour(1, startRow, startCol);
+		knightsTour(1, startRow, startCol);
 
 		// print the board
 		System.out.println("\nStarting Position: " + startRow + ", " + startCol);
@@ -204,8 +213,8 @@ public class knightsTour_v3 {
 		// printBoard();
 
 		// print the valid moves board
-		System.out.println("\nValid Moves Board:");
-		printValidMovesBoard();
+		// System.out.println("\nValid Moves Board:");
+		// printValidMovesBoard();
 
 	} // end main
 
