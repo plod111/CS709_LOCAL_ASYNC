@@ -2,8 +2,6 @@
  * CS709 - Week 7 ASYNC 
  * Exercise: Recursive sub-string detection
  * 
- * Implemented both going forward through array and also backwards through array
- * 
  * 
  * @author B.Cornish
  * @collaborator P.Chu
