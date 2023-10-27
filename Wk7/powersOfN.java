@@ -12,11 +12,16 @@ public class powersOfN {
     
     public static void main(String[] args) {
 
+        if (args.length != 2) {
+            System.out.println("\nUsage: java powersOfN <base> <exponent>\n");
+            System.exit(0);
+        }
+        
         // base, from command line
-        int n = -2; //Integer.valueOf(args[0]);
+        int n = Integer.valueOf(args[0]);
 
         // exponent, from command line
-        int x = 9; //Integer.valueOf(args[1]);
+        int x = Integer.valueOf(args[1]);
 
         // only positive exponents
         if (x >= 0) {
