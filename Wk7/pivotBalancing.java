@@ -71,7 +71,7 @@ public class pivotBalancing {
      */
     private static int[] balance(int[] input, int loadDifference) {
         if (loadDifference == 0) {
-            System.out.println("Balanced Perfectly!");
+            System.out.println("\nBalanced Perfectly!");
             return input;
         } else {
 
