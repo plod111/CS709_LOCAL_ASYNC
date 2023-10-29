@@ -44,7 +44,7 @@ public class pivotBalancing {
 
 
     ////////////////////////////////////////////////////////////////////////
-    // Load balancing
+    // Load balancing methods
 
     /**
      * loadBalance - recursively load balances a one row airplane
