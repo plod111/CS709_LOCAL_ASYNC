@@ -32,18 +32,18 @@ public class pivotBalancing {
         // System.exit(0);
         // }
 
-        int[] input = {1,2,3,4}; //{ 1, 2, 1, 2, 1, 1, 2, 1, 2, 1 }; // { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+        int[] input = { 1, 2, 3, 4 }; // { 1, 2, 1, 2, 1, 1, 2, 1, 2, 1 }; // { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
         System.out.println("Input: " + toString(input));
         System.out.println("Initial Load Left: " + sumLeft(input, 0));
         System.out.println("Initial Load Right: " + sumRight(input, 0));
         System.out.println("Initial Load Inbalance: " + difference(sumLeft(input, 0), sumRight(input, 0)));
 
-        loadBalance(input);
+        int[] balanced = loadBalance(input);
 
-        System.out.println("Optimized Load Left: " + sumLeft(input, 0));
-        System.out.println("Optimized Load Right: " + sumRight(input, 0));
-        System.out.println("Difference: " + difference(sumLeft(input, 0), sumRight(input, 0)));
+        System.out.println("Optimized Load Left: " + sumLeft(balanced, 0));
+        System.out.println("Optimized Load Right: " + sumRight(balanced, 0));
+        System.out.println("Difference: " + difference(sumLeft(balanced, 0), sumRight(balanced, 0)));
 
     } // main end
 
@@ -57,26 +57,34 @@ public class pivotBalancing {
      * @return int[] balanced
      */
     private static int[] loadBalance(int[] input) {
+        
+        // make a copy of the input array
         int[] balanced = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            balanced[i] = input[i];
+        }
 
+        // calculate the initial load difference
         int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
 
-        return balance(input, loadDifference);
+        return balance(input, loadDifference, balanced);
     }
 
-    /**
-     * balance - recursively balances the load of the airplane
-     * 
-     * @return int[] balanced
-     */
-    private static int[] balance(int[] input, int loadDifference) {
+/**
+ * balance - recursively balances the load
+ * @param input
+ * @param loadDifference
+ * @param balanced
+ * @return int[] balanced
+ */
+    private static int[] balance(int[] input, int loadDifference, int[] balanced) {
         if (loadDifference == 0) {
             System.out.println("\nBalanced Perfectly!");
             return input;
         } else {
 
-            ////////////////////////  THIS IS JUNK ////////////////////////////
-            ////////////////////////  THIS IS JUNK ////////////////////////////
+            //////////////////////// THIS IS JUNK ////////////////////////////
+            //////////////////////// THIS IS JUNK ////////////////////////////
             for (int i = 0; i < input.length; i++) {
                 if (loadDifference > 0) {
                     if (input[i] > input[input.length - i - 1]) {
@@ -90,9 +98,10 @@ public class pivotBalancing {
                     }
                 }
             }
-            ////////////////////////  ABOVE IS JUNK ////////////////////////////
         }
         return null;
+        //////////////////////// ABOVE IS JUNK ////////////////////////////
+        //////////////////////// ABOVE IS JUNK ////////////////////////////
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -173,7 +182,7 @@ public class pivotBalancing {
      * @param input
      * @return
      */
-    public static String toString(int[] input) {
+    private static String toString(int[] input) {
         String output = "";
         for (int i = 0; i < input.length; i++) {
             output += input[i] + " ";
