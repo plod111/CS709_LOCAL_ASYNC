@@ -83,41 +83,26 @@ public class pivotBalancing {
             return input;
         } else {
 
-            //////////////////////// THIS IS JUNK ////////////////////////////
-            //////////////////////// THIS IS JUNK ////////////////////////////
-            for (int i = 0; i < input.length; i++) {
-                if (loadDifference > 0) {
-                    if (input[i] > input[input.length - i - 1]) {
-                        swap(input, i, input.length - i - 1);
-                        loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
-                    }
-                } else {
-                    if (input[i] < input[input.length - i - 1]) {
-                        swap(input, i, input.length - i - 1);
-                        loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
-                    }
-                }
-            }
-        }
-        return null;
-        //////////////////////// ABOVE IS JUNK ////////////////////////////
-        //////////////////////// ABOVE IS JUNK ////////////////////////////
+            //////////////////////// ???? ////////////////////////////
+            //////////////////////// ////////////////////////////
+            
+        ////////////////////////  ////////////////////////////
+        //////////////////////// ////////////////////////////
     }
 
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
 
     /**
-     * swap - swaps two elements in an array
+     * swap - swaps nth and (length-n-1)th elements in an array
      * 
      * @param input
      * @param i
-     * @param j
      */
-    private static void swap(int[] input, int i, int j) {
-        int temp = input[i];
-        input[i] = input[j];
-        input[j] = temp;
+    private static void swap(int[] input, int n) {
+        int temp = input[n];
+        input[n] = input[input.length - n - 1];
+        input[input.length-n-1] = temp;
 
     } // end swap
 
