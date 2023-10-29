@@ -33,10 +33,22 @@ public class pivotBalancing {
     } // main end
 
     
+    ////////////////////////////////////////////////////////////////////////
+    // Load balancing
+
+    /**
+     * loadBalance - recursively load balances a one row airplane
+     * 
+     * @param input
+     * @return int[] balanced
+     */
     private static int[] loadBalance(int[] input) {
         return null;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // Helper Methods
 
     /**
      * sumLeft - recursively adds up the left side of the array
