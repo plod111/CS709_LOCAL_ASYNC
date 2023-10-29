@@ -32,16 +32,20 @@ public class pivotBalancing {
         // System.exit(0);
         // }
 
-        int[] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+        int[] input = { 1, 2, 1, 2, 1, 1, 2, 1, 2, 1 }; // { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+
+        System.out.println("Input: " + toString(input));
+        System.out.println("Initial Load Left: " + sumLeft(input, 0));
+        System.out.println("Initial Load Right: " + sumRight(input, 0));
+        System.out.println("Initial Load Inbalance: " + difference(sumLeft(input, 0), sumRight(input, 0)));
 
         loadBalance(input);
 
-        System.out.println("Load Left: " + sumLeft(input, 0));
-        System.out.println("Load Right: " + sumRight(input, 0));
+        System.out.println("Optimized Load Left: " + sumLeft(input, 0));
+        System.out.println("Optimized Load Right: " + sumRight(input, 0));
         System.out.println("Difference: " + difference(sumLeft(input, 0), sumRight(input, 0)));
 
     } // main end
-
 
     ////////////////////////////////////////////////////////////////////////
     // Load balancing methods
@@ -55,12 +59,54 @@ public class pivotBalancing {
     private static int[] loadBalance(int[] input) {
         int[] balanced = new int[input.length];
 
-        return balanced;
+        int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+
+        return balance(input, loadDifference);
     }
 
+    /**
+     * balance - recursively balances the load of the airplane
+     * 
+     * @return int[] balanced
+     */
+    private static int[] balance(int[] input, int loadDifference) {
+        if (loadDifference == 0) {
+            System.out.println("Balanced Perfectly!");
+            return input;
+        } else {
+            for (int i = 0; i < input.length; i++) {
+                if (loadDifference > 0) {
+                    if (input[i] > input[input.length - i - 1]) {
+                        swap(input, i, input.length - i - 1);
+                        loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+                    }
+                } else {
+                    if (input[i] < input[input.length - i - 1]) {
+                        swap(input, i, input.length - i - 1);
+                        loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
+
+    /**
+     * swap - swaps two elements in an array
+     * 
+     * @param input
+     * @param i
+     * @param j
+     */
+    private static void swap(int[] input, int i, int j) {
+        int temp = input[i];
+        input[i] = input[j];
+        input[j] = temp;
+
+    } // end swap
 
     /**
      * sumLeft - recursively adds up the left side of the array
@@ -82,7 +128,6 @@ public class pivotBalancing {
             return leftSide[index] + sumLeft(input, index + 1);
         }
     } // end sumLeft
-
 
     /**
      * sumRight - recursively adds up the right side of the array
@@ -107,7 +152,6 @@ public class pivotBalancing {
         }
     } // end sumRight
 
-
     /**
      * difference - returns the difference between left and right sides
      * 
@@ -118,4 +162,18 @@ public class pivotBalancing {
     private static int difference(int left, int right) {
         return left - right;
     } // end difference
+
+    /**
+     * toString - returns a string representation of an array
+     * 
+     * @param input
+     * @return
+     */
+    public static String toString(int[] input) {
+        String output = "";
+        for (int i = 0; i < input.length; i++) {
+            output += input[i] + " ";
+        }
+        return output;
+    }
 }
