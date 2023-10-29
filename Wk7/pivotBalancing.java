@@ -97,7 +97,7 @@ public class pivotBalancing {
      * swap - swaps nth and (length-n-1)th elements in an array
      * 
      * @param input
-     * @param i
+     * @param n
      */
     private static void swap(int[] input, int n) {
         int temp = input[n];
