@@ -74,6 +74,9 @@ public class pivotBalancing {
             System.out.println("Balanced Perfectly!");
             return input;
         } else {
+
+            ////////////////////////  THIS IS JUNK ////////////////////////////
+            ////////////////////////  THIS IS JUNK ////////////////////////////
             for (int i = 0; i < input.length; i++) {
                 if (loadDifference > 0) {
                     if (input[i] > input[input.length - i - 1]) {
@@ -87,6 +90,7 @@ public class pivotBalancing {
                     }
                 }
             }
+            ////////////////////////  ABOVE IS JUNK ////////////////////////////
         }
         return null;
     }
