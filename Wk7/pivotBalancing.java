@@ -32,16 +32,20 @@ public class pivotBalancing {
         // System.exit(0);
         // }
 
-        int[] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+        int[] input = { 1, 2, 3, 4 }; // { 1, 2, 1, 2, 1, 1, 2, 1, 2, 1 }; // { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
-        loadBalance(input);
+        System.out.println("Input: " + toString(input));
+        System.out.println("Initial Load Left: " + sumLeft(input, 0));
+        System.out.println("Initial Load Right: " + sumRight(input, 0));
+        System.out.println("Initial Load Inbalance: " + difference(sumLeft(input, 0), sumRight(input, 0)));
 
-        System.out.println("Load Left: " + sumLeft(input, 0));
-        System.out.println("Load Right: " + sumRight(input, 0));
-        System.out.println("Difference: " + difference(sumLeft(input, 0), sumRight(input, 0)));
+        int[] balanced = loadBalance(input);
+
+        System.out.println("Optimized Load Left: " + sumLeft(balanced, 0));
+        System.out.println("Optimized Load Right: " + sumRight(balanced, 0));
+        System.out.println("Difference: " + difference(sumLeft(balanced, 0), sumRight(balanced, 0)));
 
     } // main end
-
 
     ////////////////////////////////////////////////////////////////////////
     // Load balancing methods
@@ -53,12 +57,54 @@ public class pivotBalancing {
      * @return int[] balanced
      */
     private static int[] loadBalance(int[] input) {
-        return null;
+        
+        // make a copy of the input array
+        int[] balanced = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            balanced[i] = input[i];
+        }
+
+        // calculate the initial load difference
+        int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+
+        return balance(input, loadDifference, balanced);
     }
 
+/**
+ * balance - recursively balances the load
+ * @param input
+ * @param loadDifference
+ * @param balanced
+ * @return int[] balanced
+ */
+    private static int[] balance(int[] input, int loadDifference, int[] balanced) {
+        if (loadDifference == 0) {
+            System.out.println("\nBalanced Perfectly!");
+            return input;
+        } else {
+
+            //////////////////////// ???? ////////////////////////////
+            //////////////////////// ////////////////////////////
+            
+        ////////////////////////  ////////////////////////////
+        //////////////////////// ////////////////////////////
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
+
+    /**
+     * swap - swaps nth and (length-n-1)th elements in an array
+     * 
+     * @param input
+     * @param n
+     */
+    private static void swap(int[] input, int n) {
+        int temp = input[n];
+        input[n] = input[input.length - n - 1];
+        input[input.length-n-1] = temp;
+
+    } // end swap
 
     /**
      * sumLeft - recursively adds up the left side of the array
@@ -80,7 +126,6 @@ public class pivotBalancing {
             return leftSide[index] + sumLeft(input, index + 1);
         }
     } // end sumLeft
-
 
     /**
      * sumRight - recursively adds up the right side of the array
@@ -105,7 +150,6 @@ public class pivotBalancing {
         }
     } // end sumRight
 
-
     /**
      * difference - returns the difference between left and right sides
      * 
@@ -116,4 +160,18 @@ public class pivotBalancing {
     private static int difference(int left, int right) {
         return left - right;
     } // end difference
+
+    /**
+     * toString - returns a string representation of an array
+     * 
+     * @param input
+     * @return
+     */
+    private static String toString(int[] input) {
+        String output = "";
+        for (int i = 0; i < input.length; i++) {
+            output += input[i] + " ";
+        }
+        return output;
+    }
 }
