@@ -1,4 +1,14 @@
 /**
+ * CS709 - Week 7 ASYNC 
+ * Exercise: Recursive balancing of a one row airplane
+ * 
+ * 
+ * @author B.Cornish
+ * @collaborator P.Chu
+ * @date Oct 29, 2023
+ */
+
+/**
  * pivotBalancing
  * 
  * Program that attempts to recursively load balance a very tiny one row
@@ -32,7 +42,7 @@ public class pivotBalancing {
 
     } // main end
 
-    
+
     ////////////////////////////////////////////////////////////////////////
     // Load balancing
 
