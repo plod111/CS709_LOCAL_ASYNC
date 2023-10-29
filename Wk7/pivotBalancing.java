@@ -1,3 +1,4 @@
+
 /**
  * CS709 - Week 7 ASYNC 
  * Exercise: Recursive balancing of a one row airplane
@@ -7,6 +8,9 @@
  * @collaborator P.Chu
  * @date Oct 29, 2023
  */
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * pivotBalancing
@@ -37,58 +41,65 @@ public class pivotBalancing {
         System.out.println("Input: " + toString(input));
         System.out.println("Initial Load Left: " + sumLeft(input, 0));
         System.out.println("Initial Load Right: " + sumRight(input, 0));
-        System.out.println("Initial Load Inbalance: " + difference(sumLeft(input, 0), sumRight(input, 0)));
-
-        int[] balanced = loadBalance(input);
-
-        System.out.println("Optimized Load Left: " + sumLeft(balanced, 0));
-        System.out.println("Optimized Load Right: " + sumRight(balanced, 0));
-        System.out.println("Difference: " + difference(sumLeft(balanced, 0), sumRight(balanced, 0)));
-
-    } // main end
-
-    ////////////////////////////////////////////////////////////////////////
-    // Load balancing methods
-
-    /**
-     * loadBalance - recursively load balances a one row airplane
-     * 
-     * @param input
-     * @return int[] balanced
-     */
-    private static int[] loadBalance(int[] input) {
-        
-        // make a copy of the input array
-        int[] balanced = new int[input.length];
-        for (int i = 0; i < input.length; i++) {
-            balanced[i] = input[i];
-        }
 
         // calculate the initial load difference
         int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
 
-        return balance(input, loadDifference, balanced);
-    }
+        System.out.println("Initial Load Inbalance: " + loadDifference);
 
-/**
- * balance - recursively balances the load
- * @param input
- * @param loadDifference
- * @param balanced
- * @return int[] balanced
- */
-    private static int[] balance(int[] input, int loadDifference, int[] balanced) {
-        if (loadDifference == 0) {
-            System.out.println("\nBalanced Perfectly!");
-            return input;
+        Set<int[]> uniquePermutations = new HashSet<>(); // creates new hashset for unique permutations.
+
+        balance(input, input.length, uniquePermutations);
+
+        System.out.println("Optimized Load Left: " + sumLeft(??, 0));
+        System.out.println("Optimized Load Right: " + sumRight(??, 0));
+
+            // calculate load difference
+        int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+        System.out.println("Difference: " + difference(sumLeft(??, 0), sumRight(??, 0)));
+
+    } // main end
+
+    ////////////////////////////////////////////////////////////////////////
+    // Load balancing method
+
+    /**
+     * balance - recursively balances the load of an array
+     * 
+     * @param input
+     * @param size
+     * @param uniquePermutations
+     * @return int[] balanced
+     */
+    private static void balance(int[] input, int size, Set<int[]> uniquePermutations) {
+        // base case if method is working the last letter in the char array.
+        if (size == input.length/2) {
+            // adds to permutations set.
+            uniquePermutations.add(input);
+
         } else {
 
-            //////////////////////// ???? ////////////////////////////
-            //////////////////////// ////////////////////////////
-            
-        ////////////////////////  ////////////////////////////
-        //////////////////////// ////////////////////////////
-    }
+
+            for (int i = 0; i < input.length / 2; i++){
+
+
+
+            }
+
+
+
+            // creates a permutation recursively by swapping position of ints.
+            for (int i = 0; i < size; i++) {
+                balance(input, size - 1, uniquePermutations);
+
+                if (size % 2 == 1) {
+                    swap(input, 0, size - 1);
+                } else {
+                    swap(input, i, size - 1);
+                }
+            }
+        }
+    } // end balance
 
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
@@ -102,7 +113,7 @@ public class pivotBalancing {
     private static void swap(int[] input, int n) {
         int temp = input[n];
         input[n] = input[input.length - n - 1];
-        input[input.length-n-1] = temp;
+        input[input.length - n - 1] = temp;
 
     } // end swap
 
