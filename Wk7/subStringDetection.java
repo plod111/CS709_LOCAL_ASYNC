@@ -8,7 +8,7 @@
  * @date Oct 26, 2023
  */
 
-public class SubStringDetection {
+public class subStringDetection {
 
     /**
      * Recursive sub-string detection
