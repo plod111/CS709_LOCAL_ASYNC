@@ -54,8 +54,8 @@ public class pivotBalancing {
      */
     private static int[] loadBalance(int[] input) {
         int[] balanced = new int[input.length];
-        
-        return null;
+
+        return balanced;
     }
 
 
