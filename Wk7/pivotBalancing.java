@@ -98,11 +98,6 @@ public class pivotBalancing {
             j++;
         }
 
-        // for (int i = 0; i < rightSide.length; i++) {
-        //     System.out.print(rightSide[i]);
-        // }
-        // System.out.println();
-
         if (index == rightSide.length) {
             return 0;
         } else {
@@ -120,5 +115,5 @@ public class pivotBalancing {
      */
     private static int difference(int left, int right) {
         return left - right;
-    }
+    } // end difference
 }
