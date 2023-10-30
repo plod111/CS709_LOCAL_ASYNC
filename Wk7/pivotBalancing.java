@@ -38,7 +38,7 @@ public class pivotBalancing {
         // System.exit(0);
         // }
 
-        int[] inputOriginal = { 1, 2, 3, 4 };
+        int[] inputOriginal = { 1, 2, 3, 4,5};
 
         int[] input = new int[inputOriginal.length];
         for (int i = 0; i < inputOriginal.length; i++) {
@@ -120,12 +120,13 @@ public class pivotBalancing {
         // go thru input and permutation arrays and check if rainbow swap
         // is valid.
 
-        // printArray(permutation);
+        printArray(permutation);
 
-        if ((permutation[i] == input[i]) || (permutation[i] == input[input.length - i - 1])) {
-            // System.out.println("p[i]: " + permutation[i]);
-            // System.out.println("i[i]: " + input[i]);
-            // System.out.println("i[l-i-1]: " + input[input.length - i - 1]);
+        if (((permutation[i] == input[i]) && (permutation[input.length - i - 1] == input[input.length - i - 1]))
+                || ((permutation[i] == input[input.length - i - 1]) && (permutation[input.length-i-1] == input[i]))  ) {
+            System.out.println("p[i]: " + permutation[i]);
+            System.out.println("i[i]: " + input[i]);
+            System.out.println("i[l-i-1]: " + input[input.length - i - 1]);
             isValid = true;
             System.out.println("***isValid: " + isValid);
 
