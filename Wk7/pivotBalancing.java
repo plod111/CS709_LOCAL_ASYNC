@@ -117,11 +117,22 @@ public class pivotBalancing {
             System.out.println("end");
             return true;
         }
+
         // go thru input and permutation arrays and check if rainbow swap
         // is valid.
 
         printArray(permutation);
 
+        // if ODD array length - validate only those elements that 'middle element does not move
+        if (input.length % 2 == 1) {
+            if (permutation[i] == input[i]) {
+                isValid = true;
+            } else {
+                isValid = false;
+            }
+        }
+        
+        
         if (((permutation[i] == input[i]) && (permutation[input.length - i - 1] == input[input.length - i - 1]))
                 || ((permutation[i] == input[input.length - i - 1]) && (permutation[input.length-i-1] == input[i]))  ) {
             System.out.println("p[i]: " + permutation[i]);
