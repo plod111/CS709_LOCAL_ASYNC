@@ -12,7 +12,7 @@ import java.util.Set;
  */
 
 
-public class LetterPermutations{
+public class letterPermutations{
 
 
     /**
