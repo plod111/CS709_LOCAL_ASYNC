@@ -10,6 +10,7 @@
  */
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -30,13 +31,19 @@ import java.util.Set;
 
 public class pivotBalancing {
 
+
     public static void main(String[] args) {
         // if (args.length != 1 ) {
         // System.out.println("\nUsage: java pivotBalancing <int array>\n");
         // System.exit(0);
         // }
 
-        int[] input = { 1, 2, 3, 4 }; // { 1, 2, 1, 2, 1, 1, 2, 1, 2, 1 }; // { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+        int[] inputOriginal = { 1, 2, 3, 4 };
+
+        int[] input = new int[inputOriginal.length];
+        for (int i = 0; i < inputOriginal.length; i++) {
+            input[i] = inputOriginal[i];
+        }
 
         System.out.println("Input: " + toString(input));
         System.out.println("Initial Load Left: " + sumLeft(input, 0));
@@ -49,48 +56,117 @@ public class pivotBalancing {
 
         Set<int[]> uniquePermutations = new HashSet<>(); // creates new hashset for unique permutations.
 
-        balance(input, input.length, uniquePermutations);
+        System.out.println("Beginning permutations...");
+        permutations(input, input.length, uniquePermutations);
 
-        System.out.println("Optimized Load Left: " + sumLeft(??, 0));
-        System.out.println("Optimized Load Right: " + sumRight(??, 0));
+        Set<int[]> validPermutations = rainbowValidation(inputOriginal, uniquePermutations);
 
-            // calculate load difference
-        int loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
-        System.out.println("Difference: " + difference(sumLeft(??, 0), sumRight(??, 0)));
+        // System.out.println("Optimized Load Left: " + sumLeft(input, 0));
+        // System.out.println("Optimized Load Right: " + sumRight(input, 0));
+
+        // // calculate load difference
+        // loadDifference = difference(sumLeft(input, 0), sumRight(input, 0));
+        // System.out.println("Difference: " + loadDifference);
+
+        // System.out.println();
+        printPermutations(validPermutations);
 
     } // main end
 
     ////////////////////////////////////////////////////////////////////////
-    // Load balancing method
+    // Load balancing methods
 
     /**
-     * balance - recursively balances the load of an array
+     * rainbowValidation - validates permutations using rainbow swap
+     * 
+     * @param input
+     * @param uniquePermutations
+     * @return Set<int[]> rainbowPermutations
+     */
+    private static Set<int[]> rainbowValidation(int[] input, Set<int[]> uniquePermutations) {
+        int[][] permutationsArray = new int[uniquePermutations.size()][input.length];
+        uniquePermutations.toArray(permutationsArray);
+        // iterate thru permutationsArray and validate rainbow swaps and store
+        // valid permutations in a new set.
+
+        Set<int[]> rainbowPermutations = new HashSet<>();
+        for (int[] permutation : permutationsArray) {
+            if (isValidPermutation(input, permutation, 0)) {
+                System.out.println("Valid permutation: " + toString(permutation));
+                rainbowPermutations.add(permutation);
+            }
+        }
+
+        return rainbowPermutations;
+    }
+
+    /**
+     * isValidPermutation - checks if a permutation is valid
+     * 
+     * @param input
+     * @param permutation
+     * @param i
+     * @return boolean isValid
+     */
+    private static boolean isValidPermutation(int[] input, int[] permutation, int i) {
+
+        System.out.println("i: " + i);
+        boolean isValid = false;
+
+        if (i == input.length) {
+            System.out.println("end");
+            return true;
+        }
+        // go thru input and permutation arrays and check if rainbow swap
+        // is valid.
+
+        // printArray(permutation);
+
+        if ((permutation[i] == input[i]) || (permutation[i] == input[input.length - i - 1])) {
+            // System.out.println("p[i]: " + permutation[i]);
+            // System.out.println("i[i]: " + input[i]);
+            // System.out.println("i[l-i-1]: " + input[input.length - i - 1]);
+            isValid = true;
+            System.out.println("***isValid: " + isValid);
+
+        } else {
+            isValid = false;
+            // return isValid;
+        }
+
+        if (isValid) {
+            // System.out.println("recursive call");
+            isValidPermutation(input, permutation, i + 1);
+        }
+
+        // System.out.println(isValid);
+        return isValid;
+    }
+
+    /**
+     * permutations - recursively finds all permutations of an array
      * 
      * @param input
      * @param size
      * @param uniquePermutations
-     * @return int[] balanced
      */
-    private static void balance(int[] input, int size, Set<int[]> uniquePermutations) {
+    private static void permutations(int[] input, int size, Set<int[]> uniquePermutations) {
+
         // base case if method is working the last letter in the char array.
-        if (size == input.length/2) {
-            // adds to permutations set.
-            uniquePermutations.add(input);
-
-        } else {
-
-
-            for (int i = 0; i < input.length / 2; i++){
-
-
-
+        if (size == 1) {
+            // create new array object
+            int[] permutation = new int[input.length];
+            for (int i = 0; i < input.length; i++) {
+                permutation[i] = input[i];
             }
 
+            // adds the new array to permuteString set.
+            uniquePermutations.add(permutation);
 
-
-            // creates a permutation recursively by swapping position of ints.
+        } else {
+            // creates a permutation recursively by swapping position of chars.
             for (int i = 0; i < size; i++) {
-                balance(input, size - 1, uniquePermutations);
+                permutations(input, size - 1, uniquePermutations);
 
                 if (size % 2 == 1) {
                     swap(input, 0, size - 1);
@@ -99,18 +175,25 @@ public class pivotBalancing {
                 }
             }
         }
-    } // end balance
+    } // end permutations
 
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
 
+    // helper method to swap chars for the input array
+    public static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
     /**
-     * swap - swaps nth and (length-n-1)th elements in an array
+     * rainbowSwap - swaps nth and (length-n-1)th elements in an array
      * 
      * @param input
      * @param n
      */
-    private static void swap(int[] input, int n) {
+    private static void rainbowSwapwap(int[] input, int n) {
         int temp = input[n];
         input[n] = input[input.length - n - 1];
         input[input.length - n - 1] = temp;
@@ -184,5 +267,29 @@ public class pivotBalancing {
             output += input[i] + " ";
         }
         return output;
+    }
+
+    /**
+     * printPermutations - prints out all permutations in a set
+     * 
+     * @param uniquePermutations
+     */
+    private static void printPermutations(Set<int[]> uniquePermutations) {
+        System.out.println();
+        for (int[] permutations : uniquePermutations) {
+            for (int element : permutations) {
+                System.out.print(element + " ");
+
+            }
+            System.out.println();
+        }
+
+    }
+
+    private static void printArray(int[] input) {
+        for (int element : input) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
     }
 }
