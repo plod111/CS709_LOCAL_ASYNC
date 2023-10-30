@@ -193,7 +193,7 @@ public class pivotBalancing {
      * @param input
      * @param n
      */
-    private static void rainbowSwapwap(int[] input, int n) {
+    private static void rainbowSwap(int[] input, int n) {
         int temp = input[n];
         input[n] = input[input.length - n - 1];
         input[input.length - n - 1] = temp;
