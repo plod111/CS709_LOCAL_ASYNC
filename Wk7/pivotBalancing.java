@@ -31,8 +31,8 @@ import java.util.Set;
 public class pivotBalancing {
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("\nUsage: java pivotBalancing <int array>\n");
+        if (args.length < 1) {
+            System.out.println("\nUsage: java pivotBalancing <list of ints>\n");
             System.exit(0);
         }
 
@@ -177,8 +177,7 @@ public class pivotBalancing {
         }
 
         if (((permutation[i] == input[i]) && (permutation[input.length - i - 1] == input[input.length - i - 1]))
-                || ((permutation[i] == input[input.length - i - 1])
-                        && (permutation[input.length - i - 1] == input[i]))) {
+                || ((permutation[i] == input[input.length - i - 1]) && (permutation[input.length - i - 1] == input[i]))) {
             // System.out.println("p[i]: " + permutation[i]);
             // System.out.println("i[i]: " + input[i]);
             // System.out.println("i[l-i-1]: " + input[input.length - i - 1]);
@@ -236,7 +235,12 @@ public class pivotBalancing {
     ////////////////////////////////////////////////////////////////////////
     // Helper Methods
 
-    // helper method to swap chars for the input array
+    /**
+     * swap - swaps two elements in an array
+     * @param array
+     * @param i
+     * @param j
+     */
     public static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
