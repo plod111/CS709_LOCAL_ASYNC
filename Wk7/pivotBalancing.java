@@ -191,7 +191,7 @@ public class pivotBalancing {
 
         if (isValid) {
             // System.out.println("recursive call");
-            isValidPermutation(input, permutation, i + 1);
+            return isValidPermutation(input, permutation, i + 1);
         }
 
         // System.out.println(isValid);
