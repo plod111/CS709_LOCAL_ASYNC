@@ -1,7 +1,7 @@
 public class EightsDeck extends Deck {
     
    /**
-     * Constructs a standard deck of 52 cards.
+     * Constructs a standard deck of 52 "Eights" cards.
      */
     public EightsDeck(String label) {
         super(label);

@@ -13,6 +13,9 @@ public class EightsCard extends Card {
         super(rank, suit);
     }
 
+    /**
+     * Returns true if suits or rank matches, or is an 8.
+     */
     public boolean matches(Card thatCard) {
         return this.getSuit() == thatCard.getSuit()
                 || this.getRank() == thatCard.getRank()
