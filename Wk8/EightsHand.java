@@ -1,11 +1,18 @@
 
+/**
+ * Ch14, Exercises 3-4
+ * 
+ * @coeditor B.Cornish
+ * @coeditor P.Chu
+ * @date Nov 5, 2023
+ */
+
 public class EightsHand extends Hand {
 
     public EightsHand(String label) {
 
         super(label);
     }
-
 
     public int scoreHand() {
 
@@ -15,27 +22,11 @@ public class EightsHand extends Hand {
 
             EightsCard card = (EightsCard) getCard(i);
 
-            int rank = card.getRank();
-
-            if (rank == 8) {
-
-                score -= 20;
-
-            } else if (rank > 10) {
-
-                score -= 10;
-
-            } else {
-
-                score -= rank;
-
-            }
-
+            score += card.scoreCard();
         }
 
         return score;
 
     }
 
-    
 }

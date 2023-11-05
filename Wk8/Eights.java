@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Ch14, Exercises 3-4
  * 
- * @editor B.Cornish
+ * @coeditor B.Cornish
  * @coeditor P.Chu
  * @date Nov 4, 2023
  */
