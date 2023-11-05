@@ -1,5 +1,13 @@
 
 /**
+ * Ch14, Exercises 3-4
+ * 
+ * @editor B.Cornish
+ * @coeditor P.Chu
+ * @date Nov 4, 2023
+ */
+
+/**
  * A player in a game of crazy eights.
  */
 public class Player {
@@ -45,7 +53,7 @@ public class Player {
      */
     public Card searchForMatch(Card prev) {
         for (int i = 0; i < hand.size(); i++) {
-            EightsCard card = hand.getCard(i);
+            Card card = hand.getCard(i);
             if (matches(prev)) {
                 return hand.popCard(i);
             }

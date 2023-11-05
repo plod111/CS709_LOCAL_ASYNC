@@ -1,5 +1,13 @@
 
 /**
+ * Ch14, Exercises 3-4
+ * 
+ * @editor B.Cornish
+ * @coeditor P.Chu
+ * @date Nov 4, 2023
+ */
+
+/**
  * A deck of playing cards.
  */
 public class Deck extends CardCollection {

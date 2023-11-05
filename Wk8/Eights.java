@@ -3,14 +3,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Ch14, Exercises 3-4
+ * 
+ * @editor B.Cornish
+ * @coeditor P.Chu
+ * @date Nov 4, 2023
+ */
+
+/**
  * Simulates a game of Crazy Eights.
  * See https://en.wikipedia.org/wiki/Crazy_Eights.
  */
 public class Eights {
 
-    // private Player one;
-    // private Player two;
-    ArrayList<Player> players = new ArrayList<Player>();
+    // list of players
+    private static ArrayList<Player> players = new ArrayList<Player>();
 
     private Hand drawPile;
     private Hand discardPile;
@@ -24,6 +31,7 @@ public class Eights {
         deck.shuffle();
 
         // list of players
+        // NB: All players are Players, not Genius's - they're no fun to play against
         players.add(new Player("Allen"));
         players.add(new Player("Chris"));
         players.add(new Player("David"));
@@ -34,12 +42,6 @@ public class Eights {
         for (Player player : players) {
             deck.deal(player.getHand(), 5);
         }
-
-        // deal cards to each player
-        // one = new Player("Allen");
-        // deck.deal(one.getHand(), 5);
-        // two = new Player("Chris");
-        // deck.deal(two.getHand(), 5);
 
         // turn one card face up
         discardPile = new Hand("Discards");
@@ -57,9 +59,11 @@ public class Eights {
      * Returns true if either hand is empty.
      */
     public boolean isDone() {
-        
-        for (Player player: players) {
-            if(player.getHand().isEmpty()) {
+
+        // loop through list of players
+        // if any player's hand is empty, return done
+        for (Player player : players) {
+            if (player.getHand().isEmpty()) {
                 return true;
             }
         }
@@ -96,23 +100,24 @@ public class Eights {
     /**
      * Switches players.
      */
-    public Player nextPlayer(Player current) {  
-        int nextPlayerIndex = players.indexOf(current)+1;
-        int bounds = players.size();
+    public Player nextPlayer(Player current) {
 
-        if (nextPlayerIndex == bounds) {
+        // set index of next player to current player's index + 1
+        int nextPlayerIndex = players.indexOf(current) + 1;
+
+        if (nextPlayerIndex == players.size()) {
             nextPlayerIndex = 0;
-        } 
-            return players.get(nextPlayerIndex);
         }
-
+        return players.get(nextPlayerIndex);
+    }
 
     /**
      * Displays the state of the game.
      */
     public void displayState() {
-        
-        for(Player player:players) {
+
+        // loop through list of players
+        for (Player player : players) {
             player.display();
         }
         discardPile.display();
@@ -139,11 +144,11 @@ public class Eights {
     public void playGame() {
 
         Random rand = new Random();
-        Player player = players.get(rand.nextInt(players.size()));  // randomly chosen strater
+        Player player = players.get(rand.nextInt(players.size())); // randomly chosen starter
 
         // keep playing until there's a winner
         while (!isDone()) {
-            //displayState();
+            // displayState();
             takeTurn(player);
             player = nextPlayer(player);
         }
@@ -155,48 +160,69 @@ public class Eights {
         }
     }
 
-    public static void playGame(int numGames) {
-        int oneWins = 0;
-        int twoWins = 0;
-        int ties = 0;
+    /**
+     * Plays the game multiple times and keeps score.
+     */
+    public static void playGames(int numGames) {
+
+        // array for player scores after multiple games
+        int[] playerScores = new int[players.size()];
+        // initialize all scores to 0
+        for (int i = 0; i < players.size(); i++) {
+            playerScores[i] = 0;
+        }
+
+        // increment the score of the winner of each game
         for (int i = 0; i < numGames; i++) {
             String winner = playOneGame();
-            if (winner.equals("Allen")) {
-                oneWins++;
-            } else if (winner.equals("Chris")) {
-                twoWins++;
-            } else {
-                ties++;
+            for (int j = 0; j < players.size(); j++) {
+                if (winner.equals(players.get(j).getName())) {
+                    playerScores[j]++;
+                }
             }
         }
-        System.out.println("Allen won " + oneWins
-                + " times. Chris won " + twoWins
-                + " times. There were " + ties + " ties.");
+
+        // print out the wins for each player
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println(players.get(i).getName() + " won " + playerScores[i] + " times.");
+        }
     }
 
+    /**
+     * Simulates one game and returns the winner.
+     */
     public static String playOneGame() {
         Eights game = new Eights();
         game.playGame();
         return game.getWinner();
     }
 
+    /**
+     * Returns the winner of the game.
+     */
     public String getWinner() {
-        int i = 0;
+
+        // array for player scores
         int[] playerScores = new int[players.size()];
+        // index to hold winners position in array
+        int i = 0;
         for (Player player : players) {
-            playerScores[i] =  player.score();
+            playerScores[i] = player.score();
             i++;
         }
 
+        // find the highest score
         int maxIndex = 0;
         int max = playerScores[maxIndex];
         for (int j = 1; j < playerScores.length; j++) {
-            if(playerScores[j] > max) {
+            if (playerScores[j] > max) {
                 max = playerScores[j];
                 maxIndex = j;
             }
-            
+
         }
+
+        // return the name of the player with the highest score
         return players.get(maxIndex).getName();
 
         /// no ties dealt with here...
@@ -207,7 +233,7 @@ public class Eights {
      */
     public static void main(String[] args) {
         // Eights game = new Eights();
-        playGame(100);
+        playGames(100);
     }
 
 }
