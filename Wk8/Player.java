@@ -13,14 +13,14 @@
 public class Player {
 
     private String name;
-    protected Hand hand;
+    protected EightsHand hand;
 
     /**
      * Constructs a player with an empty hand.
      */
     public Player(String name) {
         this.name = name;
-        this.hand = new Hand(name);
+        this.hand = new EightsHand(name);
     }
 
     /**
@@ -40,8 +40,8 @@ public class Player {
     /**
      * Removes and returns a legal card from the player's hand.
      */
-    public Card play(Eights eights, Card prev) {
-        Card card = searchForMatch(prev);
+    public EightsCard play(Eights eights, EightsCard prev) {
+        EightsCard card = searchForMatch(prev);
         if (card == null) {
             card = drawForMatch(eights, prev);
         }
@@ -51,10 +51,10 @@ public class Player {
     /**
      * Searches the player's hand for a matching card.
      */
-    public Card searchForMatch(Card prev) {
+    public EightsCard searchForMatch(EightsCard prev) {
         for (int i = 0; i < hand.size(); i++) {
-            Card card = hand.getCard(i);
-            if (matches(prev)) {
+            EightsCard card = hand.getCard(i);
+            if (card.matches(prev)) {
                 return hand.popCard(i);
             }
         }
@@ -64,7 +64,7 @@ public class Player {
     /**
      * Draws cards until a match is found.
      */
-    public Card drawForMatch(Eights eights, Card prev) {
+    public EightsCard drawForMatch(Eights eights, Card prev) {
         while (true) {
             EightsCard card = eights.drawCard();
             System.out.println(name + " draws " + card);

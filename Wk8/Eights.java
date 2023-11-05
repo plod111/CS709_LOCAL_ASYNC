@@ -19,15 +19,15 @@ public class Eights {
     // list of players
     private static ArrayList<Player> players = new ArrayList<Player>();
 
-    private Hand drawPile;
-    private Hand discardPile;
+    private EightsHand drawPile;
+    private EightsHand discardPile;
     private Scanner in;
 
     /**
      * Initializes the state of the game.
      */
     public Eights() {
-        Deck deck = new Deck("Deck");
+        EightsDeck deck = new EightsDeck("Deck");
         deck.shuffle();
 
         // list of players
@@ -44,11 +44,11 @@ public class Eights {
         }
 
         // turn one card face up
-        discardPile = new Hand("Discards");
+        discardPile = new EightsHand("Discards");
         deck.deal(discardPile, 1);
 
         // put the rest of the deck face down
-        drawPile = new Hand("Draw pile");
+        drawPile = new EightsHand("Draw pile");
         deck.dealAll(drawPile);
 
         // create the scanner we'll use to wait for the user
@@ -90,11 +90,11 @@ public class Eights {
     /**
      * Returns a card from the draw pile.
      */
-    public Card drawCard() {
+    public EightsCard drawCard() {
         if (drawPile.isEmpty()) {
             reshuffle();
         }
-        return drawPile.popCard();
+        return (EightsCard)drawPile.popCard();
     }
 
     /**
@@ -130,8 +130,8 @@ public class Eights {
      * One player takes a turn.
      */
     public void takeTurn(Player player) {
-        Card prev = discardPile.lastCard();
-        Card next = player.play(this, prev);
+        EightsCard prev = discardPile.lastCard();
+        EightsCard next = player.play(this, prev);
         discardPile.addCard(next);
 
         System.out.println(player.getName() + " plays " + next);
