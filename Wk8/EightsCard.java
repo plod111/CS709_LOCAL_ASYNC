@@ -21,7 +21,7 @@ public class EightsCard extends Card {
 
 
     /**
-     * Returns the score value of the card.
+     * Returns the score value of the card using CrazyEights rules.
      */
     public int scoreCard() {
 

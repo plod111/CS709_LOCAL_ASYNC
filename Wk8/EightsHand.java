@@ -14,6 +14,9 @@ public class EightsHand extends Hand {
         super(label);
     }
 
+    /**
+     * Scores the hand.
+     */
     public int scoreHand() {
 
         int score = 0;
