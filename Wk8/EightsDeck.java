@@ -1,6 +1,8 @@
 
 /**
  * Ch14, Exercises 3-4
+ * If we've made EightsCard and EightsHand classes, we should make an EightsDeck class too,
+ * although it wasnt called for.  This is the EightsDeck class.
  * 
  * @author B.Cornish
  * @coeditor P.Chu

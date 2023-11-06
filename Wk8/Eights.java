@@ -7,7 +7,7 @@ import java.util.Random;
  * 
  * @coeditor B.Cornish
  * @coeditor P.Chu
- * @date Nov 4, 2023
+ * @date Nov 5, 2023
  */
 
 /**
@@ -19,23 +19,23 @@ public class Eights {
     // list of players
     private static ArrayList<Player> players = new ArrayList<Player>();
 
-    private EightsHand drawPile;
-    private EightsHand discardPile;
+    private Hand drawPile;  // declare as Hand, not EightsHand??
+    private Hand discardPile; // declare as Hand, not EightsHand??
     private Scanner in;
 
     /**
      * Initializes the state of the game.
      */
     public Eights() {
-        EightsDeck deck = new EightsDeck("Deck");
+        Deck deck = new EightsDeck("Deck");  // declare as Deck, not EightsDeck??
         deck.shuffle();
 
         // list of players
         // NB: All players are Players, not Genius's - they're no fun to play against
         players.add(new Player("Allen"));
         players.add(new Player("Chris"));
-        players.add(new Player("David"));
-        players.add(new Player("Ethan"));
+        players.add(new Player("Sienna"));
+        players.add(new Player("Mary"));
         players.add(new Player("Frank"));
 
         // deal cards to each player
@@ -44,11 +44,11 @@ public class Eights {
         }
 
         // turn one card face up
-        discardPile = new EightsHand("Discards");
+        discardPile = new EightsHand("Discards");  // instantiated as an EightsHand, not a Hand??
         deck.deal(discardPile, 1);
 
         // put the rest of the deck face down
-        drawPile = new EightsHand("Draw pile");
+        drawPile = new EightsHand("Draw pile"); // instantiated as an EightsHand, not a Hand??
         deck.dealAll(drawPile);
 
         // create the scanner we'll use to wait for the user
@@ -90,11 +90,11 @@ public class Eights {
     /**
      * Returns a card from the draw pile.
      */
-    public EightsCard drawCard() {
+    public Card drawCard() {   // returns a Card, not an EightsCard??
         if (drawPile.isEmpty()) {
             reshuffle();
         }
-        return (EightsCard)drawPile.popCard();
+        return drawPile.popCard();
     }
 
     /**
@@ -130,8 +130,8 @@ public class Eights {
      * One player takes a turn.
      */
     public void takeTurn(Player player) {
-        EightsCard prev = discardPile.lastCard();
-        EightsCard next = player.play(this, prev);
+        Card prev = discardPile.lastCard();
+        Card next = player.play(this, prev);
         discardPile.addCard(next);
 
         System.out.println(player.getName() + " plays " + next);

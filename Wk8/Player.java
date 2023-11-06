@@ -10,10 +10,10 @@
 /**
  * A player in a game of crazy eights.
  */
-public class Player {
+public class Player {  // Perhaps this should be an interface?  or we should have EightsPlayer extending Player?
 
     private String name;
-    protected EightsHand hand;
+    protected EightsHand hand;  
 
     /**
      * Constructs a player with an empty hand.
@@ -37,11 +37,16 @@ public class Player {
         return hand;
     }
 
+    ////////////////////////////////////////////////////////////////////
+    // The next several methods will require refactoring to cater to 
+    // EightsCards instead of Cards.  This is a good example of why this 
+    // exercise is misguided.
+    ////////////////////////////////////////////////////////////////////
     /**
      * Removes and returns a legal card from the player's hand.
      */
-    public EightsCard play(Eights eights, EightsCard prev) {
-        EightsCard card = searchForMatch(prev);
+    public Card play(Eights eights, Card prev) {
+        Card card = searchForMatch(prev);
         if (card == null) {
             card = drawForMatch(eights, prev);
         }
@@ -51,7 +56,7 @@ public class Player {
     /**
      * Searches the player's hand for a matching card.
      */
-    public EightsCard searchForMatch(EightsCard prev) {
+    public Card searchForMatch(EightsCard prev) {
         for (int i = 0; i < hand.size(); i++) {
             EightsCard card = hand.getCard(i);
             if (card.matches(prev)) {
@@ -78,11 +83,11 @@ public class Player {
     /**
      * Checks whether two cards match.
      */
-    // public static boolean cardMatches(Card card1, Card card2) {
-    //     return card1.getSuit() == card2.getSuit()
-    //         || card1.getRank() == card2.getRank()
-    //         || card1.getRank() == 8;
-    // }
+    public static boolean cardMatches(Card card1, Card card2) {
+        return card1.getSuit() == card2.getSuit()
+            || card1.getRank() == card2.getRank()
+            || card1.getRank() == 8;
+    }
 
     /**
      * Calculates the player's score (penalty points).

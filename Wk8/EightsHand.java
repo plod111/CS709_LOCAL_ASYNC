@@ -10,18 +10,23 @@ import java.util.ArrayList;
 
 public class EightsHand extends Hand {
 
-    private String label;
-    private ArrayList<EightsCard> cards;
+    ///////////////////////
+    // Not sure what to do with the constructor here //
+
+    // private String label;
+    // private ArrayList<EightsCard> cards;
 
     public EightsHand(String label) {
         super(label);
-        //this.label = label;
-        this.cards = new ArrayList<EightsCard>();
-
+        // super.label = label;
+        super.cards = new ArrayList<EightsCard>();  // we want the Hand to contain EightsCards
     }
 
     /**
-     * Scores the hand.
+     * Scores the hand.  
+     * ************->>> This is the method we are adding to the EightsHand class, 
+     * and screws everything up.  
+     * It's a game-specific scoring method and should be in the game state class, not the hand class.
      */
     public int scoreHand() {
 
@@ -40,6 +45,8 @@ public class EightsHand extends Hand {
 
     ///////////////////////////////////////////////////////////////////////////
     // Overriding methods from Hand/CardCollection to handle EightsCards
+    // These are going to be required in order to accept and return EightsCards
+    // instead of Cards, at which point, what is the point..>!??!
     /**
      * Adds the given card to the collection.
      */

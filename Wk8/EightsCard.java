@@ -16,7 +16,7 @@ public class EightsCard extends Card {
     /**
      * Returns true if suits or rank matches, or is an 8.
      */
-    public boolean matches(Card thatCard) {
+    public boolean matches(EightsCard thatCard) {   // Card or EightsCard?
         return this.getSuit() == thatCard.getSuit()
                 || this.getRank() == thatCard.getRank()
                 || this.getRank() == 8;
@@ -25,6 +25,9 @@ public class EightsCard extends Card {
 
     /**
      * Returns the score value of the card using CrazyEights rules.
+     * 
+     * Similarly, I beleive this should be part of the game state controller, and not here.
+     * Being here complicates things.
      */
     public int scoreCard() {
 

@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class CardCollection {
 
-    private String label;
-    private ArrayList<Card> cards;
+    protected String label;
+    protected ArrayList<Card> cards;
 
     /**
      * Constructs an empty collection.
