@@ -55,35 +55,7 @@ public class Grid {
 
     
 
-    // public Grid calculateNext() { // uses current param and returns next gen
-
-    //     // temp Grid
-    //     Grid next = new Grid(canvas.length, canvas[0].length);
-
-    //     int neighborCount = 0;
-
-    //     for (int i = 1; i < canvas.length - 1; i++) {
-    //         for (int j = 1; j < canvas[0].length - 1; j++) {
-
-    //             Cell cell = canvas[i][j];
-    //             neighborCount = findNeighbors(i, j);
-
-    //             Cell nextCell = next.getCell(i, j);
-
-    //             if (cell.isOn() && neighborCount < 2) {
-    //                 nextCell.turnOff();
-    //             } else if (cell.isOn() && neighborCount > 3) {
-    //                 nextCell.turnOff();
-    //             } else if (cell.isOff() && neighborCount == 3) {
-    //                 nextCell.turnOn();
-    //             } else {
-    //                 nextCell = cell;
-    //             }
-
-    //         }
-    //     }
-    //     return next;
-    // }
+  
 
 
     public void calculateNext() { // uses current param and returns next gen
