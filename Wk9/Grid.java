@@ -39,7 +39,8 @@ public class Grid {
     public void printGrid() {
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[0].length; j++) {
-                System.out.print(canvas[i][j].getState());
+                
+                System.out.print(canvas[i][j].getState() == 0 ? "-" : "X");
             }
             System.out.println();
         }
