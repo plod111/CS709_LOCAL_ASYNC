@@ -1,7 +1,24 @@
+/**
+ * CS 709 - Week 9
+ * 
+ * Conways Game of Life
+ * 
+ * @author P.Chu
+ * @editor B.Cornish
+ * @date Nov 10, 2023
+ */
+
 public class Grid {
 
+    // Text-based canvas of Cells
     public Cell[][] canvas;
 
+    /**
+     * Constructor
+     * 
+     * @param r
+     * @param c
+     */
     public Grid(int r, int c) {
         canvas = new Cell[r][c];
 
@@ -12,16 +29,7 @@ public class Grid {
             }
         }
 
-        // canvas[1][1].turnOn();
-        // canvas[2][2].turnOn();
-        // canvas[1][2].turnOn();
-        // canvas[4][2].turnOn();
-        // canvas[3][2].turnOn();
-        // canvas[2][2].turnOn();
-        // canvas[6][4].turnOn();
-        // canvas[6][3].turnOn();
-        // canvas[6][2].turnOn();
-
+        // turn on some random cells
         canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
         canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
         canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
@@ -36,15 +44,22 @@ public class Grid {
         canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
     }
 
+
+    /**
+     * Prints the grid
+     */
     public void printGrid() {
+
+        // loop and print
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[0].length; j++) {
-                
                 System.out.print(canvas[i][j].getState() == 0 ? "-" : "X");
             }
             System.out.println();
         }
         System.out.println();
+
+        // pause
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -53,23 +68,22 @@ public class Grid {
     }
 
 
-    
-
-  
-
-
+    /**
+     * Calculates the next generation
+     */
     public void calculateNext() { // uses current param and returns next gen
 
         // temp Grid
         Cell[][] next = new Cell[canvas.length][canvas[0].length];
 
+        // loop and fill
         for (int i = 0; i < next.length; i++) {
             for (int j = 0; j < next[0].length; j++) {
                 next[i][j]= new Cell(); // assign next gen into current gen
             }
         }
 
-
+        // loop thru entire grids
         int neighborCount = 0;
 
         for (int i = 1; i < canvas.length - 1; i++) {
@@ -82,6 +96,7 @@ public class Grid {
 
                 Cell nextCell = next[i][j]; // just 0
 
+                // apply rules of GoL
                 if (cell.isOn() && neighborCount < 2) {
                     nextCell.turnOff();
                 } else if (cell.isOn() && neighborCount > 3) {
@@ -106,7 +121,13 @@ public class Grid {
     }
 
 
-
+    /**
+     * Finds the number of neighbors
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
     public int findNeighbors(int x, int y) {
         int liveNeighborCount = 0;
      
@@ -121,19 +142,29 @@ public class Grid {
                 // }
                 
                 Cell cell = canvas[i][j];
-
+                
+                // ignore the cell itself
                 if (i == x && j == y) {
                     if (cell.isOn()) {
                         liveNeighborCount--;
                     }
                 }
                 
+                // count the live neighbors
                 liveNeighborCount += cell.getState();
             }
         }
         return liveNeighborCount;
     }
 
+
+    /**
+     * Returns the cell at the given coordinates
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
     public Cell getCell(int x, int y) {
         return canvas[x][y];
     }
