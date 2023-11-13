@@ -1,11 +1,9 @@
 public class Grid {
-    private int row;
-    private int col;
 
-    static Cell[][] canvas;
+    public Cell[][] canvas;
 
     public Grid(int r, int c) {
-        this.canvas = new Cell[r][c];
+        canvas = new Cell[r][c];
 
         // loop and fill
         for (int i = 0; i < canvas.length; i++) {
@@ -14,14 +12,33 @@ public class Grid {
             }
         }
 
-        canvas[3][3].turnOn();
-        canvas[3][4].turnOn();
-        canvas[3][5].turnOn();
+        // canvas[1][1].turnOn();
+        // canvas[2][2].turnOn();
+        // canvas[1][2].turnOn();
+        // canvas[4][2].turnOn();
+        // canvas[3][2].turnOn();
+        // canvas[2][2].turnOn();
+        // canvas[6][4].turnOn();
+        // canvas[6][3].turnOn();
+        // canvas[6][2].turnOn();
+
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
+        canvas[(int)Math.floor(Math.random()*(r))][(int)Math.floor(Math.random()*(c))].turnOn();
     }
 
     public void printGrid() {
-        for (int i = 1; i < canvas.length - 1; i++) {
-            for (int j = 1; j < canvas[0].length - 1; j++) {
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[0].length; j++) {
                 System.out.print(canvas[i][j].getState());
             }
             System.out.println();
@@ -34,21 +51,63 @@ public class Grid {
         }
     }
 
-    public Grid calculateNext() { // uses current param and returns next gen
+
+    
+
+    // public Grid calculateNext() { // uses current param and returns next gen
+
+    //     // temp Grid
+    //     Grid next = new Grid(canvas.length, canvas[0].length);
+
+    //     int neighborCount = 0;
+
+    //     for (int i = 1; i < canvas.length - 1; i++) {
+    //         for (int j = 1; j < canvas[0].length - 1; j++) {
+
+    //             Cell cell = canvas[i][j];
+    //             neighborCount = findNeighbors(i, j);
+
+    //             Cell nextCell = next.getCell(i, j);
+
+    //             if (cell.isOn() && neighborCount < 2) {
+    //                 nextCell.turnOff();
+    //             } else if (cell.isOn() && neighborCount > 3) {
+    //                 nextCell.turnOff();
+    //             } else if (cell.isOff() && neighborCount == 3) {
+    //                 nextCell.turnOn();
+    //             } else {
+    //                 nextCell = cell;
+    //             }
+
+    //         }
+    //     }
+    //     return next;
+    // }
+
+
+    public void calculateNext() { // uses current param and returns next gen
 
         // temp Grid
-        Grid next = new Grid(canvas.length, canvas[0].length);
+        Cell[][] next = new Cell[canvas.length][canvas[0].length];
+
+        for (int i = 0; i < next.length; i++) {
+            for (int j = 0; j < next[0].length; j++) {
+                next[i][j]= new Cell(); // assign next gen into current gen
+            }
+        }
+
 
         int neighborCount = 0;
 
         for (int i = 1; i < canvas.length - 1; i++) {
             for (int j = 1; j < canvas[0].length - 1; j++) {
 
-                Cell cell = canvas[i][j]; // .getCell(i,j);
-                neighborCount = findNeighbors(i, j);
-                System.out.println("(" + i + "," + j + ")" + "=" + neighborCount);
+                Cell cell = canvas[i][j]; // pull current gen cell
 
-                Cell nextCell = next.getCell(i, j);
+                neighborCount = findNeighbors(i, j); // find neighbors
+                // System.out.println(i + "," + j);
+
+                Cell nextCell = next[i][j]; // just 0
 
                 if (cell.isOn() && neighborCount < 2) {
                     nextCell.turnOff();
@@ -57,12 +116,23 @@ public class Grid {
                 } else if (cell.isOff() && neighborCount == 3) {
                     nextCell.turnOn();
                 } else {
-                    nextCell = cell;
+                     nextCell = cell;
                 }
+
+                next[i][j] = nextCell; // store in next gen grid
+                //System.out.println("("+i+","+j+")"+"= "+neighborCount);
             }
         }
-        return next;
+
+        // loop thru entire grids
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[0].length; j++) {
+                canvas[i][j] = next[i][j]; // assign next gen into current gen
+            }
+        }
     }
+
+
 
     public int findNeighbors(int x, int y) {
         int liveNeighborCount = 0;
@@ -77,17 +147,15 @@ public class Grid {
                 //     continue;   
                 // }
                 
-                Cell cell = canvas[i][j]; //.getCell(i,j);
-                if( i==x && j==y){
-                    if(cell.isOn()){
-                        liveNeighborCount --;
+                Cell cell = canvas[i][j];
+
+                if (i == x && j == y) {
+                    if (cell.isOn()) {
+                        liveNeighborCount--;
                     }
-                        
-                    liveNeighborCount += cell.getState();
-                    System.out.println(canvas[i][j]);
-                
-                    
                 }
+                
+                liveNeighborCount += cell.getState();
             }
         }
         return liveNeighborCount;

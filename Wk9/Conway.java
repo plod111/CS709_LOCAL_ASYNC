@@ -1,10 +1,11 @@
 public class Conway {
     
     public static void playGame(Grid grid) {
-        grid.printGrid();        
-        for (int i = 0; i < 1; i++) {
-            System.out.println("Generation: "+i);
-            grid = grid.calculateNext();
+        grid.printGrid();
+        //System.out.println("Beginning\n");    
+        for (int i = 0; i < 50; i++) {
+            //System.out.println("Generation: "+i);
+            grid.calculateNext();
             grid.printGrid();
         }
     }
@@ -19,7 +20,4 @@ public class Conway {
 
         
     }
-
-
-
 }
