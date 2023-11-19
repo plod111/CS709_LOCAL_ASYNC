@@ -1,8 +1,9 @@
 // UnitTest1.java - Fall 2023
 // ----------------------------------------------------------------------------------------
+// @author B.Cornish
 // For testing purposes only.  This file is not part of the project deliverables.
 //
-// Taken directly from: https://docs.oracle.com/javafx/2/scenegraph/jfxpub-scenegraph.htm
+// 
 
 import javafx.animation.FillTransition;
 import javafx.application.Application;
