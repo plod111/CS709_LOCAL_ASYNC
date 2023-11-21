@@ -1,4 +1,4 @@
-# CS709_Wk6_ASYNC
+# CS709_LOCAL_ASYNC
 ###### Async work with Phil
 
 (Private repo because github classroom has issues...)
