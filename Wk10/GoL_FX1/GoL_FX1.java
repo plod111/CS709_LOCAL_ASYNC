@@ -1,11 +1,17 @@
-// GoL_FX1.java - Fall 2023
-// ----------------------------------------------------------------------------------------
-// @author B.Cornish
-// 
-// ----------------------------------------------------------------------------------------
-// Attempt 1 at using FX to run GoL
-//
-// 
+
+/**
+ * GoL_FX1.java - Fall 2023
+ * CS709 - Hunter College
+ * 
+ * Game Of Life
+ * 
+ * Render options
+ * - inChars: boolean flag to render as chars or ints
+ * - wrap: boolean flag to wrap around edges or not
+ * 
+ * @author B.Cornish
+ * @date Nov 20, 2023
+ */
 
 import javafx.animation.KeyFrame;
 import javafx.application.Application;
@@ -77,7 +83,7 @@ public class GoL_FX1 extends Application {
         // play timeline
         timeline.play();
 
-        stage.setTitle("Game Of Life, Bitches");
+        stage.setTitle("Game Of Life, YO!");
         stage.setScene(scene);
         stage.show();
     }
