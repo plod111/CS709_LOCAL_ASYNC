@@ -25,10 +25,17 @@ Implementation:
 * The queue should only add songs if user has enough funds
 * Build out each 'Goal set' individually, and then decide on connectivity
 
+  - Classes
+    * CoinBox  > holds balance, setters, getters, 
+    * Each song will be a class with attributes: Title, Genre, Cost, etc.
+    * SongArrays.java which will be extended to a PurchaseQueue.java <ArrayList> 
+
+
 Questions to be questioned:
 * What is creditPayments vs coinPayments?
 * If (credit == credit card) {have user input amount in a textbox.}
 * Can we use dictionaries in Java?
+* Does the program need to be linked to external csv?
 
 
 Objects:
