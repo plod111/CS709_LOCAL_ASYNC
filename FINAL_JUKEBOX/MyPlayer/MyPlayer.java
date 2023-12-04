@@ -57,7 +57,7 @@ public class MyPlayer extends Application {
 
 
 	//mp3 = "https://....";
-	mp3 = "file:///home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/bensound-clearskies.mp3";
+	mp3 = "file///home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/bensound-clearskies.mp3";
 		// note: you can find free, open-source, legally distributable music for this project.
 		// Examples:
 		// 	https://pixabay.com/music/
