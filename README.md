@@ -33,6 +33,8 @@ Async work built herein, that will then be copied across for, and at submission 
 
 * Attempting music player: Goal set 2:  (owned by Ben)
 * Continually running into "ava.lang.reflect.InvocationTargetException" at runtime
+* Turns out - it doesnt seem to play nice within VSC - don't know how to set the dependencies there to make the media work.
+* But comiple and run at CLI works just fine...  go figure
 
 
 
