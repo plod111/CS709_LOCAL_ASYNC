@@ -1,4 +1,4 @@
-package JukeBox;
+package JukeBox.JukeBox.src;
 
 public class creditPayments implements payments{
     
