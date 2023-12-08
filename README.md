@@ -8,6 +8,16 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
+##### <u>Dec 7, 2023</u>
+
+* Built out Song class: attributes include artist, title, genre, duration and path
+* SongPlayer class - essentially just a Song list - not sure how yet and why this would access a seperate queue - maybe this class becomes the queue... Spec is not at all clear on many a design front.
+* Built FX application that can read mp3 file names from CLI upon execution, match them with the respective song details incoming from a text file that holds all that detail.
+* App can now play songs, pause, stop, restart, and cue the the next song in the list.
+* App contains basic animation elements as well as a neon font label holding the artist name of currently playing song :-)
+* https://hunterteacher-vyz6159.slack.com/files/U05QES27NSC/F069WRAC7GQ/screenshare_-_2023-12-07_11_15_40_pm.webm 
+
+
 ##### <u>Dec 3, 2023</u>
 
 * (Phil) created several classes as per spec for Goal 1: Funds. (owned by Phil)
