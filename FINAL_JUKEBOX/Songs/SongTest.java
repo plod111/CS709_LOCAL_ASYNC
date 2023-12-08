@@ -10,21 +10,21 @@ public class SongTest {
         ArrayList<Song> songs = new ArrayList<Song>();
 
         // read text file into ArrayList
-        String filename = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/MusicMP3/songDetails.txt";
-        File file = new File(filename);
+        String songDetailFile = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/songDetails.txt";
+        String songFolder = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/";
+        File file = new File(songDetailFile);
         Scanner fileReader = new Scanner(file);
+
+        // read each line of the file and create a Song object, reading in the song file name from the command line
+        int i = 0;
         while (fileReader.hasNextLine()) {
             String[] songInfo = fileReader.nextLine().split(",");
-            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4]));
+            String trackFile = args[i];
+            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songFolder+trackFile));
+            i++;
         }
         fileReader.close();
 
-        // add songs to the ArrayList from args
-        // int numSongs = args.length;
-        // for (int i = 0; i < numSongs; i++) {
-        //     String[] songInfo = args[i].split(",");
-        //     songs.add(new Song(songInfo[0], songInfo[1], Integer.parseInt(songInfo[2]), Integer.parseInt(songInfo[3])));
-        // }
 
         // print out the songs
         for (Song song : songs) {
