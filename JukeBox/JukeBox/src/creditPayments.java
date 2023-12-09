@@ -1,17 +1,20 @@
-package JukeBox.JukeBox.src;
+
 
 public class creditPayments implements payments{
     
+
+    currencyBox creditCurrencyBox = new currencyBox();
+        
+    
     @Override
     public void addFunds(int amount) {
-        // TODO Auto-generated method stub
+        creditCurrencyBox.setCreditAmountInt(amount);
         
     }
 
     @Override
     public String returnFunds() {
-        // TODO Auto-generated method stub
-        return null;
+        return Integer.toString(creditCurrencyBox.getCreditAmountInt());
     }
 
 
