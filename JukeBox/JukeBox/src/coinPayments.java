@@ -1,36 +1,36 @@
-package JukeBox.JukeBox.src;
+
 
 public class coinPayments implements payments {
 
-    currencyBox box = new currencyBox();
+    currencyBox currencyBox = new currencyBox();
 
     @Override
     public void addFunds(int amount) {
-        // TODO Auto-generated method stub
+        
         switch (amount) {
         
             case 1:
-                box.setPennies();;
+                currencyBox.setPennies();;
                 break;
             
             case 5: 
-                box.setNickels();
+                currencyBox.setNickels();
                 break;
             
             case 10:
-                box.setDimes();;
+                currencyBox.setDimes();;
                 break;
 
             case 25:
-                box.setQuarters();
+                currencyBox.setQuarters();
                 break;
 
             case 50:
-                box.setHalfDollars();
+                currencyBox.setHalfDollars();
                 break;
 
             case 100:
-                box.setGoldenDollars();
+                currencyBox.setGoldenDollars();
                 break;
     }
 
@@ -39,7 +39,18 @@ public class coinPayments implements payments {
 
     @Override
     public String returnFunds() {
-        // TODO Auto-generated method stub
-        return null;
+        
+        //builds a string specifying how much and how funds were returned
+        return Integer.toString(currencyBox.getPennies()) + " pennies, " + 
+        Integer.toString(currencyBox.getNickels()) + " nickels, " + 
+        Integer.toString(currencyBox.GetDimes()) + " dimes, " + 
+        Integer.toString(currencyBox.getQuarters()) + " quarters, " + 
+        Integer.toString(currencyBox.getHalfDollars()) + " half dollars, " + 
+        Integer.toString(currencyBox.getGoldenDollars()) + " golden dollars.";
     }
+
+    public int getTotalCoinsAmount() {
+        return currencyBox.getTotalCoinsAmount();
+    }
+
 }
