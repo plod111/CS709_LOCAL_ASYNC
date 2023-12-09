@@ -1,15 +1,30 @@
-Awakening Instrumental,ItsWatR,Hip hop,184,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/awakening-instrumental-1165
+Awakening Instrumental,ItsWatR,Hip hop,184,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/awakening-instrumental-1165.mp3
+Baby Mandala,prazkhanal,Uk drill,191,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/baby-mandala-169039.mp3
 Blackest Bouquet,Leonell Cassio,Future bass,221,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/leonell-cassio-the-blackest-bouquet-118766.mp3
+Crimson Stormheart,moodmode,Background,74,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/crimson-stormheart-180253.mp3
+Dirty Piano Vocal,Rockot,Gritty,152,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/dirty-piano-vocal-175870.mp3
 Energetic Hip-Hop,Skilsel,Hip hop,114,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/energetic-hip-hop-8303.mp3
-Fun Life,FASSounds,Advertising,109,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/fun-life-112188.mp3
+Exciting Day,Monument_Music,Adventure,135,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/exciting-day-176148.mp3
+Fun Life,FASSounds,Atmospheric,109,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/fun-life-112188.mp3
 Goldn,prazkhanal,Hip hop,159,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/goldn-116392.mp3
-Hip Hop Rock Beats,QubeSounds,Advertising,79,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/hip-hop-rock-beats-118000.mp3
+Hip Hop Rock Beats,QubeSounds,Atmospheric,79,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/hip-hop-rock-beats-118000.mp3
 Inside You,lemonmusicstudio,Acoustic,129,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/inside-you-162760.mp3
 Let It Go,ItsWatR,Hip hop,133,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/let-it-go-12279.mp3
+Mud,lemonmusicstudio,Action,146,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/mud-16376.mp3
 My Universe,Nesterouk,Power,147,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/my-universe-147152.mp3
+Once in Paris,Pumpupthemind,Atmospheric,132,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/once-in-paris-168895.mp3
+Passion,AlexiAction,Phonk,171,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/passion-127011.mp3
 Podcast Intro,Music_Unlimited,Hip hop,111,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/the-podcast-intro-111863.mp3
+Sentimental,QubeSounds,Background,146,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/sentimental-piano-166254.mp3
+Silent Night,White_Records,Background,60,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/silent-night-178751.mp3
+Smoke,SoulProdMusic,Hip hop,118,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/smoke-143172.mp3
 Stomping Rock,Alex Grohl,Action,119,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/stomping-rock-four-shots-111444.mp3
+Summer Party,Top-Flow-Production,Party,101,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/summer-party-157615.mp3
+Sunrise Groove,Top-Flow-Production,Pop,102,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/sunrise-groove-176565.mp3
 This Way,Music_Unlimited,Hip hop,139,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/quotthis-wayquot-hip-hop-beat-113255.mp3
+Tokyo Cafe,TVARI,Cafe,155,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/tokyo-cafe-159065.mp3
 Trap Future Bass,Royalty Free Music,Action,126,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/trap-future-bass-royalty-free-music-167020.mp3
+Tuesday,Amaksi,Abstract,127,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/tuesday-118327.mp3
 Turkish music Type Beat Balkan,White_Records,Turkish,171,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/turkish-music-type-beat-balkan-hip-hop-instrumental-background-music-140696.mp3
-Whip,prazkhanal,Hip hop,164,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/whip-110235.mp3
+Whip,prazkhanal,Uk drill,164,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/whip-110235.mp3
+Whistle Vibes,Top-Flow_production,Energetic,103,/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/whistle-vibes-172471.mp3
