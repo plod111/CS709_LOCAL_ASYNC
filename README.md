@@ -8,6 +8,13 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
+##### <u>Dec 8, 2023</u>
+
+* Added/modified animations to song player
+* Included buttons to sort incoming songs by title, artist, genre or duration
+* Still to build queue and purchasing
+
+
 ##### <u>Dec 7, 2023</u>
 
 * Built out Song class: attributes include artist, title, genre, duration and path
