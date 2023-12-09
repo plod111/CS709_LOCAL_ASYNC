@@ -36,6 +36,8 @@ import javafx.animation.TranslateTransition;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.animation.FillTransition;
@@ -54,16 +56,19 @@ public class MyPlayer extends Application {
 	MediaView mdv;
 
 	Song song;
+	ArrayList<Song> songs;
 
 	int songToPlay = 0;
 
 	TextField textField;
 
+	Rectangle r, r2, r3, r4;
+
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
 		// Builds the base window for the GUI (graphical user interface).
 		Group root = new Group();
-		Scene scene = new Scene(root, 500, 500, Color.BLACK);
+		Scene scene = new Scene(root, 800, 500, Color.BLACK);
 
 		// create SongPlayer object
 		String songDetailFile = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/songDetails.txt";
@@ -73,16 +78,22 @@ public class MyPlayer extends Application {
 		Parameters params = getParameters();
 		List<String> argsList = params.getRaw();
 		String[] argsArray = argsList.toArray(new String[argsList.size()]);
-
+		
+		// print out the song file names from argsArray
+		// for (int i = 0; i < argsArray.length; i++) {
+		// 	System.out.println(argsArray[i]);
+		// }
+		
 		SongPlayer sp = new SongPlayer(songDetailFile, songFolder, argsArray);
 
-		ArrayList<Song> songs = sp.getSongs();
+		songs = sp.getSongs();
 
 		// get the first song from songs ArrayList
 		song = songs.get(songToPlay); //
 
 		mp3 = "file:" + song.getPath(); // "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/fun-life-112188.mp3";
 		System.out.println(mp3);
+		// textField.setText(song.getTitle() + ": by " + song.getArtist());
 
 		// Create the media player and media view.
 		med = new Media(mp3);
@@ -97,7 +108,7 @@ public class MyPlayer extends Application {
 		playButton.setLayoutX(50);
 		playButton.setLayoutY(100);
 		playButton.setOnAction(e -> {
-			mdp.play();
+			playSong();
 		});
 		root.getChildren().add(playButton);
 
@@ -106,7 +117,7 @@ public class MyPlayer extends Application {
 		pauseButton.setLayoutX(50);
 		pauseButton.setLayoutY(150);
 		pauseButton.setOnAction(e -> {
-			mdp.pause();
+			pauseSong();
 		});
 		root.getChildren().add(pauseButton);
 
@@ -115,7 +126,7 @@ public class MyPlayer extends Application {
 		stopButton.setLayoutX(50);
 		stopButton.setLayoutY(200);
 		stopButton.setOnAction(e -> {
-			mdp.stop();
+			stopSong();
 		});
 		root.getChildren().add(stopButton);
 
@@ -137,18 +148,61 @@ public class MyPlayer extends Application {
 			mdp = new MediaPlayer(med);
 			mdv = new MediaView(mdp);
 			root.getChildren().add(mdv);
-			mdp.play();
-			textField.setText(song.getArtist());
+			textField.setText(song.getTitle() + ": by " + song.getArtist());
 		});
 		root.getChildren().add(nextButton);
 
 		////////////////////////////////////////////////////////////////////////////////
+		// SORT BUTTONS
+		// Create the button to sort by title.
+		Button titleButton = new Button("Sort by Title");
+		titleButton.setLayoutX(50);
+		titleButton.setLayoutY(300);
+		titleButton.setOnAction(e -> {
+			sortSongsBy("title");
+			System.out.println(songs);
+		});
+		root.getChildren().add(titleButton);
+
+		// Create the button to sort by artist.
+		Button artistButton = new Button("Sort by Artist");
+		artistButton.setLayoutX(50);
+		artistButton.setLayoutY(350);
+		artistButton.setOnAction(e -> {
+			sortSongsBy("artist");
+			System.out.println(songs);
+		});
+		root.getChildren().add(artistButton);
+
+		// Create the button to sort by genre.
+		Button genreButton = new Button("Sort by Genre");
+		genreButton.setLayoutX(50);
+		genreButton.setLayoutY(400);
+		genreButton.setOnAction(e -> {
+			sortSongsBy("genre");
+			System.out.println(songs);
+		});
+		root.getChildren().add(genreButton);
+
+		// Create the button to sort by duration.
+		Button durationButton = new Button("Sort by Duration");
+		durationButton.setLayoutX(50);
+		durationButton.setLayoutY(450);
+		durationButton.setOnAction(e -> {
+			sortSongsBy("duration");
+			System.out.println(songs);
+		});
+		root.getChildren().add(durationButton);
+
+		//////////////////////////////////////////////////////////////////////////////////
+
+		////////////////////////////////////////////////////////////////////////////////
 		// Create the label for the song title.
 		Text text = new Text(50, 50, "");
-		text.setFont(Font.font("Cambria", 42));
+		text.setFont(Font.font("Cambria", 28));
 		text.setStyle("-fx-font-weight: bold");
 		textField = new TextField();
-		textField.setText(song.getArtist());
+		textField.setText("Song Title");
 		text.textProperty().bind(textField.textProperty());
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -197,20 +251,22 @@ public class MyPlayer extends Application {
 		////////////////////////////////////////////////////////////////////////////////
 
 		// Builds the initial rectangle that will eventually be animated.
-		Rectangle r = new Rectangle(125, 125, 150, 150);
+		r = new Rectangle(125, 125, 150, 150);
 		r.setFill(Color.PURPLE);
-		Rectangle r2 = new Rectangle(80, 350, 100, 100);
+		r2 = new Rectangle(80, 350, 100, 100);
 		r2.setFill(Color.RED);
-		root.getChildren().addAll(r, r2);
+		r3 = new Rectangle(550, 80, 150, 150);
+		r3.setFill(Color.YELLOW);
+		r4 = new Rectangle(575, 105, 100, 100);
+		r4.setFill(Color.ORCHID);
+		root.getChildren().addAll(r, r2, r3, r4);
 
 		// Add the animation effects
-		TranslateTransition translate = new TranslateTransition(
-				Duration.millis(1750));
-		translate.setToX(390);
-		translate.setToY(390);
+		TranslateTransition translate = new TranslateTransition(Duration.millis(1750));
+		translate.setToX(590);
+		translate.setToY(290);
 
-		TranslateTransition translate2 = new TranslateTransition(
-				Duration.millis(1750));
+		TranslateTransition translate2 = new TranslateTransition(Duration.millis(1750));
 		translate2.setToX(300);
 		translate2.setToY(-390);
 
@@ -223,6 +279,16 @@ public class MyPlayer extends Application {
 		rotate.setToAngle(360);
 		RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
 		rotate2.setToAngle(-720);
+		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750),r3);
+		rotate3.setToAngle(720);
+		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750),r4);
+		rotate4.setToAngle(-720);
+		rotate3.setCycleCount(Timeline.INDEFINITE);
+		rotate4.setCycleCount(Timeline.INDEFINITE);
+		rotate3.setAutoReverse(true);
+		rotate4.setAutoReverse(true);
+		rotate3.play();
+		rotate4.play();
 
 		ScaleTransition scale = new ScaleTransition(Duration.millis(1750));
 		scale.setToX(0.1);
@@ -231,14 +297,12 @@ public class MyPlayer extends Application {
 		scale2.setToX(0.1);
 		scale2.setToY(0.1);
 
-		ParallelTransition transition = new ParallelTransition(r,
-				translate, fill, rotate, scale);
+		ParallelTransition transition = new ParallelTransition(r, translate, fill, rotate, scale);
 		transition.setCycleCount(Timeline.INDEFINITE);
 		transition.setAutoReverse(true);
 		transition.play();
 
-		ParallelTransition transition2 = new ParallelTransition(r2,
-				translate2, fill2, rotate2, scale2);
+		ParallelTransition transition2 = new ParallelTransition(r2, translate2, fill2, rotate2, scale2);
 		transition2.setCycleCount(Timeline.INDEFINITE);
 		transition2.setAutoReverse(true);
 		transition2.play();
@@ -248,6 +312,55 @@ public class MyPlayer extends Application {
 		stage.setScene(scene);
 		stage.show();
 
+	}
+
+	public void playSong() {
+		mdp.play();
+		textField.setText(song.getTitle() + ": by " + song.getArtist());
+	}
+
+	public void stopSong() {
+		mdp.stop();
+	}
+
+	public void pauseSong() {
+		mdp.pause();
+	}
+
+	public void nextSong() {
+		// mdp.stop();
+		// songToPlay++;
+
+		// song = songs.get(songToPlay); //
+
+		// mp3 = "file:" + song.getPath();
+		// System.out.println(mp3);
+		// med = new Media(mp3);
+		// mdp = new MediaPlayer(med);
+		// mdv = new MediaView(mdp);
+		// root.getChildren().add(mdv);
+		// mdp.play();
+		// textField.setText(song.getTitle() + ": by " + song.getArtist());
+	}
+
+	public void sortSongsBy(String sortBy) {
+
+		switch (sortBy) {
+			case "title":
+				Collections.sort(songs, Comparator.comparing(Song::getTitle));
+				break;
+			case "artist":
+				Collections.sort(songs, Comparator.comparing(Song::getArtist));
+				break;
+			case "genre":
+				Collections.sort(songs, Comparator.comparing(Song::getGenre));
+				break;
+			case "duration":
+				Collections.sort(songs, Comparator.comparing(Song::getDuration));
+				break;
+			default:
+				break;
+		}
 	}
 
 	public static void main(String[] args) {
