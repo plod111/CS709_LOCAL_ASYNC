@@ -10,8 +10,8 @@ public class SongList {
 
     // read text file into ArrayList
     String songFolder;
-    File file; 
-    Scanner fileReader; 
+    File file;
+    Scanner fileReader;
 
     // constructor
     public SongList(String[] args) throws FileNotFoundException {
@@ -22,23 +22,22 @@ public class SongList {
         // read each line of the file and create a Song object
         int i = 0;
         while (fileReader.hasNextLine()) {
-            
-            // System.out.println(fileReader.nextLine());
 
+            // System.out.println(fileReader.nextLine());
 
             if (i == 0) {
                 this.songFolder = fileReader.nextLine();
-                                i++;
+                i++;
                 continue;
             }
-            
+
             String[] songInfo = fileReader.nextLine().split(",");
-            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4], songFolder + songInfo[4]));
+            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4],
+                    songFolder + songInfo[4]));
             i++;
         }
         fileReader.close();
     }
-
 
     public ArrayList<Song> getSongs() {
         return songs;
