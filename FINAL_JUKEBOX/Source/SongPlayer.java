@@ -1,4 +1,5 @@
-// MyPlayer.java - Fall 2023 - A groovy, animated music player.
+// SongPlayer.java - Fall 2023 - A groovy, animated Jukebox that plays MP3 files.
+// CS709 Hunter Fall 2023 - Final Project
 // ----------------------------------------------------------------------------------------
 
 // To compile and run:
@@ -70,11 +71,8 @@ public class SongPlayer extends Application {
 		Group root = new Group();
 		Scene scene = new Scene(root, 800, 500, Color.BLACK);
 
-		// create SongPlayer object
-		String songDetailFile = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/songDetails.txt";
-		String songFolder = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/";
 
-		// read in the song file names from the command line
+		// read in the song details file from the command line
 		Parameters params = getParameters();
 		List<String> argsList = params.getRaw();
 		String[] argsArray = argsList.toArray(new String[argsList.size()]);
@@ -84,14 +82,17 @@ public class SongPlayer extends Application {
 		// 	System.out.println(argsArray[i]);
 		// }
 		
-		SongPlayer sp = new SongPlayer(songDetailFile, songFolder, argsArray);
+		SongList sp = new SongList(argsArray);
 
 		songs = sp.getSongs();
 
+		////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////
 		// get the first song from songs ArrayList
 		song = songs.get(songToPlay); //
 
-		mp3 = "file:" + song.getPath(); // "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/fun-life-112188.mp3";
+		mp3 = "file:" + song.getFileName(); //
 		System.out.println(mp3);
 		// textField.setText(song.getTitle() + ": by " + song.getArtist());
 

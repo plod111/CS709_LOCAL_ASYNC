@@ -9,26 +9,29 @@ public class SongList {
     ArrayList<Song> songs = new ArrayList<Song>();
 
     // read text file into ArrayList
-    String songDetailFile; // "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/songDetails.txt";
-    String songFolder;; // = "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/";
-    File file; // = new File(songDetailFile);
-    Scanner fileReader; // = new Scanner(file);
+    String songFolder;
+    // File file; 
+    Scanner fileReader; 
 
     // constructor
-    public SongList(String songDetailFileString, String songFolderString, String[] args) throws FileNotFoundException {
-        this.songDetailFile = songDetailFileString;
-        this.songFolder = songFolderString;
-        this.file = new File(songDetailFile);
-        this.fileReader = new Scanner(file);
+    public SongList(String[] args) throws FileNotFoundException {
+
+        this.fileReader = new Scanner(args[0]);
 
         // read each line of the file and create a Song object, reading in the song file
         // name from the command line
         int i = 0;
         while (fileReader.hasNextLine()) {
+            
+            if (i==0){
+                this.songFolder = fileReader.nextLine();
+                i++;
+                continue;
+            }
+            
             String[] songInfo = fileReader.nextLine().split(",");
-            String trackFile = args[i];
-            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]),
-                    songFolder + trackFile));
+            // String trackFileName = args[i];
+            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4], songFolder + songInfo[4]));
             i++;
         }
         fileReader.close();
