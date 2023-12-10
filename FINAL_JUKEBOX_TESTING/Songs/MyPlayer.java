@@ -84,7 +84,7 @@ public class MyPlayer extends Application {
 		// 	System.out.println(argsArray[i]);
 		// }
 		
-		SongList sp = new SongList(songDetailFile, songFolder, argsArray);
+		SongPlayer sp = new SongPlayer(songDetailFile, songFolder, argsArray);
 
 		songs = sp.getSongs();
 

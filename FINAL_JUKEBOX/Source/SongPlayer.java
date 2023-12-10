@@ -71,36 +71,34 @@ public class SongPlayer extends Application {
 		Group root = new Group();
 		Scene scene = new Scene(root, 800, 500, Color.BLACK);
 
-
 		// read in the song details file from the command line
 		Parameters params = getParameters();
 		List<String> argsList = params.getRaw();
 		String[] argsArray = argsList.toArray(new String[argsList.size()]);
-		
-		// print out the song file names from argsArray
-		// for (int i = 0; i < argsArray.length; i++) {
-		// 	System.out.println(argsArray[i]);
-		// }
-		
-		SongList songList = new SongList(argsArray);
 
-		songs = songList.getSongs();
+		// print out the song details list file name
+		// System.out.println(argsArray);
+
+		SongList songList = new SongList(argsArray);
+		
+		System.out.println(songList.toString());
+		// songs = songList.getSongs();
 
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		// get the first song from songs ArrayList
-		song = songs.get(songToPlay); //
+		// song = songs.get(songToPlay); //
 
-		mp3 = "file:" + song.getFileName(); //
-		System.out.println(mp3);
-		// textField.setText(song.getTitle() + ": by " + song.getArtist());
+		// mp3 = "file:" + song.getFileName(); //
+		// System.out.println(mp3);
+		// // textField.setText(song.getTitle() + ": by " + song.getArtist());
 
-		// Create the media player and media view.
-		med = new Media(mp3);
-		mdp = new MediaPlayer(med);
-		mdv = new MediaView(mdp);
-		root.getChildren().add(mdv);
+		// // Create the media player and media view.
+		// med = new Media(mp3);
+		// mdp = new MediaPlayer(med);
+		// mdv = new MediaView(mdp);
+		// root.getChildren().add(mdv);
 		// mdp.play();
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -280,9 +278,9 @@ public class SongPlayer extends Application {
 		rotate.setToAngle(360);
 		RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
 		rotate2.setToAngle(-720);
-		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750),r3);
+		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750), r3);
 		rotate3.setToAngle(720);
-		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750),r4);
+		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750), r4);
 		rotate4.setToAngle(-720);
 		rotate3.setCycleCount(Timeline.INDEFINITE);
 		rotate4.setCycleCount(Timeline.INDEFINITE);
