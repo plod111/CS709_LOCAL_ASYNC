@@ -1,23 +1,24 @@
 import java.util.LinkedList;
 
-public class purchaseQueue extends LinkedList<Song> {
+public class PurchaseQueue extends LinkedList<Song> {
     
-    public purchaseQueue() {
+    public PurchaseQueue() {
         super();
     }
     
   
     // add a song to the queue band check if there's enough funds
-    public void addSong(Song song, currencyBox creditCurrencyBox, currencyBox coinCurrencyBox) {
+    public void addSong(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < song.getPrice()) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
 
             return;
-        }else if(coinCurrencyBox.getTotalCoinsAmount() < song.getPrice()) {
+        } else if (coinCurrencyBox.getTotalCoinsAmount() < song.getPrice()) {
             int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
             creditCurrencyBox.setCreditAmountInt(-difference);
             coinCurrencyBox.resetAllCoins();
-        this.add(song);
+            this.add(song);
+        }
     }
 
     //skip a song in the queue

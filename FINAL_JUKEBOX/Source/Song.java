@@ -5,6 +5,7 @@ public class Song {
     private int duration;
     private String fileName;
     private String path;
+    private int price;
 
     public Song(String title, String artist, String genre, int duration, String fileName, String path) {
         this.title = title;
@@ -13,6 +14,7 @@ public class Song {
         this.duration = duration;
         this.fileName = fileName;
         this.path = path;
+        this.price = 25;  // uniform price for all songs: 25 cents
     }
 
     public String getTitle() {
@@ -37,6 +39,10 @@ public class Song {
 
     public String getPath() {
         return path;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public String toString() {

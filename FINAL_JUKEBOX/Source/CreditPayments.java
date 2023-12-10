@@ -1,9 +1,9 @@
 
 
-public class creditPayments implements payments{
+public class CreditPayments implements Payments{
     
 
-    currencyBox creditCurrencyBox = new currencyBox();
+    CurrencyBox creditCurrencyBox = new CurrencyBox();
         
     
     @Override

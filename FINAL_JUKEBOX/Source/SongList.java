@@ -18,8 +18,7 @@ public class SongList {
 
         this.fileReader = new Scanner(args[0]);
 
-        // read each line of the file and create a Song object, reading in the song file
-        // name from the command line
+        // read each line of the file and create a Song object
         int i = 0;
         while (fileReader.hasNextLine()) {
             
@@ -30,7 +29,6 @@ public class SongList {
             }
             
             String[] songInfo = fileReader.nextLine().split(",");
-            // String trackFileName = args[i];
             songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4], songFolder + songInfo[4]));
             i++;
         }

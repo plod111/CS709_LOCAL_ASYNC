@@ -82,9 +82,9 @@ public class SongPlayer extends Application {
 		// 	System.out.println(argsArray[i]);
 		// }
 		
-		SongList sp = new SongList(argsArray);
+		SongList songList = new SongList(argsArray);
 
-		songs = sp.getSongs();
+		songs = songList.getSongs();
 
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////

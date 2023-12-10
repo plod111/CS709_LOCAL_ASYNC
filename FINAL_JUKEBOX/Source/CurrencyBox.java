@@ -1,4 +1,4 @@
-public class currencyBox {
+public class CurrencyBox {
     private int pennies = 0;
     private int nickels = 0;
     private int dimes = 0;

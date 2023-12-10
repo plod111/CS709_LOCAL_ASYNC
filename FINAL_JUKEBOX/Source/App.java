@@ -23,9 +23,9 @@ public class App extends Application {
 
 
     //create instances of the classes
-    coinPayments coinPayments = new coinPayments();
-    currencyBox currencyBox = new currencyBox();
-    creditPayments creditPayments = new creditPayments();
+    CoinPayments coinPayments = new CoinPayments();
+    CurrencyBox currencyBox = new CurrencyBox();
+    CreditPayments creditPayments = new CreditPayments();
         
     //prints funds to the screen
     private void displayUpdatedTotal() {

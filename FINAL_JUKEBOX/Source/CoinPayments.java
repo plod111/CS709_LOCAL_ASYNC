@@ -1,8 +1,8 @@
 
 
-public class coinPayments implements payments {
+public class CoinPayments implements Payments {
 
-    currencyBox currencyBox = new currencyBox();
+    CurrencyBox currencyBox = new CurrencyBox();
 
     @Override
     public void addFunds(int amount) {

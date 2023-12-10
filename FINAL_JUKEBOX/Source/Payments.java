@@ -1,5 +1,5 @@
 // Purpose: Interface for payments
-public interface payments {
+public interface Payments {
     void addFunds(int amount);
     String returnFunds();
 }
