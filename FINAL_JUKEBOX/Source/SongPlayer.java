@@ -47,7 +47,7 @@ import javafx.util.Duration;
 import javafx.scene.media.*;
 import javafx.scene.Node;
 
-public class MyPlayer extends Application {
+public class SongPlayer extends Application {
 
 	// Media player code for the music.
 	String mp3;
