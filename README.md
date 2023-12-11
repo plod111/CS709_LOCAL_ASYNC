@@ -8,6 +8,16 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
+##### <u>Dec 9, 2023</u>
+
+* Refactored after group discussion:
+* SongPlayer becomes SongList - creates and holds list of available songs, via song details text file entered on CL at runtime.
+* Only arg at runtime is no SongDetails.txt.  MP3s are listed therein along with path for media.
+* Song price field added to Song: uniformly set to 25c.
+* SongPlayer is now the main FX application.
+* PurchaseQueue : extension of Queue to make use of methods therein.
+* FX app window built using Group with currently available functionality all set as buttons.  Further functionality and form still required for final.
+
 ##### <u>Dec 8, 2023</u>
 
 * Added/modified animations to song player
