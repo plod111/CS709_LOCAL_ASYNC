@@ -3,8 +3,8 @@
 // ----------------------------------------------------------------------------------------
 
 // To compile and run:
-// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java
-// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java *.mp3
+// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media SongPlayer.java
+// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media SongPlayer.java *.mp3
 
 // Imports relevant to the graphical elements.
 import javafx.application.Application;

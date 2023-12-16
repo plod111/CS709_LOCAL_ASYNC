@@ -1,10 +1,10 @@
-// SongPlayer.java - Fall 2023 - A groovy, animated Jukebox that plays MP3 files.
+// App.java - Fall 2023 - A groovy, animated Jukebox that plays MP3 files.
 // CS709 Hunter Fall 2023 - Final Project
 // ----------------------------------------------------------------------------------------
 
 // To compile and run:
-// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java
-// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java *.mp3
+// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media App.java
+// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media App.java <song details file>
 
 // Imports relevant to the graphical elements.
 import javafx.application.Application;
