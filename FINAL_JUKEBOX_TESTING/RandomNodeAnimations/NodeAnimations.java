@@ -123,7 +123,11 @@ public class NodeAnimations extends Application {
 
 	}
 
-
+	/**
+	 * Builds the rectangles for the confetti.
+	 * @param numRectangles
+	 * @param root
+	 */
 	private void buildRectangles(int numRectangles, Group root) {
 
 		for (int i = 0; i < numRectangles; i++) {
@@ -140,7 +144,12 @@ public class NodeAnimations extends Application {
 	}
 	
 
-	
+	/**
+	 * Builds the animation effects for each rectangle.
+	 * @param numRectangles
+	 * @param root
+	 * @param scene
+	 */
 	private void buildTransitions(int numRectangles, Group root, Scene scene) {
 
 		// for each rectangle
