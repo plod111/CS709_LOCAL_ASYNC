@@ -1,10 +1,10 @@
-// App.java - Fall 2023 - A groovy, animated Jukebox that plays MP3 files.
+// SongPlayer.java - Fall 2023 - A groovy, animated Jukebox that plays MP3 files.
 // CS709 Hunter Fall 2023 - Final Project
 // ----------------------------------------------------------------------------------------
 
 // To compile and run:
-// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media App.java
-// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media App.java <song details file>
+// javac --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java
+// java --module-path /home/plod/Documents/CS-709/JavaFX/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.media MyPlayer.java *.mp3
 
 // Imports relevant to the graphical elements.
 import javafx.application.Application;
@@ -122,7 +122,7 @@ public class App extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 		// Builds the base window for the GUI (graphical user interface).
 		Group root = new Group();
-		Scene scene = new Scene(root, 800, 500, Color.BLACK);
+		Scene scene = new Scene(root, 800, 800, Color.BLACK);
 
 		// read in the song details file from the command line
 		Parameters params = getParameters();
@@ -256,9 +256,11 @@ public class App extends Application {
         creditFundsLabel = new Label();
         fundsLabel.setLayoutX(50);
         fundsLabel.setLayoutY(700);
+		fundsLabel.setTextFill(Color.GRAY);
         creditFundsLabel.setLayoutX(400);
         creditFundsLabel.setLayoutY(600);
         root.getChildren().addAll(fundsLabel, creditFundsLabel);
+		
 
 		 // coinPad Buttons
 		 Button pennyButton = createButton("1¢", 60, 445);
@@ -323,7 +325,9 @@ public class App extends Application {
         });
 
 
-		
+		root.getChildren().addAll(pennyButton, nickelButton, dimeButton, quarterButton, halfDollarButton,
+				goldenDollarButton, returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
+				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton);	
 
 
 		//////////////////////////////////////////////////////////////////////////////////
