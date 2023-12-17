@@ -40,6 +40,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.print.attribute.standard.Media;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -51,6 +54,9 @@ import javafx.animation.FillTransition;
 // Imports relevant to playing MP3 music.
 import javafx.scene.media.*;
 import javafx.scene.Node;
+import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.media.MediaView;
+import javafx.scene.media.MediaPlayer;
 
 public class App extends Application {
 
@@ -145,10 +151,13 @@ public class App extends Application {
 
 		System.out.println(purchaseQueue.toString());
 
-		// create intro song
-		song = new Song("file:/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3"); //purchaseQueue.getFirst(); //
+		// get the first song from the purchaseQueue
+		song = purchaseQueue.getFirst();
 
-		mp3 = ; //+ song.getPath(); //
+		// create intro song
+		//song = new Song("709JukeBox Winamp Ripoff", "Phil", "Monday evenings", 6, "winamp-intro.mp3", "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3"); //purchaseQueue.getFirst(); //
+
+		mp3 = "file:" + song.getPath(); // "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Songs/awakening-instrumental-1165.mp3"; // //
 		System.out.println(mp3);
 		med = new Media(mp3);
 		mdp = new MediaPlayer(med);
@@ -477,22 +486,22 @@ public class App extends Application {
 	public void sortSongsBy(String sortBy) {
 		// ArrayList<Song> songs = songList.getSongs();
 
-		switch (sortBy) {
-			case "title":
-				Collections.sort(songList, Comparator.comparing(Song::getTitle));
-				break;
-			case "artist":
-				Collections.sort(songList, Comparator.comparing(Song::getArtist));
-				break;
-			case "genre":
-				Collections.sort(songs, Comparator.comparing(Song::getGenre));
-				break;
-			case "duration":
-				Collections.sort(songs, Comparator.comparing(Song::getDuration));
-				break;
-			default:
-				break;
-		}
+		// switch (sortBy) {
+		// 	case "title":
+		// 		Collections.sort(songList, Comparator.comparing(Song::getTitle));
+		// 		break;
+		// 	case "artist":
+		// 		Collections.sort(songList, Comparator.comparing(Song::getArtist));
+		// 		break;
+		// 	case "genre":
+		// 		Collections.sort(songs, Comparator.comparing(Song::getGenre));
+		// 		break;
+		// 	case "duration":
+		// 		Collections.sort(songs, Comparator.comparing(Song::getDuration));
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 	}
 
 	public static void main(String[] args) {
