@@ -144,10 +144,11 @@ public class App extends Application {
 		purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
 
 		System.out.println(purchaseQueue.toString());
-		song = purchaseQueue.getFirst(); //
 
-		// intro song
-		mp3 = "file:/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/"; //+ song.getPath(); //
+		// create intro song
+		song = new Song("file:/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3"); //purchaseQueue.getFirst(); //
+
+		mp3 = ; //+ song.getPath(); //
 		System.out.println(mp3);
 		med = new Media(mp3);
 		mdp = new MediaPlayer(med);
