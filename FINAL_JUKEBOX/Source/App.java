@@ -156,9 +156,10 @@ public class App extends Application {
 		System.out.println(purchaseQueue.toString());
 		//song = purchaseQueue.getFirst(); //
 
-		// Intro song
+		//////////////////////////////////////////////////////////////////////////////
+		// Intro song ////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////
 		song = new Song("Intro","WinampRipoff", "Intro", 5, "winamp-intro.mp3", "/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
-		
 		mp3 = "file:" + song.getPath(); //
 		System.out.println(mp3);
 		med = new Media(mp3);
