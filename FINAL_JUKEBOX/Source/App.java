@@ -63,7 +63,7 @@ public class App extends Application {
 	MediaView mdv;
 
 	Song song;
-	ArrayList<Song> songs;
+	SongList songList;
 
 	int songToPlay = 0;
 
@@ -132,28 +132,41 @@ public class App extends Application {
 		// print out the song details list file name
 		// System.out.println(argsArray);
 
-		SongList songList = new SongList(argsArray);
+		songList = new SongList(argsArray);
 		
 		System.out.println(songList.toString());
 		// songs = songList.getSongs();
 
+		//DELETE THIS LATER
+		coinPayments.addFunds(100);
+
+
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
-		// get the first song from songs ArrayList
-		// song = songs.get(songToPlay); //
+		// get the first song from the purchaseQueue
+		PurchaseQueue purchaseQueue = new PurchaseQueue();
 
-		// mp3 = "file:" + song.getFileName(); //
-		// System.out.println(mp3);
-		// // textField.setText(song.getTitle() + ": by " + song.getArtist());
 
-		// // Create the media player and media view.
-		// med = new Media(mp3);
-		// mdp = new MediaPlayer(med);
-		// mdv = new MediaView(mdp);
-		// root.getChildren().add(mdv);
-		// mdp.play();
 
+		purchaseQueue.addSong(songList.getSongs().get(0), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+
+
+		System.out.println(purchaseQueue.toString());
+		song = purchaseQueue.getFirst(); //
+		
+		mp3 = "file:" + song.getFileName(); //
+		System.out.println(mp3);
+		med = new Media(mp3);
+		mdp = new MediaPlayer(med);
+		mdv = new MediaView(mdp);
+		root.getChildren().add(mdv);
+		
+
+		
+		
+		
 		////////////////////////////////////////////////////////////////////////////////
 		// Create the button to play the song.
 		Button playButton = new Button("Play");
@@ -192,7 +205,7 @@ public class App extends Application {
 			mdp.stop();
 			songToPlay++;
 
-			song = songs.get(songToPlay); //
+			//song = songs.get(songToPlay); //
 
 			mp3 = "file:" + song.getPath();
 			System.out.println(mp3);
@@ -212,7 +225,7 @@ public class App extends Application {
 		titleButton.setLayoutY(220);
 		titleButton.setOnAction(e -> {
 			sortSongsBy("title");
-			System.out.println(songs);
+			System.out.println(song);
 		});
 		root.getChildren().add(titleButton);
 
@@ -222,7 +235,7 @@ public class App extends Application {
 		artistButton.setLayoutY(250);
 		artistButton.setOnAction(e -> {
 			sortSongsBy("artist");
-			System.out.println(songs);
+			System.out.println(song);
 		});
 		root.getChildren().add(artistButton);
 
@@ -232,7 +245,7 @@ public class App extends Application {
 		genreButton.setLayoutY(280);
 		genreButton.setOnAction(e -> {
 			sortSongsBy("genre");
-			System.out.println(songs);
+			System.out.println(song);
 		});
 		root.getChildren().add(genreButton);
 
@@ -242,7 +255,7 @@ public class App extends Application {
 		durationButton.setLayoutY(310);
 		durationButton.setOnAction(e -> {
 			sortSongsBy("duration");
-			System.out.println(songs);
+			System.out.println(song);
 		});
 		root.getChildren().add(durationButton);
 
@@ -480,23 +493,24 @@ public class App extends Application {
 	}
 
 	public void sortSongsBy(String sortBy) {
-
-		switch (sortBy) {
-			case "title":
-				Collections.sort(songs, Comparator.comparing(Song::getTitle));
-				break;
-			case "artist":
-				Collections.sort(songs, Comparator.comparing(Song::getArtist));
-				break;
-			case "genre":
-				Collections.sort(songs, Comparator.comparing(Song::getGenre));
-				break;
-			case "duration":
-				Collections.sort(songs, Comparator.comparing(Song::getDuration));
-				break;
-			default:
-				break;
-		}
+		ArrayList<Song> songs = songList.getSongs();
+		
+		// switch (sortBy) {
+		// 	case "title":
+		// 		Collections.sort(songList, Comparator.comparing(Song::getTitle));
+		// 		break;
+		// 	case "artist":
+		// 		Collections.sort(songList, Comparator.comparing(Song::getArtist));
+		// 		break;
+		// 	case "genre":
+		// 		Collections.sort(songs, Comparator.comparing(Song::getGenre));
+		// 		break;
+		// 	case "duration":
+		// 		Collections.sort(songs, Comparator.comparing(Song::getDuration));
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 	}
 
 	public static void main(String[] args) {
