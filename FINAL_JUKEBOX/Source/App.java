@@ -48,8 +48,6 @@ import javafx.util.Duration;
 
 import javafx.animation.FillTransition;
 
-
-
 // Imports relevant to playing MP3 music.
 import javafx.scene.media.*;
 import javafx.scene.Node;
@@ -71,27 +69,26 @@ public class App extends Application {
 
 	Rectangle r, r2, r3, r4;
 
+	// Payment system variables
+	private Label fundsLabel;
+	private Label creditFundsLabel;
+	private String creditCardAmount = "";
 
-	//Payment system variables 
-    private Label fundsLabel;
-    private Label creditFundsLabel;
-    private String creditCardAmount = "";
+	// create instances of the classes
+	CoinPayments coinPayments = new CoinPayments();
+	CreditPayments creditPayments = new CreditPayments();
 
-    // create instances of the classes
-    CoinPayments coinPayments = new CoinPayments();
-    CreditPayments creditPayments = new CreditPayments();
+	// prints funds to the screen
+	private void displayUpdatedTotal() {
+		int displayAmount = coinPayments.currencyBox.getTotalCoinsAmount()
+				+ creditPayments.creditCurrencyBox.getCreditAmountInt();
+		fundsLabel.setText("Funds: " + displayAmount + "¢");
+	}
 
-    // prints funds to the screen
-    private void displayUpdatedTotal() {
-        int displayAmount = coinPayments.currencyBox.getTotalCoinsAmount()
-                + creditPayments.creditCurrencyBox.getCreditAmountInt();
-        fundsLabel.setText("Funds: " + displayAmount + "¢");
-    }
-
-    private void ccAmountAdded(int addedAmount) {
-        creditCardAmount = creditCardAmount + Integer.toString(addedAmount);
-        creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
-    }
+	private void ccAmountAdded(int addedAmount) {
+		creditCardAmount = creditCardAmount + Integer.toString(addedAmount);
+		creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
+	}
 
 	private void handleCoinButton(int amount) {
 		coinPayments.addFunds(amount);
@@ -99,24 +96,21 @@ public class App extends Application {
 	}
 
 	private Button createButton(String text, double layoutX, double layoutY) {
-        Button button = new Button(text);
-        button.setLayoutX(layoutX);
-        button.setLayoutY(layoutY);
-        return button;
-    }
+		Button button = new Button(text);
+		button.setLayoutX(layoutX);
+		button.setLayoutY(layoutY);
+		return button;
+	}
 
 	private void handleReturnFundsButton() {
-			int totalReturnAmount = coinPayments.currencyBox.getTotalCoinsAmount()
-					+ creditPayments.creditCurrencyBox.getCreditAmountInt();
-			fundsLabel.setText("Funds returned: " + totalReturnAmount + "¢" + "\n" + coinPayments.returnFunds() + "\n"
-					+ "Credit Card Amount: " + creditPayments.returnFunds() + "¢");
-	
-			creditPayments.creditCurrencyBox.resetCreditAmountInt();
-			coinPayments.currencyBox.resetAllCoins();
-		}
+		int totalReturnAmount = coinPayments.currencyBox.getTotalCoinsAmount()
+				+ creditPayments.creditCurrencyBox.getCreditAmountInt();
+		fundsLabel.setText("Funds returned: " + totalReturnAmount + "¢" + "\n" + coinPayments.returnFunds() + "\n"
+				+ "Credit Card Amount: " + creditPayments.returnFunds() + "¢");
 
-	
-
+		creditPayments.creditCurrencyBox.resetCreditAmountInt();
+		coinPayments.currencyBox.resetAllCoins();
+	}
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -133,13 +127,12 @@ public class App extends Application {
 		// System.out.println(argsArray);
 
 		songList = new SongList(argsArray);
-		
+
 		System.out.println(songList.toString());
 		// songs = songList.getSongs();
 
-		//DELETE THIS LATER
+		// DELETE THIS LATER
 		coinPayments.addFunds(100);
-
 
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
@@ -147,26 +140,20 @@ public class App extends Application {
 		// get the first song from the purchaseQueue
 		PurchaseQueue purchaseQueue = new PurchaseQueue();
 
-
-
 		purchaseQueue.addSong(songList.getSongs().get(0), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
 		purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
 
-
 		System.out.println(purchaseQueue.toString());
 		song = purchaseQueue.getFirst(); //
-		
-		mp3 = "file:" + song.getFileName(); //
+
+		// intro song
+		mp3 = "file:/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/"; //+ song.getPath(); //
 		System.out.println(mp3);
 		med = new Media(mp3);
 		mdp = new MediaPlayer(med);
 		mdv = new MediaView(mdp);
 		root.getChildren().add(mdv);
-		
 
-		
-		
-		
 		////////////////////////////////////////////////////////////////////////////////
 		// Create the button to play the song.
 		Button playButton = new Button("Play");
@@ -205,7 +192,7 @@ public class App extends Application {
 			mdp.stop();
 			songToPlay++;
 
-			//song = songs.get(songToPlay); //
+			// song = songs.get(songToPlay); //
 
 			mp3 = "file:" + song.getPath();
 			System.out.println(mp3);
@@ -259,89 +246,83 @@ public class App extends Application {
 		});
 		root.getChildren().add(durationButton);
 
-
 		/////////////////////////////////////////
-        //labels and buttons for payment system//
-        /////////////////////////////////////////
+		// labels and buttons for payment system//
+		/////////////////////////////////////////
 
 		// funds label
-        fundsLabel = new Label();
-        creditFundsLabel = new Label();
-        fundsLabel.setLayoutX(50);
-        fundsLabel.setLayoutY(700);
+		fundsLabel = new Label();
+		creditFundsLabel = new Label();
+		fundsLabel.setLayoutX(50);
+		fundsLabel.setLayoutY(700);
 		fundsLabel.setTextFill(Color.GRAY);
-        creditFundsLabel.setLayoutX(400);
-        creditFundsLabel.setLayoutY(600);
-        root.getChildren().addAll(fundsLabel, creditFundsLabel);
-		
+		creditFundsLabel.setLayoutX(400);
+		creditFundsLabel.setLayoutY(600);
+		root.getChildren().addAll(fundsLabel, creditFundsLabel);
 
-		 // coinPad Buttons
-		 Button pennyButton = createButton("1¢", 60, 445);
-		 pennyButton.setOnAction(e -> handleCoinButton(1));
- 
-		 Button nickelButton = createButton("5¢", 90, 445);
-		 nickelButton.setOnAction(e -> handleCoinButton(5));
- 
-		 Button dimeButton = createButton("10¢", 120, 445);
-		 dimeButton.setOnAction(e -> handleCoinButton(10));
- 
-		 Button quarterButton = createButton("25¢", 155, 445);
-		 quarterButton.setOnAction(e -> handleCoinButton(25));
- 
-		 Button halfDollarButton = createButton("50¢", 190, 445);
-		 halfDollarButton.setOnAction(e -> handleCoinButton(50));
- 
-		 Button goldenDollarButton = createButton("$1", 225, 445);
-		 goldenDollarButton.setOnAction(e -> handleCoinButton(100));
-		
-		
+		// coinPad Buttons
+		Button pennyButton = createButton("1¢", 60, 445);
+		pennyButton.setOnAction(e -> handleCoinButton(1));
+
+		Button nickelButton = createButton("5¢", 90, 445);
+		nickelButton.setOnAction(e -> handleCoinButton(5));
+
+		Button dimeButton = createButton("10¢", 120, 445);
+		dimeButton.setOnAction(e -> handleCoinButton(10));
+
+		Button quarterButton = createButton("25¢", 155, 445);
+		quarterButton.setOnAction(e -> handleCoinButton(25));
+
+		Button halfDollarButton = createButton("50¢", 190, 445);
+		halfDollarButton.setOnAction(e -> handleCoinButton(50));
+
+		Button goldenDollarButton = createButton("$1", 225, 445);
+		goldenDollarButton.setOnAction(e -> handleCoinButton(100));
+
 		// return funds button
-        Button returnFundsButton = createButton("Return Funds", 150, 500);
-        returnFundsButton.setOnAction(e -> handleReturnFundsButton());
+		Button returnFundsButton = createButton("Return Funds", 150, 500);
+		returnFundsButton.setOnAction(e -> handleReturnFundsButton());
 
-        // creditCardPayment Buttons
-        Button oneButton = createButton("1", 400, 445);
-        oneButton.setOnAction(e -> ccAmountAdded(1));
+		// creditCardPayment Buttons
+		Button oneButton = createButton("1", 400, 445);
+		oneButton.setOnAction(e -> ccAmountAdded(1));
 
-        Button twoButton = createButton("2", 430, 445);
-        twoButton.setOnAction(e -> ccAmountAdded(2));
+		Button twoButton = createButton("2", 430, 445);
+		twoButton.setOnAction(e -> ccAmountAdded(2));
 
-        Button threeButton = createButton("3", 460, 445);
-        threeButton.setOnAction(e -> ccAmountAdded(3));
+		Button threeButton = createButton("3", 460, 445);
+		threeButton.setOnAction(e -> ccAmountAdded(3));
 
-        Button fourButton = createButton("4", 400, 475);
-        fourButton.setOnAction(e -> ccAmountAdded(4));
+		Button fourButton = createButton("4", 400, 475);
+		fourButton.setOnAction(e -> ccAmountAdded(4));
 
-        Button fiveButton = createButton("5", 430, 475);
-        fiveButton.setOnAction(e -> ccAmountAdded(5));
+		Button fiveButton = createButton("5", 430, 475);
+		fiveButton.setOnAction(e -> ccAmountAdded(5));
 
-        Button sixButton = createButton("6", 460, 475);
-        sixButton.setOnAction(e -> ccAmountAdded(6));
+		Button sixButton = createButton("6", 460, 475);
+		sixButton.setOnAction(e -> ccAmountAdded(6));
 
-        Button sevenButton = createButton("7", 400, 505);
-        sevenButton.setOnAction(e -> ccAmountAdded(7));
+		Button sevenButton = createButton("7", 400, 505);
+		sevenButton.setOnAction(e -> ccAmountAdded(7));
 
-        Button eightButton = createButton("8", 430, 505);
-        eightButton.setOnAction(e -> ccAmountAdded(8));
+		Button eightButton = createButton("8", 430, 505);
+		eightButton.setOnAction(e -> ccAmountAdded(8));
 
-        Button nineButton = createButton("9", 460, 505);
-        nineButton.setOnAction(e -> ccAmountAdded(9));
+		Button nineButton = createButton("9", 460, 505);
+		nineButton.setOnAction(e -> ccAmountAdded(9));
 
-        Button zeroButton = createButton("0", 430, 535);
-        zeroButton.setOnAction(e -> ccAmountAdded(0));
-
+		Button zeroButton = createButton("0", 430, 535);
+		zeroButton.setOnAction(e -> ccAmountAdded(0));
 
 		Button clearButton = createButton("C", 460, 535);
-        clearButton.setOnAction(e -> {
-            creditCardAmount = "";
-            creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
-        });
-
+		clearButton.setOnAction(e -> {
+			creditCardAmount = "";
+			creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
+		});
 
 		root.getChildren().addAll(pennyButton, nickelButton, dimeButton, quarterButton, halfDollarButton,
 				goldenDollarButton, returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
-				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton);	
-
+				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton);
 
 		//////////////////////////////////////////////////////////////////////////////////
 
@@ -493,24 +474,24 @@ public class App extends Application {
 	}
 
 	public void sortSongsBy(String sortBy) {
-		ArrayList<Song> songs = songList.getSongs();
-		
-		// switch (sortBy) {
-		// 	case "title":
-		// 		Collections.sort(songList, Comparator.comparing(Song::getTitle));
-		// 		break;
-		// 	case "artist":
-		// 		Collections.sort(songList, Comparator.comparing(Song::getArtist));
-		// 		break;
-		// 	case "genre":
-		// 		Collections.sort(songs, Comparator.comparing(Song::getGenre));
-		// 		break;
-		// 	case "duration":
-		// 		Collections.sort(songs, Comparator.comparing(Song::getDuration));
-		// 		break;
-		// 	default:
-		// 		break;
-		// }
+		// ArrayList<Song> songs = songList.getSongs();
+
+		switch (sortBy) {
+			case "title":
+				Collections.sort(songList, Comparator.comparing(Song::getTitle));
+				break;
+			case "artist":
+				Collections.sort(songList, Comparator.comparing(Song::getArtist));
+				break;
+			case "genre":
+				Collections.sort(songs, Comparator.comparing(Song::getGenre));
+				break;
+			case "duration":
+				Collections.sort(songs, Comparator.comparing(Song::getDuration));
+				break;
+			default:
+				break;
+		}
 	}
 
 	public static void main(String[] args) {
