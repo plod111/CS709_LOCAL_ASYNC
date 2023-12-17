@@ -32,8 +32,7 @@ public class SongList {
             }
 
             String[] songInfo = fileReader.nextLine().split(",");
-            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4],
-                    songFolder + songInfo[4]));
+            songs.add(new Song(songInfo[0], songInfo[1], songInfo[2], Integer.parseInt(songInfo[3]), songInfo[4], songFolder + songInfo[4]));
             i++;
         }
         fileReader.close();
