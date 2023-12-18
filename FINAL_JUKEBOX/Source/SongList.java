@@ -44,7 +44,7 @@ public class SongList {
 
     // toString method
     public String toString() {
-        String songList = "Song folder is: " + songFolder + "\n";
+        String songList = "\nSong folder is: " + songFolder + "\n\n"+ "Songs are:\n";
         for (Song song : songs) {
             songList += song.toString();
         }

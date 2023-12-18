@@ -8,8 +8,6 @@ public class CurrencyBox {
     private int refundDimes = 0;
     private int refundQuarters = 0;
 
-
-    
     public void resetAllCoins() {
         this.nickels = 0;
         this.dimes = 0;
@@ -26,14 +24,17 @@ public class CurrencyBox {
         this.creditAmountInt += creditAmountInt;
     }
 
+    public void setCoinAmountInt(int coinAmountInt) {
+        this.totalCoinsAmount += coinAmountInt;
+    }
+
     public int getCreditAmountInt() {
         return this.creditAmountInt;
     }
 
     private void updateTotalCoinsAmount() {
-        this.totalCoinsAmount =  nickels*5 + dimes*10 + quarters*25;
-    }   
-
+        this.totalCoinsAmount = nickels * 5 + dimes * 10 + quarters * 25;
+    }
 
     public void setNickels() {
         this.nickels += 1;
@@ -50,37 +51,33 @@ public class CurrencyBox {
         updateTotalCoinsAmount();
     }
 
-
-
     public int getTotalCoinsAmount() {
         return this.totalCoinsAmount;
     }
-
 
     public int getNickels() {
         return this.nickels;
     }
 
-    public int GetDimes() {
+    public int getDimes() {
         return this.dimes;
-    }   
+    }
 
     public int getQuarters() {
         return this.quarters;
     }
 
-    
     public void setRefundAmount() {
-        if (totalCoinsAmount/25 > 0) {
+        if (totalCoinsAmount / 25 > 0) {
             refundQuarters = totalCoinsAmount / 25;
             totalCoinsAmount = totalCoinsAmount % 25;
         }
-        if (totalCoinsAmount/10 > 0) {
-            refundDimes = totalCoinsAmount/10;
-            totalCoinsAmount = totalCoinsAmount % 10;  
+        if (totalCoinsAmount / 10 > 0) {
+            refundDimes = totalCoinsAmount / 10;
+            totalCoinsAmount = totalCoinsAmount % 10;
         }
-        if (totalCoinsAmount/5 > 0) {
-            refundNickels = totalCoinsAmount/5;    
+        if (totalCoinsAmount / 5 > 0) {
+            refundNickels = totalCoinsAmount / 5;
         }
     }
 
@@ -95,7 +92,5 @@ public class CurrencyBox {
     public int getRefundQuarters() {
         return this.refundQuarters;
     }
-    
-
 
 }

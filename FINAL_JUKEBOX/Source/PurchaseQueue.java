@@ -17,19 +17,16 @@ public class PurchaseQueue extends LinkedList<Song> {
     public void addSong(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < song.getPrice()) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
-
             return;
-            //if there's enough coins, add the song to the queue and subtract the price from coins
+            //if there aren't enough coins, add the song to the queue and subtract the price from coins and then credit
         } else if (coinCurrencyBox.getTotalCoinsAmount() < song.getPrice()) {
             int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
             creditCurrencyBox.setCreditAmountInt(-difference);
             coinCurrencyBox.resetAllCoins();
 
-            //if there aren't enough coins, add the song to the queue and subtract the price from coins and then credit
+            //if there's enough coins, add the song to the queue and subtract the price from coins
         } else {
-            int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
-            coinCurrencyBox.resetAllCoins();
-            coinCurrencyBox.setCreditAmountInt(-difference);
+            coinCurrencyBox.setCoinAmountInt(-song.getPrice());
         }
         this.add(song);
         System.out.println("Added " + song.getTitle() + " to the queue");
@@ -41,19 +38,16 @@ public class PurchaseQueue extends LinkedList<Song> {
     public void addSongPlayNext(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < (song.getPrice()+premiumCost)) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
-
             return;
-            //if there's enough coins, add the song to the queue and subtract the price from coins
+            // if there aren't enough coins, add the song to the queue and subtract the price from coins and then credit
         } else if (coinCurrencyBox.getTotalCoinsAmount() < (song.getPrice()+premiumCost)) {
-            int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
+            int difference = (song.getPrice()+premiumCost) - coinCurrencyBox.getTotalCoinsAmount();
             creditCurrencyBox.setCreditAmountInt(-difference);
             coinCurrencyBox.resetAllCoins();
            
-            //if there aren't enough coins, add the song to the queue and subtract the price from coins and then credit
+            //if there's enough coins, add the song to the queue and subtract the price from coins
         }  else{
-            int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
-            coinCurrencyBox.resetAllCoins();
-            coinCurrencyBox.setCreditAmountInt(-difference);
+            coinCurrencyBox.setCoinAmountInt(-(song.getPrice()+premiumCost));
         }
         this.add(1,song); // add to position 1, behind current playing song
         System.out.println("Added," + song.getTitle() + " Playing Next");

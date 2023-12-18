@@ -6,22 +6,7 @@ public class CoinPayments implements Payments {
     @Override
     public void addFunds(int amount) {
         
-        switch (amount) {
-        
-            
-            case 5: 
-                currencyBox.setNickels();
-                break;
-            
-            case 10:
-                currencyBox.setDimes();;
-                break;
-
-            case 25:
-                currencyBox.setQuarters();
-                break;
-
-    }
+        currencyBox.setCoinAmountInt(amount);
 
 
     }

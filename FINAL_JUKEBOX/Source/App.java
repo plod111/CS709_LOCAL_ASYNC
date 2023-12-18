@@ -138,31 +138,27 @@ public class App extends Application {
 		List<String> argsList = params.getRaw();
 		String[] argsArray = argsList.toArray(new String[argsList.size()]);
 
-		// print out the song details list file name
-		// System.out.println(argsArray);
-
+		// create the song list
 		songList = new SongList(argsArray);
-
+		// print the song list
 		System.out.println(songList.toString());
-		// songs = songList.getSongs();
 
 		// DELETE THIS LATER
-		coinPayments.addFunds(100);
+		// coinPayments.addFunds(100);
 
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
-		// get the first song from the purchaseQueue
+		// Create the queue of songs to play.
 		purchaseQueue = new PurchaseQueue();
 
-		purchaseQueue.addSong(songList.getSongs().get(0), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		purchaseQueue.addSong(songList.getSongs().get(22), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		purchaseQueue.addSong(songList.getSongs().get(14), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		purchaseQueue.addSong(songList.getSongs().get(8), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		// purchaseQueue.addSong(songList.getSongs().get(0), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		// purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		// purchaseQueue.addSong(songList.getSongs().get(22), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		// purchaseQueue.addSong(songList.getSongs().get(14), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+		// purchaseQueue.addSong(songList.getSongs().get(8), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
 
-		System.out.println(purchaseQueue.toString());
-		// song = purchaseQueue.getFirst(); //
+		// System.out.println("Purchase queue: " + purchaseQueue.toString());
 
 		//////////////////////////////////////////////////////////////////////////////
 		// Intro song ////////////////////////////////////////////////////////////////
@@ -172,7 +168,7 @@ public class App extends Application {
 
 		song = introSong;
 		mp3 = "file:" + song.getPath(); //
-		System.out.println(mp3);
+		System.out.println("Intro wav: " + mp3);
 		med = new Media(mp3);
 		mdp = new MediaPlayer(med);
 		mdv = new MediaView(mdp);
@@ -266,6 +262,7 @@ public class App extends Application {
 				for (Song song : songList.getSongs()) {
 					if (song.getArtist().equals(artist) && song.getTitle().equals(title)) {
 						purchaseQueue.addSong(song, creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+						displayUpdatedTotal();
 						System.out.println(purchaseQueue.toString());
 					}
 				}
@@ -277,20 +274,21 @@ public class App extends Application {
 		// BUY & ADD SONG PLAY NEXT BUTTON
 		////////////////////////////////////////////////////////////////////////////////
 		Button buySongPlayNextButton = new Button("Buy Song, Play Next");
-		buySongPlayNextButton.setLayoutX(330);
+		buySongPlayNextButton.setLayoutX(380);
 		buySongPlayNextButton.setLayoutY(350);
 		buySongPlayNextButton.setOnAction(e -> {
 			if (listView.getSelectionModel().getSelectedItem() != null) {
 				String selectedSong = listView.getSelectionModel().getSelectedItem();
 				String[] songDetails = selectedSong.split(" - ");
 				String artist = songDetails[0];
-				System.out.println("Artist: " + artist);
+				// System.out.println("Artist: " + artist);
 				String title = songDetails[1];
-				System.out.println("Title: " + title);
+				// System.out.println("Title: " + title);
 
 				for (Song song : songList.getSongs()) {
 					if (song.getArtist().equals(artist) && song.getTitle().equals(title)) {
 						purchaseQueue.addSongPlayNext(song, creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+						displayUpdatedTotal();
 						System.out.println(purchaseQueue.toString());
 					}
 				}
@@ -556,11 +554,6 @@ public class App extends Application {
 		root.getChildren().remove(mdv);
 
 		if (!purchaseQueue.isEmpty()) {
-			System.out.println("Removing song from queue");
-			purchaseQueue.removeFirst();
-		}
-
-		if (!purchaseQueue.isEmpty()) {
 			song = purchaseQueue.getFirst();
 			System.out.println(purchaseQueue.toString());
 		} else {
@@ -568,7 +561,15 @@ public class App extends Application {
 			textField.setText("Song Queue is Empty!");
 			song = introSong; // new Song("Intro", "WinampRipoff", "Intro", 5,
 								// "winamp-intro.mp3","/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
-			// return;
+			mp3 = "file:" + song.getPath();
+			System.out.println(mp3);
+			med = new Media(mp3);
+			mdp = new MediaPlayer(med);
+			mdv = new MediaView(mdp);
+			root.getChildren().add(mdv);
+			mdp.play();
+			textField.setText(song.getTitle() + ": by " + song.getArtist());
+			return;
 		}
 
 		mp3 = "file:" + song.getPath();
@@ -579,6 +580,8 @@ public class App extends Application {
 		root.getChildren().add(mdv);
 		mdp.play();
 		textField.setText(song.getTitle() + ": by " + song.getArtist());
+		System.out.println("Removing song from queue");
+		purchaseQueue.removeFirst();
 	}
 
 	public void sortSongsBy(String sortBy) {
