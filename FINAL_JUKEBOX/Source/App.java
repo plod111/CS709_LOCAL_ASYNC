@@ -83,7 +83,11 @@ public class App extends Application {
 
 	TextField textField; // Text field for the song title.
 
-	Rectangle r, r2, r3, r4;
+	// Scene dimensions
+	int sceneWidth = 1000;
+	int sceneHeight = 800;
+
+	// Rectangle r, r2, r3, r4;
 
 	// Payment system variables
 	private Label fundsLabel;
@@ -93,6 +97,18 @@ public class App extends Application {
 	// create instances of the classes
 	CoinPayments coinPayments = new CoinPayments();
 	CreditPayments creditPayments = new CreditPayments();
+
+	////////////////////////////////////////////////////////////////////////////////
+	// Confetti Animation Elements /////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	int numRectangles = 250;
+
+	Rectangle[] rectangles = new Rectangle[numRectangles];
+	TranslateTransition[] translations = new TranslateTransition[numRectangles];
+	FillTransition[] fills = new FillTransition[numRectangles];
+	RotateTransition[] rotations = new RotateTransition[numRectangles];
+	ScaleTransition[] scales = new ScaleTransition[numRectangles];
+	ParallelTransition[] transitions = new ParallelTransition[numRectangles];
 
 	// prints funds to the screen
 	private void displayUpdatedTotal() {
@@ -133,66 +149,69 @@ public class App extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 		// Builds the base window for the GUI (graphical user interface).
 		root = new Group();
-		Scene scene = new Scene(root, 1000, 800, Color.BLACK);
+		Scene scene = new Scene(root, sceneWidth, sceneHeight, Color.BLACK);
 
 		////////////////////////////////////////////////////////////////////////////////
+		
+		buildRectangles(numRectangles, root);
+		buildTransitions(numRectangles, root, scene);
 
 		// Builds the initial rectangle that will eventually be animated.
-		r = new Rectangle(125, 125, 150, 150);
-		r.setFill(Color.PURPLE);
-		r2 = new Rectangle(80, 350, 100, 100);
-		r2.setFill(Color.RED);
-		r3 = new Rectangle(550, 80, 150, 150);
-		r3.setFill(Color.YELLOW);
-		r4 = new Rectangle(575, 105, 100, 100);
-		r4.setFill(Color.ORCHID);
-		root.getChildren().addAll(r, r2, r3, r4);
+		// r = new Rectangle(125, 125, 150, 150);
+		// r.setFill(Color.PURPLE);
+		// r2 = new Rectangle(80, 350, 100, 100);
+		// r2.setFill(Color.RED);
+		// r3 = new Rectangle(550, 80, 150, 150);
+		// r3.setFill(Color.YELLOW);
+		// r4 = new Rectangle(575, 105, 100, 100);
+		// r4.setFill(Color.ORCHID);
+		// root.getChildren().addAll(r, r2, r3, r4);
 
 		// Add the animation effects
-		TranslateTransition translate = new TranslateTransition(Duration.millis(1750));
-		translate.setToX(590);
-		translate.setToY(290);
+		// TranslateTransition translate = new TranslateTransition(Duration.millis(1750));
+		// translate.setToX(590);
+		// translate.setToY(290);
 
-		TranslateTransition translate2 = new TranslateTransition(Duration.millis(1750));
-		translate2.setToX(300);
-		translate2.setToY(-390);
+		// TranslateTransition translate2 = new TranslateTransition(Duration.millis(1750));
+		// translate2.setToX(300);
+		// translate2.setToY(-390);
 
-		FillTransition fill = new FillTransition(Duration.millis(1750));
-		fill.setToValue(Color.BLUE);
-		FillTransition fill2 = new FillTransition(Duration.millis(1750));
-		fill2.setToValue(Color.BLUE);
+		// FillTransition fill = new FillTransition(Duration.millis(1750));
+		// fill.setToValue(Color.BLUE);
+		// FillTransition fill2 = new FillTransition(Duration.millis(1750));
+		// fill2.setToValue(Color.BLUE);
 
-		RotateTransition rotate = new RotateTransition(Duration.millis(1750));
-		rotate.setToAngle(360);
-		RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
-		rotate2.setToAngle(-720);
-		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750), r3);
-		rotate3.setToAngle(720);
-		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750), r4);
-		rotate4.setToAngle(-720);
-		rotate3.setCycleCount(Timeline.INDEFINITE);
-		rotate4.setCycleCount(Timeline.INDEFINITE);
-		rotate3.setAutoReverse(true);
-		rotate4.setAutoReverse(true);
-		rotate3.play();
-		rotate4.play();
+		// RotateTransition rotate = new RotateTransition(Duration.millis(1750));
+		// rotate.setToAngle(360);
+		// RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
+		// rotate2.setToAngle(-720);
+		// RotateTransition rotate3 = new RotateTransition(Duration.millis(2750), r3);
+		// rotate3.setToAngle(720);
+		// RotateTransition rotate4 = new RotateTransition(Duration.millis(2750), r4);
+		// rotate4.setToAngle(-720);
+		// rotate3.setCycleCount(Timeline.INDEFINITE);
+		// rotate4.setCycleCount(Timeline.INDEFINITE);
+		// rotate3.setAutoReverse(true);
+		// rotate4.setAutoReverse(true);
+		// rotate3.play();
+		// rotate4.play();
 
-		ScaleTransition scale = new ScaleTransition(Duration.millis(1750));
-		scale.setToX(0.1);
-		scale.setToY(0.1);
-		ScaleTransition scale2 = new ScaleTransition(Duration.millis(1750));
-		scale2.setToX(0.1);
-		scale2.setToY(0.1);
+		// ScaleTransition scale = new ScaleTransition(Duration.millis(1750));
+		// scale.setToX(0.1);
+		// scale.setToY(0.1);
+		// ScaleTransition scale2 = new ScaleTransition(Duration.millis(1750));
+		// scale2.setToX(0.1);
+		// scale2.setToY(0.1);
 
-		ParallelTransition transition = new ParallelTransition(r, translate, fill, rotate, scale);
-		transition.setCycleCount(Timeline.INDEFINITE);
-		transition.setAutoReverse(true);
-		transition.play();
+		// ParallelTransition transition = new ParallelTransition(r, translate, fill, rotate, scale);
+		// transition.setCycleCount(Timeline.INDEFINITE);
+		// transition.setAutoReverse(true);
+		// transition.play();
 
-		ParallelTransition transition2 = new ParallelTransition(r2, translate2, fill2, rotate2, scale2);
-		transition2.setCycleCount(Timeline.INDEFINITE);
-		transition2.setAutoReverse(true);
-		transition2.play();
+		// ParallelTransition transition2 = new ParallelTransition(r2, translate2, fill2, rotate2, scale2);
+		// transition2.setCycleCount(Timeline.INDEFINITE);
+		// transition2.setAutoReverse(true);
+		// transition2.play();
 
 		//////////////////////////////////////////////////////////////////////////////////
 
@@ -706,6 +725,63 @@ public class App extends Application {
 			default:
 				break;
 		}
+	}
+
+	/**
+	 * Builds the rectangles for the confetti.
+	 * 
+	 * @param numRectangles
+	 * @param root
+	 */
+	private void buildRectangles(int numRectangles, Group root) {
+
+		for (int i = 0; i < numRectangles; i++) {
+			rectangles[i] = new Rectangle((int) (Math.random() * sceneWidth), (int) (Math.random() * sceneHeight),
+					(int) (Math.random() * 30), (int) (Math.random() * 30));
+			// System.out.println(rectangles[i]);
+			// System.out.println((int) (Math.random() * sceneWidth));
+			// random color
+			rectangles[i].setFill(
+					Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
+			root.getChildren().add(rectangles[i]);
+		}
+
+	}
+
+	/**
+	 * Builds the animation effects for each rectangle.
+	 * 
+	 * @param numRectangles
+	 * @param root
+	 * @param scene
+	 */
+	private void buildTransitions(int numRectangles, Group root, Scene scene) {
+
+		// for each rectangle
+		for (int i = 0; i < numRectangles; i++) {
+			// Add the animation effects
+			int duration = (int) (Math.random() * 1750 + 300);
+			translations[i] = new TranslateTransition(Duration.millis(duration));
+			translations[i].setToX((int) (Math.random() * 2 * sceneWidth - sceneWidth));
+			translations[i].setToY((int) (Math.random() * 2 * sceneHeight - sceneHeight));
+
+			fills[i] = new FillTransition(Duration.millis(duration));
+			fills[i].setToValue(Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),
+					(int) (Math.random() * 255)));
+
+			rotations[i] = new RotateTransition(Duration.millis(duration));
+			rotations[i].setToAngle((int) Math.random() * 720 - 360);
+
+			scales[i] = new ScaleTransition(Duration.millis(duration));
+			scales[i].setToX((int) (Math.random() * 2));
+			scales[i].setToY((int) (Math.random() * 2));
+
+			transitions[i] = new ParallelTransition(rectangles[i], translations[i], fills[i], rotations[i], scales[i]);
+			transitions[i].setCycleCount(Timeline.INDEFINITE);
+			transitions[i].setAutoReverse(true);
+			transitions[i].play();
+		}
+
 	}
 
 	public static void main(String[] args) {
