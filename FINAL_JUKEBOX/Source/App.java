@@ -52,7 +52,6 @@ import javafx.animation.FillTransition;
 import javafx.scene.media.*;
 import javafx.scene.Node;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // ***************************************************************************//
 // RENAME TO SongPlayer.java
@@ -68,7 +67,7 @@ public class App extends Application {
 	MediaPlayer mdp;
 	MediaView mdv;
 
-	Song song;
+	Song song, introSong;
 	SongList songList;
 	PurchaseQueue purchaseQueue;
 
@@ -161,8 +160,10 @@ public class App extends Application {
 		//////////////////////////////////////////////////////////////////////////////
 		// Intro song ////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////
-		song = new Song("Intro", "WinampRipoff", "Intro", 5, "winamp-intro.mp3",
+		introSong = new Song("Intro", "WinampRipoff", "Intro", 5, "winamp-intro.mp3",
 				"/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
+
+		song = introSong;
 		mp3 = "file:" + song.getPath(); //
 		System.out.println(mp3);
 		med = new Media(mp3);
@@ -441,7 +442,7 @@ public class App extends Application {
 		transition2.play();
 
 		// Launch the application window
-		stage.setTitle("Music Player Demo");
+		stage.setTitle("CS709 JukeIt!");
 		stage.setScene(scene);
 		stage.show();
 
@@ -462,22 +463,21 @@ public class App extends Application {
 
 	public void nextSong() {
 		mdp.stop();
-		// songToPlay++;
+		root.getChildren().remove(mdv);
 
-		if (purchaseQueue.isEmpty()) {
-			System.out.println("No more songs in the queue");
-			textField.setText("Song Queue is Empty!");
-			song = new Song("Intro", "WinampRipoff", "Intro", 5, "winamp-intro.mp3",
-					"/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
-			return;
+		if (!purchaseQueue.isEmpty()) {
+			System.out.println("Removing song from queue");
+			purchaseQueue.removeFirst();
 		}
-		if (song.getArtist().equals("WinampRipoff")) {
+
+		if (!purchaseQueue.isEmpty()) {
 			song = purchaseQueue.getFirst();
 			System.out.println(purchaseQueue.toString());
 		} else {
-			purchaseQueue.removeFirst();
-			song = purchaseQueue.getFirst();
-			System.out.println(purchaseQueue.toString());
+			System.out.println("No more songs in the queue");
+			textField.setText("Song Queue is Empty!");
+			song = introSong; //new Song("Intro", "WinampRipoff", "Intro", 5, "winamp-intro.mp3","/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
+			// return;
 		}
 
 		mp3 = "file:" + song.getPath();
