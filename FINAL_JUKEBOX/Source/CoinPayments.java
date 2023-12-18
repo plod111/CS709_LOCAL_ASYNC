@@ -1,5 +1,4 @@
 
-
 public class CoinPayments implements Payments {
 
     CurrencyBox currencyBox = new CurrencyBox();
@@ -9,9 +8,6 @@ public class CoinPayments implements Payments {
         
         switch (amount) {
         
-            case 1:
-                currencyBox.setPennies();;
-                break;
             
             case 5: 
                 currencyBox.setNickels();
@@ -25,13 +21,6 @@ public class CoinPayments implements Payments {
                 currencyBox.setQuarters();
                 break;
 
-            case 50:
-                currencyBox.setHalfDollars();
-                break;
-
-            case 100:
-                currencyBox.setGoldenDollars();
-                break;
     }
 
 
@@ -41,12 +30,10 @@ public class CoinPayments implements Payments {
     public String returnFunds() {
         
         //builds a string specifying how much and how funds were returned
-        return Integer.toString(currencyBox.getPennies()) + " pennies, " + 
-        Integer.toString(currencyBox.getNickels()) + " nickels, " + 
-        Integer.toString(currencyBox.GetDimes()) + " dimes, " + 
-        Integer.toString(currencyBox.getQuarters()) + " quarters, " + 
-        Integer.toString(currencyBox.getHalfDollars()) + " half dollars, " + 
-        Integer.toString(currencyBox.getGoldenDollars()) + " golden dollars.";
+        return  
+        Integer.toString(currencyBox.getRefundNickels()) + " nickels, " + 
+        Integer.toString(currencyBox.getRefundDimes()) + " dimes, " + 
+        Integer.toString(currencyBox.getRefundQuarters()) + " quarters, ";
     }
 
     public int getTotalCoinsAmount() {

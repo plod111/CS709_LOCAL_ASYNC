@@ -8,17 +8,23 @@ public class PurchaseQueue extends LinkedList<Song> {
     
   
     // add a song to the queue band check if there's enough funds
-    //using 20 as a placeholder for the price of a song
+    
     public void addSong(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < song.getPrice()) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
 
             return;
+            //if there's enough coins, add the song to the queue and subtract the price from coins
         } else if (coinCurrencyBox.getTotalCoinsAmount() < song.getPrice()) {
             int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
             creditCurrencyBox.setCreditAmountInt(-difference);
             coinCurrencyBox.resetAllCoins();
            
+            //if there aren't enough coins, add the song to the queue and subtract the price from coins and then credit
+        }  else{
+            int difference = song.getPrice() - coinCurrencyBox.getTotalCoinsAmount();
+            coinCurrencyBox.resetAllCoins();
+            coinCurrencyBox.setCreditAmountInt(-difference);
         }
         this.add(song);
         System.out.println("Added " + song.getTitle() + " to the queue");

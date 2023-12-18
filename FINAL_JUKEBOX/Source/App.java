@@ -40,6 +40,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.print.attribute.standard.Media;
+import javax.swing.text.html.ListView;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -113,12 +117,14 @@ public class App extends Application {
 	private void handleReturnFundsButton() {
 		int totalReturnAmount = coinPayments.currencyBox.getTotalCoinsAmount()
 				+ creditPayments.creditCurrencyBox.getCreditAmountInt();
+				coinPayments.currencyBox.setRefundAmount();
 		fundsLabel.setText("Funds returned: " + totalReturnAmount + "¢" + "\n" + coinPayments.returnFunds() + "\n"
 				+ "Credit Card Amount: " + creditPayments.returnFunds() + "¢");
 
 		creditPayments.creditCurrencyBox.resetCreditAmountInt();
 		coinPayments.currencyBox.resetAllCoins();
 	}
+
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -208,6 +214,45 @@ public class App extends Application {
 		});
 		root.getChildren().add(nextButton);
 
+
+		//Radio Buttons for sorting
+		ToggleGroup sortingRadioButtons = new ToggleGroup();
+    	RadioButton button1 = new RadioButton("By Title");
+		button1.setToggleGroup(sortingRadioButtons);
+		button1.setSelected(true);
+		RadioButton button2 = new RadioButton("By Artist");
+		button2.setToggleGroup(sortingRadioButtons);
+		RadioButton button3 = new RadioButton("By Genre");
+		button3.setToggleGroup(sortingRadioButtons);
+		RadioButton button4 = new RadioButton("By Duration");
+		button4.setToggleGroup(sortingRadioButtons);
+		button1.setLayoutX(50);
+		button1.setLayoutY(350);
+		button2.setLayoutX(50);
+		button2.setLayoutY(380);
+		button3.setLayoutX(50);
+		button3.setLayoutY(410);
+		button4.setLayoutX(50);
+		button4.setLayoutY(440);
+		root.getChildren().addAll(button1, button2, button3, button4);
+
+		//need to add simple listener to the radio buttons 
+
+
+
+		////////////////////////////////////////////////////////////////////////////////
+		//simple list view that lists song titles
+			ListView<String> listView = new ListView<String>();
+			ObservableList<String> items = FXCollections.observableArrayList();
+			for (Song song : songList.getSongs()) {
+				items.add(song.getArtist()+ " - " + song.getTitle());
+			}
+			listView.setItems(items);
+			listView.setLayoutX(280);
+			listView.setLayoutY(100);
+			listView.setPrefSize(240, 240);
+			root.getChildren().add(listView);
+
 		////////////////////////////////////////////////////////////////////////////////
 		// SORT BUTTONS
 		// Create the button to sort by title.
@@ -265,9 +310,6 @@ public class App extends Application {
 		root.getChildren().addAll(fundsLabel, creditFundsLabel);
 
 		// coinPad Buttons
-		Button pennyButton = createButton("1¢", 60, 445);
-		pennyButton.setOnAction(e -> handleCoinButton(1));
-
 		Button nickelButton = createButton("5¢", 90, 445);
 		nickelButton.setOnAction(e -> handleCoinButton(5));
 
@@ -276,12 +318,6 @@ public class App extends Application {
 
 		Button quarterButton = createButton("25¢", 155, 445);
 		quarterButton.setOnAction(e -> handleCoinButton(25));
-
-		Button halfDollarButton = createButton("50¢", 190, 445);
-		halfDollarButton.setOnAction(e -> handleCoinButton(50));
-
-		Button goldenDollarButton = createButton("$1", 225, 445);
-		goldenDollarButton.setOnAction(e -> handleCoinButton(100));
 
 		// return funds button
 		Button returnFundsButton = createButton("Return Funds", 150, 500);
@@ -324,8 +360,17 @@ public class App extends Application {
 			creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
 		});
 
-		root.getChildren().addAll(pennyButton, nickelButton, dimeButton, quarterButton, halfDollarButton,
-				goldenDollarButton, returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
+		//"swipe credit card button" to load funds from credit card
+		Button swipeCreditCardButton = createButton("Swipe Credit Card", 380, 565);
+		swipeCreditCardButton.setOnAction(e -> {
+			creditPayments.addFunds(Integer.parseInt(creditCardAmount));
+			creditCardAmount = "";
+			creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
+			displayUpdatedTotal();
+		});
+
+		root.getChildren().addAll(nickelButton, dimeButton, quarterButton,
+				returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
 				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton);
 
 		//////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 
-
 public class CreditPayments implements Payments{
     
 
