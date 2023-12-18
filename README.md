@@ -8,9 +8,32 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
+##### <u>Dec 16,17, 2023</u>
+
+* Brought together the final pieces for jukebox into one operational app.  Cleanup still remains.  Fully functional at present given the limited unit tests ran.
+* Added an intro sound bite - based on Winamp - this loads as the first audio, and is reset as the audio, both in the presence of an empty playlist (queue). 
+* Purchase queue now gets built/populated via song buy buttons.
+* Troubleshooted coin based purchases - there was a seperate tally of nickels, dimes and quarters happening that wasnt synchronized with total funds.
+* Removed all denom buttons except n, d, q's.
+* Added a premium pruchase option that costs an additional 10c per song and adds the song into the next to play position (does not take current playing position).
+* Added song list viewed via SimpleList.  Song title and artist now listed.
+* Added radio buttons and tied them to existing sort functions.  Sorts happen as direct consequence of radio button selection - no need for additional button to initiate sort.
+* To repain the list, the SimpleList view has to be recreated by the looks
+* Realized that objects appear in the scene in the order they are created in code - so earlier nodes, like rectangles can be created first and they will now remain behind buttons etc. 
+* Added playlist queue using same SimpleList view.  Populates and behaves correctly per purchaseQueue.
+
+* <b>TODO:</b>
+* Check on removal of additional / updated SimpleList views.
+* Add confetti in background
+* Cleanup positioning of buttons
+* Check if play on media end can be integrated
+
 ##### <u>Dec 10, 2023</u>
 
-* Phil 
+* Built out currencyBox GUI elements and implemented associated logic for funds addition and balance
+* Built a confetti animation using Rectangle arrays and multiple transitions.
+* Sort functionality for songlist implemented via title, artist, genre, duration
+* 
 
 ##### <u>Dec 9, 2023</u>
 
