@@ -8,12 +8,18 @@
 
 // Imports relevant to the graphical elements.
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.DropShadow;
@@ -40,10 +46,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import javax.print.attribute.standard.Media;
-import javax.swing.text.html.ListView;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -75,9 +77,9 @@ public class App extends Application {
 	SongList songList;
 	PurchaseQueue purchaseQueue;
 
-	int songToPlay = 0;
+	// int songToPlay = 0;
 
-	TextField textField;
+	TextField textField; // Text field for the song title.
 
 	Rectangle r, r2, r3, r4;
 
@@ -117,14 +119,13 @@ public class App extends Application {
 	private void handleReturnFundsButton() {
 		int totalReturnAmount = coinPayments.currencyBox.getTotalCoinsAmount()
 				+ creditPayments.creditCurrencyBox.getCreditAmountInt();
-				coinPayments.currencyBox.setRefundAmount();
+		coinPayments.currencyBox.setRefundAmount();
 		fundsLabel.setText("Funds returned: " + totalReturnAmount + "¢" + "\n" + coinPayments.returnFunds() + "\n"
 				+ "Credit Card Amount: " + creditPayments.returnFunds() + "¢");
 
 		creditPayments.creditCurrencyBox.resetCreditAmountInt();
 		coinPayments.currencyBox.resetAllCoins();
 	}
-
 
 	@Override
 	public void start(Stage stage) throws FileNotFoundException {
@@ -214,10 +215,9 @@ public class App extends Application {
 		});
 		root.getChildren().add(nextButton);
 
-
-		//Radio Buttons for sorting
+		// Radio Buttons for sorting
 		ToggleGroup sortingRadioButtons = new ToggleGroup();
-    	RadioButton button1 = new RadioButton("By Title");
+		RadioButton button1 = new RadioButton("By Title");
 		button1.setToggleGroup(sortingRadioButtons);
 		button1.setSelected(true);
 		RadioButton button2 = new RadioButton("By Artist");
@@ -236,22 +236,67 @@ public class App extends Application {
 		button4.setLayoutY(440);
 		root.getChildren().addAll(button1, button2, button3, button4);
 
-		//need to add simple listener to the radio buttons 
-
-
+		// need to add simple listener to the radio buttons
 
 		////////////////////////////////////////////////////////////////////////////////
-		//simple list view that lists song titles
-			ListView<String> listView = new ListView<String>();
-			ObservableList<String> items = FXCollections.observableArrayList();
-			for (Song song : songList.getSongs()) {
-				items.add(song.getArtist()+ " - " + song.getTitle());
+		// simple list view that lists song titles
+		ListView<String> listView = new ListView<String>();
+		ObservableList<String> items = FXCollections.observableArrayList();
+		for (Song song : songList.getSongs()) {
+			items.add(song.getArtist() + " - " + song.getTitle());
+		}
+		listView.setItems(items);
+		listView.setLayoutX(280);
+		listView.setLayoutY(100);
+		listView.setPrefSize(240, 240);
+		root.getChildren().add(listView);
+
+		////////////////////////////////////////////////////////////////////////////////
+		// BUY & ADD SONG BUTTON
+		////////////////////////////////////////////////////////////////////////////////
+		Button buySongButton = new Button("Buy Song");
+		buySongButton.setLayoutX(280);
+		buySongButton.setLayoutY(350);
+		buySongButton.setOnAction(e -> {
+			if (listView.getSelectionModel().getSelectedItem() != null) {
+				String selectedSong = listView.getSelectionModel().getSelectedItem();
+				String[] songDetails = selectedSong.split(" - ");
+				String artist = songDetails[0];
+				String title = songDetails[1];
+				for (Song song : songList.getSongs()) {
+					if (song.getArtist().equals(artist) && song.getTitle().equals(title)) {
+						purchaseQueue.addSong(song, creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+						System.out.println(purchaseQueue.toString());
+					}
+				}
 			}
-			listView.setItems(items);
-			listView.setLayoutX(280);
-			listView.setLayoutY(100);
-			listView.setPrefSize(240, 240);
-			root.getChildren().add(listView);
+		});
+		root.getChildren().add(buySongButton);
+
+		////////////////////////////////////////////////////////////////////////////////
+		// BUY & ADD SONG PLAY NEXT BUTTON
+		////////////////////////////////////////////////////////////////////////////////
+		Button buySongPlayNextButton = new Button("Buy Song, Play Next");
+		buySongPlayNextButton.setLayoutX(330);
+		buySongPlayNextButton.setLayoutY(350);
+		buySongPlayNextButton.setOnAction(e -> {
+			if (listView.getSelectionModel().getSelectedItem() != null) {
+				String selectedSong = listView.getSelectionModel().getSelectedItem();
+				String[] songDetails = selectedSong.split(" - ");
+				String artist = songDetails[0];
+				System.out.println("Artist: " + artist);
+				String title = songDetails[1];
+				System.out.println("Title: " + title);
+
+				for (Song song : songList.getSongs()) {
+					if (song.getArtist().equals(artist) && song.getTitle().equals(title)) {
+						purchaseQueue.addSongPlayNext(song, creditPayments.creditCurrencyBox, coinPayments.currencyBox);
+						System.out.println(purchaseQueue.toString());
+					}
+				}
+			}
+		});
+		root.getChildren().add(buySongPlayNextButton);
 
 		////////////////////////////////////////////////////////////////////////////////
 		// SORT BUTTONS
@@ -360,7 +405,7 @@ public class App extends Application {
 			creditFundsLabel.setText("Credit Card Amount: " + creditCardAmount);
 		});
 
-		//"swipe credit card button" to load funds from credit card
+		// "swipe credit card button" to load funds from credit card
 		Button swipeCreditCardButton = createButton("Swipe Credit Card", 380, 565);
 		swipeCreditCardButton.setOnAction(e -> {
 			creditPayments.addFunds(Integer.parseInt(creditCardAmount));
@@ -371,7 +416,7 @@ public class App extends Application {
 
 		root.getChildren().addAll(nickelButton, dimeButton, quarterButton,
 				returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
-				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton);
+				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton, swipeCreditCardButton);
 
 		//////////////////////////////////////////////////////////////////////////////////
 
@@ -521,7 +566,8 @@ public class App extends Application {
 		} else {
 			System.out.println("No more songs in the queue");
 			textField.setText("Song Queue is Empty!");
-			song = introSong; //new Song("Intro", "WinampRipoff", "Intro", 5, "winamp-intro.mp3","/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
+			song = introSong; // new Song("Intro", "WinampRipoff", "Intro", 5,
+								// "winamp-intro.mp3","/home/plod/Documents/CS-709/CS709_LOCAL_ASYNC/FINAL_JUKEBOX/Source/winamp-intro.mp3");
 			// return;
 		}
 

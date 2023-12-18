@@ -1,21 +1,19 @@
 public class CurrencyBox {
-    private int pennies = 0;
     private int nickels = 0;
     private int dimes = 0;
     private int quarters = 0;
-    private int halfDollars = 0;
-    private int goldenDollars = 0;
     private int totalCoinsAmount = 0;
     private int creditAmountInt = 0;
+    private int refundNickels = 0;
+    private int refundDimes = 0;
+    private int refundQuarters = 0;
 
 
+    
     public void resetAllCoins() {
-        this.pennies = 0;
         this.nickels = 0;
         this.dimes = 0;
         this.quarters = 0;
-        this.halfDollars = 0;
-        this.goldenDollars = 0;
         this.totalCoinsAmount = 0;
         this.creditAmountInt = 0;
     }
@@ -33,13 +31,9 @@ public class CurrencyBox {
     }
 
     private void updateTotalCoinsAmount() {
-        this.totalCoinsAmount = pennies*1 + nickels*5 + dimes*10 + quarters*25 + halfDollars*50 + goldenDollars*100;
+        this.totalCoinsAmount =  nickels*5 + dimes*10 + quarters*25;
     }   
 
-    public void setPennies() {
-        this.pennies += 1;
-        updateTotalCoinsAmount();
-    }
 
     public void setNickels() {
         this.nickels += 1;
@@ -56,24 +50,12 @@ public class CurrencyBox {
         updateTotalCoinsAmount();
     }
 
-    public void setHalfDollars() {
-        this.halfDollars += 1;
-        updateTotalCoinsAmount();
-    }
-    
-    public void setGoldenDollars() {
-        this.goldenDollars += 1;    
-        updateTotalCoinsAmount();
-    }
 
 
     public int getTotalCoinsAmount() {
         return this.totalCoinsAmount;
     }
 
-    public int getPennies() {
-        return this.pennies;
-    }
 
     public int getNickels() {
         return this.nickels;
@@ -87,12 +69,33 @@ public class CurrencyBox {
         return this.quarters;
     }
 
-    public int getHalfDollars() {
-        return this.halfDollars;
+    
+    public void setRefundAmount() {
+        if (totalCoinsAmount/25 > 0) {
+            refundQuarters = totalCoinsAmount / 25;
+            totalCoinsAmount = totalCoinsAmount % 25;
+        }
+        if (totalCoinsAmount/10 > 0) {
+            refundDimes = totalCoinsAmount/10;
+            totalCoinsAmount = totalCoinsAmount % 10;  
+        }
+        if (totalCoinsAmount/5 > 0) {
+            refundNickels = totalCoinsAmount/5;    
+        }
     }
 
-    public int getGoldenDollars() {
-        return this.goldenDollars;
+    public int getRefundNickels() {
+        return this.refundNickels;
     }
+
+    public int getRefundDimes() {
+        return this.refundDimes;
+    }
+
+    public int getRefundQuarters() {
+        return this.refundQuarters;
+    }
+    
+
 
 }
