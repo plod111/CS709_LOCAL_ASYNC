@@ -76,8 +76,10 @@ public class App extends Application {
 	Song song, introSong;
 	SongList songList;
 	PurchaseQueue purchaseQueue;
-
-	// int songToPlay = 0;
+	ObservableList<String> queueItems;
+	ListView<String> queueListView;
+	ListView<String> listView;
+	ObservableList<String> items;
 
 	TextField textField; // Text field for the song title.
 
@@ -131,7 +133,68 @@ public class App extends Application {
 	public void start(Stage stage) throws FileNotFoundException {
 		// Builds the base window for the GUI (graphical user interface).
 		root = new Group();
-		Scene scene = new Scene(root, 800, 800, Color.BLACK);
+		Scene scene = new Scene(root, 1000, 800, Color.BLACK);
+
+		////////////////////////////////////////////////////////////////////////////////
+
+		// Builds the initial rectangle that will eventually be animated.
+		r = new Rectangle(125, 125, 150, 150);
+		r.setFill(Color.PURPLE);
+		r2 = new Rectangle(80, 350, 100, 100);
+		r2.setFill(Color.RED);
+		r3 = new Rectangle(550, 80, 150, 150);
+		r3.setFill(Color.YELLOW);
+		r4 = new Rectangle(575, 105, 100, 100);
+		r4.setFill(Color.ORCHID);
+		root.getChildren().addAll(r, r2, r3, r4);
+
+		// Add the animation effects
+		TranslateTransition translate = new TranslateTransition(Duration.millis(1750));
+		translate.setToX(590);
+		translate.setToY(290);
+
+		TranslateTransition translate2 = new TranslateTransition(Duration.millis(1750));
+		translate2.setToX(300);
+		translate2.setToY(-390);
+
+		FillTransition fill = new FillTransition(Duration.millis(1750));
+		fill.setToValue(Color.BLUE);
+		FillTransition fill2 = new FillTransition(Duration.millis(1750));
+		fill2.setToValue(Color.BLUE);
+
+		RotateTransition rotate = new RotateTransition(Duration.millis(1750));
+		rotate.setToAngle(360);
+		RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
+		rotate2.setToAngle(-720);
+		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750), r3);
+		rotate3.setToAngle(720);
+		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750), r4);
+		rotate4.setToAngle(-720);
+		rotate3.setCycleCount(Timeline.INDEFINITE);
+		rotate4.setCycleCount(Timeline.INDEFINITE);
+		rotate3.setAutoReverse(true);
+		rotate4.setAutoReverse(true);
+		rotate3.play();
+		rotate4.play();
+
+		ScaleTransition scale = new ScaleTransition(Duration.millis(1750));
+		scale.setToX(0.1);
+		scale.setToY(0.1);
+		ScaleTransition scale2 = new ScaleTransition(Duration.millis(1750));
+		scale2.setToX(0.1);
+		scale2.setToY(0.1);
+
+		ParallelTransition transition = new ParallelTransition(r, translate, fill, rotate, scale);
+		transition.setCycleCount(Timeline.INDEFINITE);
+		transition.setAutoReverse(true);
+		transition.play();
+
+		ParallelTransition transition2 = new ParallelTransition(r2, translate2, fill2, rotate2, scale2);
+		transition2.setCycleCount(Timeline.INDEFINITE);
+		transition2.setAutoReverse(true);
+		transition2.play();
+
+		//////////////////////////////////////////////////////////////////////////////////
 
 		// read in the song details file from the command line
 		Parameters params = getParameters();
@@ -143,22 +206,11 @@ public class App extends Application {
 		// print the song list
 		System.out.println(songList.toString());
 
-		// DELETE THIS LATER
-		// coinPayments.addFunds(100);
-
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////
 		// Create the queue of songs to play.
 		purchaseQueue = new PurchaseQueue();
-
-		// purchaseQueue.addSong(songList.getSongs().get(0), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		// purchaseQueue.addSong(songList.getSongs().get(1), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		// purchaseQueue.addSong(songList.getSongs().get(22), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		// purchaseQueue.addSong(songList.getSongs().get(14), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-		// purchaseQueue.addSong(songList.getSongs().get(8), creditPayments.creditCurrencyBox, coinPayments.currencyBox);
-
-		// System.out.println("Purchase queue: " + purchaseQueue.toString());
 
 		//////////////////////////////////////////////////////////////////////////////
 		// Intro song ////////////////////////////////////////////////////////////////
@@ -213,31 +265,48 @@ public class App extends Application {
 
 		// Radio Buttons for sorting
 		ToggleGroup sortingRadioButtons = new ToggleGroup();
-		RadioButton button1 = new RadioButton("By Title");
-		button1.setToggleGroup(sortingRadioButtons);
-		button1.setSelected(true);
-		RadioButton button2 = new RadioButton("By Artist");
-		button2.setToggleGroup(sortingRadioButtons);
-		RadioButton button3 = new RadioButton("By Genre");
-		button3.setToggleGroup(sortingRadioButtons);
-		RadioButton button4 = new RadioButton("By Duration");
-		button4.setToggleGroup(sortingRadioButtons);
-		button1.setLayoutX(50);
-		button1.setLayoutY(350);
-		button2.setLayoutX(50);
-		button2.setLayoutY(380);
-		button3.setLayoutX(50);
-		button3.setLayoutY(410);
-		button4.setLayoutX(50);
-		button4.setLayoutY(440);
-		root.getChildren().addAll(button1, button2, button3, button4);
+		RadioButton sortByTitleButton = new RadioButton("By Title");
+		sortByTitleButton.setToggleGroup(sortingRadioButtons);
+		sortByTitleButton.setSelected(true);
+		sortByTitleButton.setLayoutX(50);
+		sortByTitleButton.setLayoutY(350);
+		sortByTitleButton.setOnAction(e -> {
+			sortSongsBy("title");
+		});
 
-		// need to add simple listener to the radio buttons
+		RadioButton sortByArtistButton = new RadioButton("By Artist");
+		sortByArtistButton.setToggleGroup(sortingRadioButtons);
+		sortByArtistButton.setLayoutX(50);
+		sortByArtistButton.setLayoutY(380);
+		sortByArtistButton.setOnAction(e -> {
+			sortSongsBy("artist");
+
+		});
+
+		RadioButton sortByGenreButton = new RadioButton("By Genre");
+		sortByGenreButton.setToggleGroup(sortingRadioButtons);
+		sortByGenreButton.setLayoutX(50);
+		sortByGenreButton.setLayoutY(410);
+		sortByGenreButton.setOnAction(e -> {
+			sortSongsBy("genre");
+
+		});
+
+		RadioButton sortByDurationButton = new RadioButton("By Duration");
+		sortByDurationButton.setToggleGroup(sortingRadioButtons);
+		sortByDurationButton.setLayoutX(50);
+		sortByDurationButton.setLayoutY(440);
+		sortByDurationButton.setOnAction(e -> {
+			sortSongsBy("duration");
+
+		});
+
+		root.getChildren().addAll(sortByTitleButton, sortByArtistButton, sortByGenreButton, sortByDurationButton);
 
 		////////////////////////////////////////////////////////////////////////////////
 		// simple list view that lists song titles
-		ListView<String> listView = new ListView<String>();
-		ObservableList<String> items = FXCollections.observableArrayList();
+		listView = new ListView<String>();
+		items = FXCollections.observableArrayList();
 		for (Song song : songList.getSongs()) {
 			items.add(song.getArtist() + " - " + song.getTitle());
 		}
@@ -246,6 +315,29 @@ public class App extends Application {
 		listView.setLayoutY(100);
 		listView.setPrefSize(240, 240);
 		root.getChildren().add(listView);
+
+		////////////////////////////////////////////////////////////////////////////////
+		// simple list view that lists queued songs
+
+		// header for the song queue list view
+		Label songQueueLabel = new Label("Up Next");
+		songQueueLabel.setLayoutX(700);
+		songQueueLabel.setLayoutY(70);
+		songQueueLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+		root.getChildren().add(songQueueLabel);
+
+		// simple list view for songs in purchase queue
+		queueListView = new ListView<String>();
+		queueItems = FXCollections.observableArrayList();
+		// System.out.println(purchaseQueue.getQueue());
+		// for (Song song : purchaseQueue.getQueue()) {
+		// queueItems.add(song.getArtist()+ " - " + song.getTitle());
+		// }
+		// queueListView.setItems(queueItems);
+		queueListView.setLayoutX(700);
+		queueListView.setLayoutY(100);
+		queueListView.setPrefSize(240, 240);
+		root.getChildren().add(queueListView);
 
 		////////////////////////////////////////////////////////////////////////////////
 		// BUY & ADD SONG BUTTON
@@ -267,6 +359,16 @@ public class App extends Application {
 					}
 				}
 			}
+			queueListView = new ListView<String>();
+			queueItems = FXCollections.observableArrayList();
+			queueListView.setLayoutX(700);
+			queueListView.setLayoutY(100);
+			queueListView.setPrefSize(240, 240);
+			for (Song song : purchaseQueue.getQueue()) {
+				queueItems.add(song.getArtist() + " - " + song.getTitle());
+			}
+			queueListView.setItems(queueItems);
+			root.getChildren().add(queueListView);
 		});
 		root.getChildren().add(buySongButton);
 
@@ -293,6 +395,16 @@ public class App extends Application {
 					}
 				}
 			}
+			queueListView = new ListView<String>();
+			queueItems = FXCollections.observableArrayList();
+			queueListView.setLayoutX(700);
+			queueListView.setLayoutY(100);
+			queueListView.setPrefSize(240, 240);
+			for (Song song : purchaseQueue.getQueue()) {
+				queueItems.add(song.getArtist() + " - " + song.getTitle());
+			}
+			queueListView.setItems(queueItems);
+			root.getChildren().add(queueListView);
 		});
 		root.getChildren().add(buySongPlayNextButton);
 
@@ -470,65 +582,6 @@ public class App extends Application {
 		text.setEffect(blend);
 		root.getChildren().add(text);
 
-		////////////////////////////////////////////////////////////////////////////////
-
-		// Builds the initial rectangle that will eventually be animated.
-		r = new Rectangle(125, 125, 150, 150);
-		r.setFill(Color.PURPLE);
-		r2 = new Rectangle(80, 350, 100, 100);
-		r2.setFill(Color.RED);
-		r3 = new Rectangle(550, 80, 150, 150);
-		r3.setFill(Color.YELLOW);
-		r4 = new Rectangle(575, 105, 100, 100);
-		r4.setFill(Color.ORCHID);
-		root.getChildren().addAll(r, r2, r3, r4);
-
-		// Add the animation effects
-		TranslateTransition translate = new TranslateTransition(Duration.millis(1750));
-		translate.setToX(590);
-		translate.setToY(290);
-
-		TranslateTransition translate2 = new TranslateTransition(Duration.millis(1750));
-		translate2.setToX(300);
-		translate2.setToY(-390);
-
-		FillTransition fill = new FillTransition(Duration.millis(1750));
-		fill.setToValue(Color.BLUE);
-		FillTransition fill2 = new FillTransition(Duration.millis(1750));
-		fill2.setToValue(Color.BLUE);
-
-		RotateTransition rotate = new RotateTransition(Duration.millis(1750));
-		rotate.setToAngle(360);
-		RotateTransition rotate2 = new RotateTransition(Duration.millis(1750));
-		rotate2.setToAngle(-720);
-		RotateTransition rotate3 = new RotateTransition(Duration.millis(2750), r3);
-		rotate3.setToAngle(720);
-		RotateTransition rotate4 = new RotateTransition(Duration.millis(2750), r4);
-		rotate4.setToAngle(-720);
-		rotate3.setCycleCount(Timeline.INDEFINITE);
-		rotate4.setCycleCount(Timeline.INDEFINITE);
-		rotate3.setAutoReverse(true);
-		rotate4.setAutoReverse(true);
-		rotate3.play();
-		rotate4.play();
-
-		ScaleTransition scale = new ScaleTransition(Duration.millis(1750));
-		scale.setToX(0.1);
-		scale.setToY(0.1);
-		ScaleTransition scale2 = new ScaleTransition(Duration.millis(1750));
-		scale2.setToX(0.1);
-		scale2.setToY(0.1);
-
-		ParallelTransition transition = new ParallelTransition(r, translate, fill, rotate, scale);
-		transition.setCycleCount(Timeline.INDEFINITE);
-		transition.setAutoReverse(true);
-		transition.play();
-
-		ParallelTransition transition2 = new ParallelTransition(r2, translate2, fill2, rotate2, scale2);
-		transition2.setCycleCount(Timeline.INDEFINITE);
-		transition2.setAutoReverse(true);
-		transition2.play();
-
 		// Launch the application window
 		stage.setTitle("CS709 JukeIt!");
 		stage.setScene(scene);
@@ -582,6 +635,17 @@ public class App extends Application {
 		textField.setText(song.getTitle() + ": by " + song.getArtist());
 		System.out.println("Removing song from queue");
 		purchaseQueue.removeFirst();
+
+		queueListView = new ListView<String>();
+		queueItems = FXCollections.observableArrayList();
+		queueListView.setLayoutX(700);
+		queueListView.setLayoutY(100);
+		queueListView.setPrefSize(240, 240);
+		for (Song song : purchaseQueue.getQueue()) {
+			queueItems.add(song.getArtist() + " - " + song.getTitle());
+		}
+		queueListView.setItems(queueItems);
+		root.getChildren().add(queueListView);
 	}
 
 	public void sortSongsBy(String sortBy) {
@@ -589,15 +653,55 @@ public class App extends Application {
 		switch (sortBy) {
 			case "title":
 				Collections.sort(songList.getSongs(), Comparator.comparing(Song::getTitle));
+				listView = new ListView<String>();
+				items = FXCollections.observableArrayList();
+				for (Song song : songList.getSongs()) {
+					items.add(song.getArtist() + " - " + song.getTitle());
+				}
+				listView.setItems(items);
+				listView.setLayoutX(280);
+				listView.setLayoutY(100);
+				listView.setPrefSize(240, 240);
+				root.getChildren().add(listView);
 				break;
 			case "artist":
 				Collections.sort(songList.getSongs(), Comparator.comparing(Song::getArtist));
+				listView = new ListView<String>();
+				items = FXCollections.observableArrayList();
+				for (Song song : songList.getSongs()) {
+					items.add(song.getArtist() + " - " + song.getTitle());
+				}
+				listView.setItems(items);
+				listView.setLayoutX(280);
+				listView.setLayoutY(100);
+				listView.setPrefSize(240, 240);
+				root.getChildren().add(listView);
 				break;
 			case "genre":
 				Collections.sort(songList.getSongs(), Comparator.comparing(Song::getGenre));
+				listView = new ListView<String>();
+				items = FXCollections.observableArrayList();
+				for (Song song : songList.getSongs()) {
+					items.add(song.getArtist() + " - " + song.getTitle());
+				}
+				listView.setItems(items);
+				listView.setLayoutX(280);
+				listView.setLayoutY(100);
+				listView.setPrefSize(240, 240);
+				root.getChildren().add(listView);
 				break;
 			case "duration":
 				Collections.sort(songList.getSongs(), Comparator.comparing(Song::getDuration));
+				listView = new ListView<String>();
+				items = FXCollections.observableArrayList();
+				for (Song song : songList.getSongs()) {
+					items.add(song.getArtist() + " - " + song.getTitle());
+				}
+				listView.setItems(items);
+				listView.setLayoutX(280);
+				listView.setLayoutY(100);
+				listView.setPrefSize(240, 240);
+				root.getChildren().add(listView);
 				break;
 			default:
 				break;

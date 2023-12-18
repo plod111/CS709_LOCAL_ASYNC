@@ -12,6 +12,18 @@ public class PurchaseQueue extends LinkedList<Song> {
         super();
     }
     
+    public int getPremiumCost() {
+        return premiumCost;
+    }
+
+    public void setPremiumCost(int premiumCost) {
+        this.premiumCost = premiumCost;
+    }
+
+    public LinkedList<Song> getQueue() {
+        return this;
+    }
+    
   
     // add a song to the queue band check if there's enough funds to purchase it
     public void addSong(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
