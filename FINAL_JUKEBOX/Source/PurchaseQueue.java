@@ -1,3 +1,16 @@
+/**
+ * PurchaseQueue.java - Fall 2023
+ * 
+ * This class implements the PurchaseQueue and handles the queue of songs to be played
+ * 
+ * CS709 Hunter Fall 2023 - Final Project
+ * 
+ * @author P.Chu
+ * @author B.Cornish
+ * @date Dec 2023
+ * 
+ */
+
 import java.util.LinkedList;
 
 public class PurchaseQueue extends LinkedList<Song> {
@@ -12,20 +25,37 @@ public class PurchaseQueue extends LinkedList<Song> {
         super();
     }
     
+    /**
+     * Returns the premium cost for play next
+     * @return
+     */
     public int getPremiumCost() {
         return premiumCost;
     }
 
+    /**
+     * Sets the premium cost for play next
+     * @param premiumCost
+     */
     public void setPremiumCost(int premiumCost) {
         this.premiumCost = premiumCost;
     }
 
+    /**
+     * Returns the queue of songs to be played
+     * @return
+     */
     public LinkedList<Song> getQueue() {
         return this;
     }
     
   
-    // add a song to the queue band check if there's enough funds to purchase it
+    /**
+     * Adds a song to the queue and checks if there's enough funds to purchase it
+     * @param song
+     * @param creditCurrencyBox
+     * @param coinCurrencyBox
+     */
     public void addSong(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < song.getPrice()) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
@@ -44,9 +74,15 @@ public class PurchaseQueue extends LinkedList<Song> {
         System.out.println("Added " + song.getTitle() + " to the queue");
     }
     
-    // add a song to the front of queue position 1 , so as to not push current playing song out
-    // (check if there's enough funds to purchase it
-    // Premium cost for this is 10c.
+
+    /**
+     * Adds a song to the front of the queue and checks if there's enough funds to purchase it
+     * Premium cost for this is currently 10c.
+     * 
+     * @param song
+     * @param creditCurrencyBox
+     * @param coinCurrencyBox
+     */
     public void addSongPlayNext(Song song, CurrencyBox creditCurrencyBox, CurrencyBox coinCurrencyBox) {
         if ((coinCurrencyBox.getTotalCoinsAmount() + creditCurrencyBox.getCreditAmountInt()) < (song.getPrice()+premiumCost)) {
             System.out.println("Not enough funds to purchase " + song.getTitle());
@@ -65,7 +101,9 @@ public class PurchaseQueue extends LinkedList<Song> {
         System.out.println("Added," + song.getTitle() + " Playing Next");
     }
 
-    //skip a song in the queue
+    /**
+     * Removes the first song in the queue
+     */
     public void skipSong() {
         if (this.size() == 0) {
             System.out.println("No songs in the queue");
