@@ -109,6 +109,18 @@ public class App extends Application {
 	ScaleTransition[] scales = new ScaleTransition[numRectangles];
 	ParallelTransition[] transitions = new ParallelTransition[numRectangles];
 
+	public static void main(String[] args) {
+
+		// useage
+		if (args.length != 1) {
+			System.out.println("Usage: java --module-path <local JavaFX sdk lib path> --add-modules javafx.controls,javafx.fxml,javafx.media SongPlayer songDetails.txt");
+			System.exit(0);
+		}
+
+		launch(args);
+	}
+
+	
 	// prints funds to the screen
 	private void displayUpdatedTotal() {
 		int displayAmount = coinPayments.currencyBox.getTotalCoinsAmount()
@@ -753,14 +765,5 @@ public class App extends Application {
 
 	}
 
-	public static void main(String[] args) {
-
-		// useage
-		if (args.length != 1) {
-			System.out.println("Usage: java --module-path <local JavaFX sdk lib path> --add-modules javafx.controls,javafx.fxml,javafx.media SongPlayer songDetails.txt");
-			System.exit(0);
-		}
-
-		launch(args);
-	}
+	
 }
