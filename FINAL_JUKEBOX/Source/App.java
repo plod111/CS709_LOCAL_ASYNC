@@ -287,7 +287,7 @@ public class App extends Application {
 		sortByTitleButton.setToggleGroup(sortingRadioButtons);
 		sortByTitleButton.setSelected(true);
 		sortByTitleButton.setLayoutX(50);
-		sortByTitleButton.setLayoutY(350);
+		sortByTitleButton.setLayoutY(220);
 		sortByTitleButton.setOnAction(e -> {
 			sortSongsBy("title");
 		});
@@ -295,7 +295,7 @@ public class App extends Application {
 		RadioButton sortByArtistButton = new RadioButton("By Artist");
 		sortByArtistButton.setToggleGroup(sortingRadioButtons);
 		sortByArtistButton.setLayoutX(50);
-		sortByArtistButton.setLayoutY(380);
+		sortByArtistButton.setLayoutY(250);
 		sortByArtistButton.setOnAction(e -> {
 			sortSongsBy("artist");
 
@@ -304,7 +304,7 @@ public class App extends Application {
 		RadioButton sortByGenreButton = new RadioButton("By Genre");
 		sortByGenreButton.setToggleGroup(sortingRadioButtons);
 		sortByGenreButton.setLayoutX(50);
-		sortByGenreButton.setLayoutY(410);
+		sortByGenreButton.setLayoutY(280);
 		sortByGenreButton.setOnAction(e -> {
 			sortSongsBy("genre");
 
@@ -313,7 +313,7 @@ public class App extends Application {
 		RadioButton sortByDurationButton = new RadioButton("By Duration");
 		sortByDurationButton.setToggleGroup(sortingRadioButtons);
 		sortByDurationButton.setLayoutX(50);
-		sortByDurationButton.setLayoutY(440);
+		sortByDurationButton.setLayoutY(310);
 		sortByDurationButton.setOnAction(e -> {
 			sortSongsBy("duration");
 
@@ -322,6 +322,15 @@ public class App extends Application {
 		root.getChildren().addAll(sortByTitleButton, sortByArtistButton, sortByGenreButton, sortByDurationButton);
 
 		////////////////////////////////////////////////////////////////////////////////
+		// header for the song queue list view
+		Label listViewLabel = new Label("Song Selection");
+		listViewLabel.setLayoutX(280);
+		listViewLabel.setLayoutY(70);
+		listViewLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+		listViewLabel.setTextFill(Color.GRAY);
+		root.getChildren().add(listViewLabel);
+		
+		
 		// simple list view that lists song titles
 		listView = new ListView<String>();
 		items = FXCollections.observableArrayList();
@@ -342,6 +351,7 @@ public class App extends Application {
 		songQueueLabel.setLayoutX(700);
 		songQueueLabel.setLayoutY(70);
 		songQueueLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+		songQueueLabel.setTextFill(Color.GRAY);
 		root.getChildren().add(songQueueLabel);
 
 		// simple list view for songs in purchase queue
@@ -426,47 +436,7 @@ public class App extends Application {
 		});
 		root.getChildren().add(buySongPlayNextButton);
 
-		////////////////////////////////////////////////////////////////////////////////
-		// SORT BUTTONS
-		// Create the button to sort by title.
-		Button titleButton = new Button("Sort by Title");
-		titleButton.setLayoutX(50);
-		titleButton.setLayoutY(220);
-		titleButton.setOnAction(e -> {
-			sortSongsBy("title");
-			System.out.println(song);
-		});
-		root.getChildren().add(titleButton);
 
-		// Create the button to sort by artist.
-		Button artistButton = new Button("Sort by Artist");
-		artistButton.setLayoutX(50);
-		artistButton.setLayoutY(250);
-		artistButton.setOnAction(e -> {
-			sortSongsBy("artist");
-			System.out.println(song);
-		});
-		root.getChildren().add(artistButton);
-
-		// Create the button to sort by genre.
-		Button genreButton = new Button("Sort by Genre");
-		genreButton.setLayoutX(50);
-		genreButton.setLayoutY(280);
-		genreButton.setOnAction(e -> {
-			sortSongsBy("genre");
-			System.out.println(song);
-		});
-		root.getChildren().add(genreButton);
-
-		// Create the button to sort by duration.
-		Button durationButton = new Button("Sort by Duration");
-		durationButton.setLayoutX(50);
-		durationButton.setLayoutY(310);
-		durationButton.setOnAction(e -> {
-			sortSongsBy("duration");
-			System.out.println(song);
-		});
-		root.getChildren().add(durationButton);
 
 		/////////////////////////////////////////
 		// labels and buttons for payment system//
@@ -493,7 +463,7 @@ public class App extends Application {
 		quarterButton.setOnAction(e -> handleCoinButton(25));
 
 		// return funds button
-		Button returnFundsButton = createButton("Return Funds", 150, 500);
+		Button returnFundsButton = createButton("Return Funds", 90, 500);
 		returnFundsButton.setOnAction(e -> handleReturnFundsButton());
 
 		// creditCardPayment Buttons
