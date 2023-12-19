@@ -322,7 +322,7 @@ public class App extends Application {
 		root.getChildren().addAll(sortByTitleButton, sortByArtistButton, sortByGenreButton, sortByDurationButton);
 
 		////////////////////////////////////////////////////////////////////////////////
-		// header for the song queue list view
+		// header for the song list view Song Selection
 		Label listViewLabel = new Label("Song Selection");
 		listViewLabel.setLayoutX(280);
 		listViewLabel.setLayoutY(70);
