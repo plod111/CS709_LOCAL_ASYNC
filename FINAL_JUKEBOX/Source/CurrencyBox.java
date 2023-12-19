@@ -1,7 +1,7 @@
 /**
  * CurrencyBox.java - Fall 2023
  * 
- * This class implements the Payments interface and handles the credit payments
+ * This class creates a currency box to store coins
  * 
  * CS709 Hunter Fall 2023 - Final Project
  * 
