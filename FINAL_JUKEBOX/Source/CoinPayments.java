@@ -1,8 +1,23 @@
+/**
+ * CoinPayments.java - Fall 2023
+ * 
+ * This class implements the Payments interface and handles the coin payments
+ * 
+ * CS709 Hunter Fall 2023 - Final Project
+ * 
+ * @author P.Chu
+ * @date Dec 2023
+ * 
+ */
+
 
 public class CoinPayments implements Payments {
 
     CurrencyBox currencyBox = new CurrencyBox();
 
+    /**
+     * This method adds the amount of coins to the currency box
+     */
     @Override
     public void addFunds(int amount) {
         
@@ -11,6 +26,10 @@ public class CoinPayments implements Payments {
 
     }
 
+    /**
+     * This method returns the amount of coins in the currency box
+     * @return the amount of coins in the currency box
+     */
     @Override
     public String returnFunds() {
         
@@ -21,6 +40,10 @@ public class CoinPayments implements Payments {
         Integer.toString(currencyBox.getRefundQuarters()) + " quarters, ";
     }
 
+    /**
+     * This method returns the total amount of coins in the currency box
+     * @return
+     */
     public int getTotalCoinsAmount() {
         return currencyBox.getTotalCoinsAmount();
     }
