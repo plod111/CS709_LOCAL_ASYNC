@@ -8,6 +8,14 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
+##### <u>Dec 18,19, 2023</u>
+
+* renamed App to SongPlayer - this is now the FX application - run this iwth one single CL arg - the songDetails file.
+* Added header comments everywhere.
+* Reworekd and cleaned up the Application code - moved main method to top.  Grouped all methods per functionality and moved towards bottom.
+* Adjusted some GUI stuff
+
+
 ##### <u>Dec 16,17, 2023</u>
 
 * Brought together the final pieces for jukebox into one operational app.  Cleanup still remains.  Fully functional at present given the limited unit tests ran.
