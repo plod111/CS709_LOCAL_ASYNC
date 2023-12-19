@@ -706,7 +706,7 @@ public class App extends Application {
 
 		for (int i = 0; i < numRectangles; i++) {
 			rectangles[i] = new Rectangle((int) (Math.random() * sceneWidth), (int) (Math.random() * sceneHeight),
-					(int) (Math.random() * 30), (int) (Math.random() * 30));
+					(int) (Math.random() * 20), (int) (Math.random() * 20));
 			// System.out.println(rectangles[i]);
 			// System.out.println((int) (Math.random() * sceneWidth));
 			// random color
@@ -729,7 +729,7 @@ public class App extends Application {
 		// for each rectangle
 		for (int i = 0; i < numRectangles; i++) {
 			// Add the animation effects
-			int duration = (int) (Math.random() * 1750 + 300);
+			int duration = (int) (Math.random() * 2750 + 1000);
 			translations[i] = new TranslateTransition(Duration.millis(duration));
 			translations[i].setToX((int) (Math.random() * 2 * sceneWidth - sceneWidth));
 			translations[i].setToY((int) (Math.random() * 2 * sceneHeight - sceneHeight));
@@ -739,7 +739,7 @@ public class App extends Application {
 					(int) (Math.random() * 255)));
 
 			rotations[i] = new RotateTransition(Duration.millis(duration));
-			rotations[i].setToAngle((int) Math.random() * 720 - 360);
+			rotations[i].setToAngle((int) Math.random() * 1720 - 360);
 
 			scales[i] = new ScaleTransition(Duration.millis(duration));
 			scales[i].setToX((int) (Math.random() * 2));
