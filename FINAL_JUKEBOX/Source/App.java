@@ -39,6 +39,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.animation.FillTransition;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,8 +52,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
-
-import javafx.animation.FillTransition;
 
 // Imports relevant to playing MP3 music.
 import javafx.scene.media.*;
@@ -785,6 +784,13 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
+
+		// useage
+		if (args.length != 1) {
+			System.out.println("Usage: java --module-path <local JavaFX sdk lib path> --add-modules javafx.controls,javafx.fxml,javafx.media SongPlayer songDetails.txt");
+			System.exit(0);
+		}
+
 		launch(args);
 	}
 }
