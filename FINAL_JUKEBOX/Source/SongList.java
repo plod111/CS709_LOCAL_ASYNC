@@ -1,3 +1,15 @@
+/**
+ * SongList.java - Fall 2023
+ * 
+ * List of Song objects are created from the song data in the song details file
+ * 
+ * CS709 Hunter Fall 2023 - Final Project
+ * 
+ * @author B.Cornish
+ * @date Dec 2023
+ * 
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,7 +25,11 @@ public class SongList {
     File file;
     Scanner fileReader;
 
-    // constructor
+    /**
+     * Constructor for objects of class SongList
+     * @param args
+     * @throws FileNotFoundException
+     */
     public SongList(String[] args) throws FileNotFoundException {
 
         this.file = new File(args[0]);
@@ -38,11 +54,17 @@ public class SongList {
         fileReader.close();
     }
 
+    /**
+     * Returns the songs in the song list
+     * @return
+     */
     public ArrayList<Song> getSongs() {
         return songs;
     }
 
-    // toString method
+    /**
+     * Returns the song list as a string
+     */
     public String toString() {
         String songList = "\nSong folder is: " + songFolder + "\n\n"+ "Songs are:\n";
         for (Song song : songs) {
