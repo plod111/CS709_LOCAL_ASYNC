@@ -1,6 +1,6 @@
 # CS709 - Dec 2023 - Final Project - JavaFX JukeBox
 
-@author Ben Cornish
+@author Ben Cornish <br>
 @author Phil Chu
 
 ### <u>Final deliverable INSTRUCTIONS / COMMENTARY :</u>
