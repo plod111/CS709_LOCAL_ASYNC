@@ -51,8 +51,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-// import javax.print.attribute.standard.Media;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.text.FontWeight;
