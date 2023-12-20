@@ -8,7 +8,13 @@ Async work built herein, that will then be copied across for, and at submission 
 
 ## FINAL PROJECT THOUGHTS / PLANNING
 
-##### <u>Dec 18,19, 2023</u>
+##### <u>Dec 19, 2023</u>
+
+* Adjusted SimpleList view of available songs.
+* Adjusted label contrast.
+* Wrote up a ReadMe file for JukeBox app.
+* 
+##### <u>Dec 18, 2023</u>
 
 * renamed App to SongPlayer - this is now the FX application - run this iwth one single CL arg - the songDetails file.
 * Added header comments everywhere.
