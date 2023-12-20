@@ -13,7 +13,7 @@ Async work built herein, that will then be copied across for, and at submission 
 * renamed App to SongPlayer - this is now the FX application - run this iwth one single CL arg - the songDetails file.
 * Added header comments everywhere.
 * Reworekd and cleaned up the Application code - moved main method to top.  Grouped all methods per functionality and moved towards bottom.
-* Adjusted some GUI stuff
+* Adjusted some GUI stuff.
 
 
 ##### <u>Dec 16,17, 2023</u>
@@ -26,7 +26,7 @@ Async work built herein, that will then be copied across for, and at submission 
 * Added a premium pruchase option that costs an additional 10c per song and adds the song into the next to play position (does not take current playing position).
 * Added song list viewed via SimpleList.  Song title and artist now listed.
 * Added radio buttons and tied them to existing sort functions.  Sorts happen as direct consequence of radio button selection - no need for additional button to initiate sort.
-* To repain the list, the SimpleList view has to be recreated by the looks
+* To repaint the list, the SimpleList view has to be recreated by the looks.
 * Realized that objects appear in the scene in the order they are created in code - so earlier nodes, like rectangles can be created first and they will now remain behind buttons etc. 
 * Added playlist queue using same SimpleList view.  Populates and behaves correctly per purchaseQueue.
 
@@ -41,6 +41,8 @@ Async work built herein, that will then be copied across for, and at submission 
 * Built out currencyBox GUI elements and implemented associated logic for funds addition and balance
 * Built a confetti animation using Rectangle arrays and multiple transitions.
 * Sort functionality for songlist implemented via title, artist, genre, duration
+* Worked on reading in parameters from CL at execution for purposes of getting all mp3s.  
+* Got that working, and pushed through from main, to launch, to start, and created List of Songs.   SO clunky to do it this way...
 * 
 
 ##### <u>Dec 9, 2023</u>
