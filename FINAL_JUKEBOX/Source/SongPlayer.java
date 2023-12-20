@@ -50,6 +50,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.print.attribute.standard.Media;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.text.FontWeight;
@@ -422,6 +425,30 @@ public class SongPlayer extends Application {
 		root.getChildren().addAll(nickelButton, dimeButton, quarterButton,
 				returnFundsButton, oneButton, twoButton, threeButton, fourButton, fiveButton,
 				sixButton, sevenButton, eightButton, nineButton, zeroButton, clearButton, swipeCreditCardButton);
+
+
+		////////////////////////////////////////////////////////////////////////////////
+		// Marquee ////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////
+
+		Text textNode = new Text("25 cents per song... 35 cents for premium play next... 25 cents per song... 35 cents for premium play next... 25 cents per song... 35 cents for premium play next... ");
+
+    
+        TranslateTransition marqueeTransition = new TranslateTransition(Duration.seconds(20), textNode);
+
+        marqueeTransition.setByX(-2000); 
+
+		textNode.setTranslateX(600);
+		textNode.setTranslateY(695);
+		textNode.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
+		textNode.setFill(Color.WHITE);
+
+		// Set the transition to continuously cycle
+        marqueeTransition.setCycleCount(TranslateTransition.INDEFINITE);
+
+        marqueeTransition.play();
+
+        root.getChildren().add(textNode);
 
 		//////////////////////////////////////////////////////////////////////////////////
 
