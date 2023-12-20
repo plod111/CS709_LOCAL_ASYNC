@@ -250,7 +250,7 @@ public class SongPlayer extends Application {
 		listView.setItems(items);
 		listView.setLayoutX(280);
 		listView.setLayoutY(100);
-		listView.setPrefSize(280, 240);
+		listView.setPrefSize(285, 240);
 		root.getChildren().add(listView);
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -269,7 +269,7 @@ public class SongPlayer extends Application {
 		queueItems = FXCollections.observableArrayList();
 		queueListView.setLayoutX(645);
 		queueListView.setLayoutY(100);
-		queueListView.setPrefSize(280, 240);
+		queueListView.setPrefSize(285, 240);
 		root.getChildren().add(queueListView);
 
 		////////////////////////////////////////////////////////////////////////////////
