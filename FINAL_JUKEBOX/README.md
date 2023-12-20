@@ -57,7 +57,7 @@
 <b>NB.</b> In a prior version of Juke box, in development, it was built and demonstrated that all mp3 files can indeed be brought in on CL runtime execution and successfully listed and queued for playing within an FX media-capable application.
 <br>
 
-#### <u>Brief development notes from 5 weeks</u>
+### <u>Brief development notes from 5 weeks</u>
 
 ##### <u>Dec 19, 2023</u>
 
