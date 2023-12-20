@@ -139,4 +139,7 @@ Questions to be questioned:
 
 
 Objects:
-* 
+* Song?
+* List to play
+* Coinbox
+* interface elements?
