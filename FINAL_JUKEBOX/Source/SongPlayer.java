@@ -194,6 +194,7 @@ public class SongPlayer extends Application {
 		sortByTitleButton.setSelected(true);
 		sortByTitleButton.setLayoutX(50);
 		sortByTitleButton.setLayoutY(250);
+		sortByTitleButton.setTextFill(Color.GRAY);
 		sortByTitleButton.setOnAction(e -> {
 			sortSongsBy("title");
 		});
@@ -202,6 +203,7 @@ public class SongPlayer extends Application {
 		sortByArtistButton.setToggleGroup(sortingRadioButtons);
 		sortByArtistButton.setLayoutX(50);
 		sortByArtistButton.setLayoutY(280);
+		sortByArtistButton.setTextFill(Color.GRAY);
 		sortByArtistButton.setOnAction(e -> {
 			sortSongsBy("artist");
 
@@ -211,6 +213,7 @@ public class SongPlayer extends Application {
 		sortByGenreButton.setToggleGroup(sortingRadioButtons);
 		sortByGenreButton.setLayoutX(50);
 		sortByGenreButton.setLayoutY(310);
+		sortByGenreButton.setTextFill(Color.GRAY);
 		sortByGenreButton.setOnAction(e -> {
 			sortSongsBy("genre");
 
@@ -220,6 +223,7 @@ public class SongPlayer extends Application {
 		sortByDurationButton.setToggleGroup(sortingRadioButtons);
 		sortByDurationButton.setLayoutX(50);
 		sortByDurationButton.setLayoutY(340);
+		sortByDurationButton.setTextFill(Color.GRAY);
 		sortByDurationButton.setOnAction(e -> {
 			sortSongsBy("duration");
 
@@ -246,7 +250,7 @@ public class SongPlayer extends Application {
 		listView.setItems(items);
 		listView.setLayoutX(280);
 		listView.setLayoutY(100);
-		listView.setPrefSize(240, 240);
+		listView.setPrefSize(280, 240);
 		root.getChildren().add(listView);
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -254,7 +258,7 @@ public class SongPlayer extends Application {
 		////////////////////////////////////////////////////////////////////////////////
 		// header for the song queue list view
 		Label songQueueLabel = new Label("Up Next");
-		songQueueLabel.setLayoutX(700);
+		songQueueLabel.setLayoutX(645);
 		songQueueLabel.setLayoutY(70);
 		songQueueLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 20));
 		songQueueLabel.setTextFill(Color.GRAY);
@@ -263,9 +267,9 @@ public class SongPlayer extends Application {
 		// simple list view for songs in purchase queue
 		queueListView = new ListView<String>();
 		queueItems = FXCollections.observableArrayList();
-		queueListView.setLayoutX(700);
+		queueListView.setLayoutX(645);
 		queueListView.setLayoutY(100);
-		queueListView.setPrefSize(240, 240);
+		queueListView.setPrefSize(280, 240);
 		root.getChildren().add(queueListView);
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -290,9 +294,9 @@ public class SongPlayer extends Application {
 			}
 			queueListView = new ListView<String>();
 			queueItems = FXCollections.observableArrayList();
-			queueListView.setLayoutX(700);
+			queueListView.setLayoutX(645);
 			queueListView.setLayoutY(100);
-			queueListView.setPrefSize(240, 240);
+			queueListView.setPrefSize(280, 240);
 			for (Song song : purchaseQueue.getQueue()) {
 				queueItems.add(song.getArtist() + " - " + song.getTitle());
 			}
@@ -326,9 +330,9 @@ public class SongPlayer extends Application {
 			}
 			queueListView = new ListView<String>();
 			queueItems = FXCollections.observableArrayList();
-			queueListView.setLayoutX(700);
+			queueListView.setLayoutX(645);
 			queueListView.setLayoutY(100);
-			queueListView.setPrefSize(240, 240);
+			queueListView.setPrefSize(280, 240);
 			for (Song song : purchaseQueue.getQueue()) {
 				queueItems.add(song.getArtist() + " - " + song.getTitle());
 			}
@@ -356,13 +360,13 @@ public class SongPlayer extends Application {
 		root.getChildren().addAll(fundsLabel, creditFundsLabel);
 
 		// coinPad Buttons
-		Button nickelButton = createButton("5¢", 90, 445);
+		Button nickelButton = createButton(" 5¢", 80, 445);
 		nickelButton.setOnAction(e -> handleCoinButton(5));
 
 		Button dimeButton = createButton("10¢", 120, 445);
 		dimeButton.setOnAction(e -> handleCoinButton(10));
 
-		Button quarterButton = createButton("25¢", 155, 445);
+		Button quarterButton = createButton("25¢", 163, 445);
 		quarterButton.setOnAction(e -> handleCoinButton(25));
 
 		// return funds button
@@ -608,9 +612,9 @@ public class SongPlayer extends Application {
 
 		queueListView = new ListView<String>();
 		queueItems = FXCollections.observableArrayList();
-		queueListView.setLayoutX(700);
+		queueListView.setLayoutX(645);
 		queueListView.setLayoutY(100);
-		queueListView.setPrefSize(240, 240);
+		queueListView.setPrefSize(280, 240);
 		for (Song song : purchaseQueue.getQueue()) {
 			queueItems.add(song.getArtist() + " - " + song.getTitle());
 		}
@@ -636,7 +640,7 @@ public class SongPlayer extends Application {
 				listView.setItems(items);
 				listView.setLayoutX(280);
 				listView.setLayoutY(100);
-				listView.setPrefSize(240, 240);
+				listView.setPrefSize(280, 240);
 				root.getChildren().add(listView);
 				break;
 			case "artist":
@@ -649,7 +653,7 @@ public class SongPlayer extends Application {
 				listView.setItems(items);
 				listView.setLayoutX(280);
 				listView.setLayoutY(100);
-				listView.setPrefSize(240, 240);
+				listView.setPrefSize(280, 240);
 				root.getChildren().add(listView);
 				break;
 			case "genre":
@@ -662,7 +666,7 @@ public class SongPlayer extends Application {
 				listView.setItems(items);
 				listView.setLayoutX(280);
 				listView.setLayoutY(100);
-				listView.setPrefSize(240, 240);
+				listView.setPrefSize(280, 240);
 				root.getChildren().add(listView);
 				break;
 			case "duration":
@@ -675,7 +679,7 @@ public class SongPlayer extends Application {
 				listView.setItems(items);
 				listView.setLayoutX(280);
 				listView.setLayoutY(100);
-				listView.setPrefSize(240, 240);
+				listView.setPrefSize(280, 240);
 				root.getChildren().add(listView);
 				break;
 			default:

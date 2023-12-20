@@ -140,7 +140,7 @@ public class CurrencyBox {
             refundQuarters = totalCoinsAmount / 25;
             totalCoinsAmount = totalCoinsAmount % 25;
         }
-        if (totalCoinsAmount / 10 > 0) {
+        if (totalCoinsAmount / 10 >= 0) {
             refundDimes = totalCoinsAmount / 10;
             totalCoinsAmount = totalCoinsAmount % 10;
         }
